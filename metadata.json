@@ -1,0 +1,6 @@
+{
+  "name": "Mobbin Inspire",
+  "description": "UI & UX design inspiration for mobile & web apps. Discover real-world design patterns.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
