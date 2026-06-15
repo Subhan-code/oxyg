@@ -1,5 +1,51 @@
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { ArrowRight } from "lucide-react";
+import { useState, useEffect } from "react";
+
+const LOGO_TEMPLATES = [
+  { name: "Airbnb", className: "font-extrabold text-2xl tracking-tighter text-neutral-800 dark:text-neutral-200" },
+  { name: "Plaid", className: "font-bold text-2xl text-neutral-800 dark:text-neutral-200" },
+  { name: "NIKE", className: "font-black text-2xl italic tracking-tighter text-neutral-800 dark:text-neutral-200" },
+  { name: "Spotify", className: "font-bold text-2xl tracking-tight text-neutral-800 dark:text-neutral-200" },
+  { name: "Uber", className: "font-extrabold text-2xl tracking-tight text-neutral-800 dark:text-neutral-200" },
+  { name: "Stripe", className: "font-extrabold text-2xl text-neutral-800 dark:text-neutral-200" },
+  { name: "Linear", className: "font-semibold text-2xl tracking-wide text-neutral-800 dark:text-neutral-200" },
+  { name: "Figma", className: "font-bold text-2xl tracking-normal text-neutral-800 dark:text-neutral-200" },
+  { name: "Slack", className: "font-extrabold text-2xl tracking-tight text-neutral-800 dark:text-neutral-200" },
+  { name: "Apple", className: "font-medium text-2xl tracking-tighter text-neutral-800 dark:text-neutral-200" },
+  { name: "Google", className: "font-bold text-2xl text-neutral-800 dark:text-neutral-200" },
+];
+
+function LogoSlot({ index, interval }: { index: number; interval: number }) {
+  const [logoIndex, setLogoIndex] = useState(index);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setLogoIndex((prev) => (prev + 1) % LOGO_TEMPLATES.length);
+    }, interval);
+    return () => clearInterval(timer);
+  }, [interval]);
+
+  const currentLogo = LOGO_TEMPLATES[logoIndex];
+
+  return (
+    <div className="w-[120px] h-[40px] flex items-center justify-center overflow-hidden">
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={currentLogo.name}
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -15 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className={`${currentLogo.className} select-none`}
+        >
+          {currentLogo.name}
+        </motion.span>
+      </AnimatePresence>
+    </div>
+  );
+}
+
 
 const statItemVariants = {
   hidden: { opacity: 0, y: 30, filter: "blur(4px)" },
@@ -56,7 +102,7 @@ export function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
-        className="mt-8 md:mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 w-full px-4"
+        className="mt-8 md:mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 w-full px-4 animate-once"
       >
         <button className="w-full sm:w-auto bg-[#141414] text-white px-6 py-[10px] rounded-full font-semibold text-[15px] hover:scale-105 active:scale-95 transition-all shadow-md">
           Join for free
@@ -67,6 +113,29 @@ export function Hero() {
         </button>
       </motion.div>
 
+      {/* ScrollLaunch Badge */}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
+        className="mt-6 flex justify-center"
+      >
+        <a 
+          href="https://www.scrolllaunch.com/products/oxygen-ui?utm_source=badge&utm_medium=embed&utm_campaign=oxygen-ui&ref=scrolllaunch" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="hover:scale-105 transition-transform duration-200"
+        >
+          <img 
+            src="https://www.scrolllaunch.com/api/badge/oxygen-ui" 
+            alt="Featured on ScrollLaunch" 
+            width="220" 
+            height="48" 
+            loading="lazy" 
+          />
+        </a>
+      </motion.div>
+
       {/* Trusted By */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -74,14 +143,12 @@ export function Hero() {
         transition={{ duration: 1, delay: 0.4 }}
         className="mt-20 md:mt-32 w-full text-center flex flex-col items-center"
       >
-        <p className="text-[14px] text-[#717171] font-medium mb-8">Trusted by design teams at</p>
-        <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-6 opacity-[0.4] grayscale w-full max-w-4xl px-4 pointer-events-none">
-          {/* Text-based placeholder logos */}
-          <span className="font-extrabold text-2xl tracking-tighter mix-blend-multiply">Airbnb</span>
-          <span className="font-bold text-2xl mix-blend-multiply">Plaid</span>
-          <span className="font-black text-2xl italic tracking-tighter mix-blend-multiply">NIKE</span>
-          <span className="font-bold text-2xl tracking-tight mix-blend-multiply">Spotify</span>
-          <span className="font-extrabold text-2xl tracking-tight mix-blend-multiply">Uber</span>
+        <p className="text-[14px] text-[#717171] font-medium mb-4">Trusted by design teams at</p>
+        <div className="flex flex-wrap justify-center items-center gap-x-8 md:gap-x-12 gap-y-4 opacity-[0.4] grayscale w-full max-w-4xl px-4">
+          <LogoSlot index={0} interval={3000} />
+          <LogoSlot index={2} interval={3500} />
+          <LogoSlot index={4} interval={4000} />
+          <LogoSlot index={6} interval={4500} />
         </div>
       </motion.div>
 

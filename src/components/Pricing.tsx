@@ -20,11 +20,11 @@ export function Pricing() {
       <div className="max-w-[1240px] w-full mx-auto px-4 md:px-12 flex flex-col items-center">
         
         {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6">
+        <div className="text-center mb-12 md:mb-16">
+          <h1 className="text-[36px] leading-tight sm:text-5xl md:text-7xl font-bold tracking-tight text-white mb-6">
             Build <span className="whitespace-nowrap">like a Pro.</span>
           </h1>
-          <p className="text-xl text-[#a1a1aa]">
+          <p className="text-lg md:text-xl text-[#a1a1aa] px-4">
             Get full access to all components & features from only ₹26.30 per day —{" "}
             <span className="whitespace-nowrap">Cancel anytime.</span>
           </p>
