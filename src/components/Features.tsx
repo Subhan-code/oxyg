@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { useState } from "react";
 
-const TABS = ["Screens", "UI Elements", "Flows", "Text in Screenshots"];
+const TABS = ["Components", "Templates", "Hooks", "Integrations"];
 
 const IMAGES = [
   "https://framerusercontent.com/images/yT3kv5drMsbZmpGqxH03q2Xr6zw.png?width=768&height=1662",
@@ -55,7 +55,7 @@ export function Features() {
                 transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
                 className="block"
               >
-                Find design patterns
+                Find exactly what
               </motion.span>
             </span>
             <span className="overflow-hidden block mt-1">
@@ -66,7 +66,7 @@ export function Features() {
                 transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1], delay: 0.1 }}
                 className="block"
               >
-                in seconds.
+                you need.
               </motion.span>
             </span>
           </h2>
@@ -126,7 +126,7 @@ export function Features() {
                   transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
                   className="block"
                 >
-                  Explore entire user
+                  Complete application
                 </motion.span>
               </span>
               <span className="overflow-hidden block mt-1">
@@ -137,7 +137,7 @@ export function Features() {
                   transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1], delay: 0.1 }}
                   className="block"
                 >
-                  journeys with flows.
+                  templates ready to deploy.
                 </motion.span>
               </span>
             </h2>
@@ -153,8 +153,8 @@ export function Features() {
                 />
               </div>
               <div className="px-2">
-                <h3 className="text-2xl font-bold tracking-tight text-neutral-900 mb-2">Video</h3>
-                <p className="text-neutral-500 font-medium text-lg leading-relaxed">Experience flows in their natural form complete with micro-[interactions], animations and more.</p>
+                <h3 className="text-2xl font-bold tracking-tight text-neutral-900 mb-2">Copy & Paste</h3>
+                <p className="text-neutral-500 font-medium text-lg leading-relaxed">Copy production-ready React code straight into your application with zero setup.</p>
               </div>
             </div>
             
@@ -167,8 +167,8 @@ export function Features() {
                 />
               </div>
               <div className="px-2">
-                <h3 className="text-2xl font-bold tracking-tight text-neutral-900 mb-2">Prototype</h3>
-                <p className="text-neutral-500 font-medium text-lg leading-relaxed">Go through screen by screen using the interactive hotspots at your own preferred pace.</p>
+                <h3 className="text-2xl font-bold tracking-tight text-neutral-900 mb-2">Customizable</h3>
+                <p className="text-neutral-500 font-medium text-lg leading-relaxed">Fully typed, easily themed, and designed to scale from prototype to enterprise.</p>
               </div>
             </div>
           </div>
@@ -188,7 +188,7 @@ export function Features() {
                   transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
                   className="block"
                 >
-                  From inspiration
+                  From idea
                 </motion.span>
               </span>
               <span className="overflow-hidden block mt-1">
@@ -199,7 +199,7 @@ export function Features() {
                   transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1], delay: 0.1 }}
                   className="block"
                 >
-                  to creation.
+                  to production.
                 </motion.span>
               </span>
             </h2>
@@ -218,8 +218,8 @@ export function Features() {
                 />
               </div>
               <div className="text-center px-4">
-                <h3 className="text-xl font-bold tracking-tight text-neutral-900 mb-2">Copy to Figma</h3>
-                <p className="text-neutral-500 font-medium leading-relaxed">Download designs you like or copy it straight into Figma with our new plugin.</p>
+                <h3 className="text-xl font-bold tracking-tight text-neutral-900 mb-2">Premium Quality</h3>
+                <p className="text-neutral-500 font-medium leading-relaxed">Engineered with strict attention to accessibility, performance, and best practices.</p>
               </div>
             </div>
             <div className="flex flex-col gap-6 group">
@@ -234,8 +234,8 @@ export function Features() {
                 />
               </div>
               <div className="text-center px-4">
-                <h3 className="text-xl font-bold tracking-tight text-neutral-900 mb-2">Save to collections</h3>
-                <p className="text-neutral-500 font-medium leading-relaxed">Collect your favorite designs and upload your own screenshots into one place.</p>
+                <h3 className="text-xl font-bold tracking-tight text-neutral-900 mb-2">AI-Ready</h3>
+                <p className="text-neutral-500 font-medium leading-relaxed">Structured specifically to be ingested by coding agents and AI co-pilots seamlessly.</p>
               </div>
             </div>
             <div className="flex flex-col gap-6 group">
@@ -250,8 +250,8 @@ export function Features() {
                 />
               </div>
               <div className="text-center px-4">
-                <h3 className="text-xl font-bold tracking-tight text-neutral-900 mb-2">Leave comments</h3>
-                <p className="text-neutral-500 font-medium leading-relaxed">Take notes upon saving so you'll never forget the context in the future.</p>
+                <h3 className="text-xl font-bold tracking-tight text-neutral-900 mb-2">Developer First</h3>
+                <p className="text-neutral-500 font-medium leading-relaxed">Built on Tailwind CSS, framer-motion, and Radix UI - the modern developer stack.</p>
               </div>
             </div>
           </div>

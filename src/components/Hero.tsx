@@ -39,7 +39,7 @@ export function Hero() {
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
         className="text-[44px] leading-[44px] md:text-[64px] md:leading-[64px] lg:text-[80px] lg:leading-[80px] font-[700] tracking-[-0.6px] text-center max-w-[900px] text-[#141414] mt-10 md:mt-12"
       >
-        Discover real-world<br /> design inspiration.
+        Build faster with<br /> premium components.
       </motion.h1>
       
       <motion.p 
@@ -48,7 +48,7 @@ export function Hero() {
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
         className="mt-6 md:mt-8 text-[16px] md:text-[20px] text-[#717171] font-medium text-center max-w-2xl px-4"
       >
-        Featuring over 1,000 iOS & Web apps, and 200 sites —<br className="hidden sm:block" /> New content weekly.
+        Featuring over 500 crafted UI elements and ready-to-use templates.<br className="hidden sm:block" /> Engineered for modern agents and devs.
       </motion.p>
       
       {/* Buttons */}
@@ -155,7 +155,7 @@ export function Hero() {
              transition={{ duration: 1.2, delay: 0 }}
              className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-[-0.04em] text-[#adadad] text-center leading-[1.1]"
           >
-            1,428 apps
+            1,428 components
           </motion.div>
           <motion.div
              initial={{ opacity: 0.2, filter: "blur(2px)", y: 20 }}
@@ -164,7 +164,7 @@ export function Hero() {
              transition={{ duration: 1.2, delay: 0.5 }}
              className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-[-0.04em] text-[#adadad] text-center leading-[1.1]"
           >
-            621,500+ screens
+            200+ templates
           </motion.div>
           <motion.div
              initial={{ opacity: 0.2, filter: "blur(2px)", y: 20 }}
@@ -173,7 +173,7 @@ export function Hero() {
              transition={{ duration: 1.2, delay: 1 }}
              className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-[-0.04em] text-[#adadad] text-center leading-[1.1]"
           >
-            323,900 flows
+            50+ integrations
           </motion.div>
         </div>
       </div>

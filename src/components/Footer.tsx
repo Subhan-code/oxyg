@@ -6,9 +6,9 @@ export function Footer() {
       <div className="max-w-[1240px] w-full mx-auto flex flex-col md:flex-row justify-between items-start gap-12 z-10 w-full">
         <div className="flex flex-col gap-5 md:max-w-[320px]">
            <div className="flex items-center gap-2">
-             <span className="font-bold text-[32px] tracking-tight text-white mb-1">Mobbin</span>
+             <span className="font-bold text-[32px] tracking-tight text-white mb-1">Oxygen UI</span>
            </div>
-           <p className="text-[17px] font-normal leading-[26px] text-[#a1a1aa]">Design better digital experiences <br />with Mobbin.</p>
+           <p className="text-[17px] font-normal leading-[26px] text-[#a1a1aa]">Build better digital experiences <br />with Oxygen UI.</p>
         </div>
 
         <div className="grid grid-cols-2 md:flex gap-16 md:gap-[160px] w-full md:w-auto h-full">
@@ -34,7 +34,7 @@ export function Footer() {
       </div>
       
       <div className="max-w-[1240px] w-full mx-auto flex flex-col md:flex-row justify-between items-end gap-4 md:gap-6 mt-16 md:mt-[80px] text-[13px] text-[#a1a1aa] z-10 font-medium">
-           <span className="md:mr-4">© Mobbin 2018-2026</span>
+           <span className="md:mr-4">© Oxygen UI 2026</span>
            <div className="grid grid-cols-2 md:flex gap-16 md:gap-[160px] w-full md:w-auto">
                <a href="#" className="hover:text-white transition-colors text-left w-[85px]">Privacy policy</a>
                <a href="#" className="hover:text-white transition-colors text-left w-[85px]">Terms</a>

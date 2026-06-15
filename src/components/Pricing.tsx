@@ -22,10 +22,10 @@ export function Pricing() {
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6">
-            Design <span className="whitespace-nowrap">like a Pro.</span>
+            Build <span className="whitespace-nowrap">like a Pro.</span>
           </h1>
           <p className="text-xl text-[#a1a1aa]">
-            Get full access to all apps & features from only ₹26.30 per day —{" "}
+            Get full access to all components & features from only ₹26.30 per day —{" "}
             <span className="whitespace-nowrap">Cancel anytime.</span>
           </p>
         </div>
@@ -80,25 +80,25 @@ export function Pricing() {
 
             <ul className="flex flex-col gap-4 mt-2">
               <li className="flex items-center gap-3 text-[15px] font-medium text-[#e4e4e7]">
-                <CheckIcon /> Access all apps & sites
+                <CheckIcon /> Access all components
               </li>
               <li className="flex items-center gap-3 text-[15px] font-medium text-[#e4e4e7]">
-                <CheckIcon /> Browse flows
+                <CheckIcon /> Browse templates
               </li>
               <li className="flex items-center gap-3 text-[15px] font-medium text-[#e4e4e7]">
                 <CheckIcon /> See animations
               </li>
               <li className="flex items-center gap-3 text-[15px] font-medium text-[#e4e4e7]">
-                <CheckIcon /> Unlimited collections
+                <CheckIcon /> Unlimited projects
               </li>
               <li className="flex items-center gap-3 text-[15px] font-medium text-[#e4e4e7]">
-                <CheckIcon /> Hide screen footers
+                <CheckIcon /> Copy React code
               </li>
               <li className="flex items-center gap-3 text-[15px] font-medium text-[#e4e4e7]">
-                <CheckIcon /> Download multiple screens
+                <CheckIcon /> Figma UI kit
               </li>
               <li className="flex items-center gap-3 text-[15px] font-medium text-[#e4e4e7]">
-                <CheckIcon /> App history
+                <CheckIcon /> Priority support
               </li>
             </ul>
           </div>
@@ -129,10 +129,10 @@ export function Pricing() {
                 <CheckIcon /> All Pro features
               </li>
               <li className="flex items-center gap-3 text-[15px] font-medium text-[#e4e4e7]">
-                <CheckIcon /> Team collections
+                <CheckIcon /> Team projects
               </li>
               <li className="flex items-center gap-3 text-[15px] font-medium text-[#e4e4e7]">
-                <CheckIcon /> Comments & mentions
+                <CheckIcon /> Priority access to updates
               </li>
               <li className="flex items-center gap-3 text-[15px] font-medium text-[#e4e4e7]">
                 <CheckIcon /> Admin tools
@@ -144,7 +144,7 @@ export function Pricing() {
                 <CheckIcon /> Seat-based pricing
               </li>
               <li className="flex items-center gap-3 text-[15px] font-medium text-[#e4e4e7]">
-                <CheckIcon /> SOC 2 reports
+                <CheckIcon /> Dedicated Slack channel
               </li>
             </ul>
           </div>
@@ -164,8 +164,8 @@ export function Pricing() {
               <div className="w-12 h-12 rounded-xl bg-[#27272a] flex items-center justify-center mb-2">
                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="text-white"><path d="M19.1667 7.5L10 11.6667L0.833334 7.5L10 3.33333L19.1667 7.5ZM19.1667 7.5V13.3333M4.16667 9.16667V12.7521C4.16667 13.3665 4.50471 13.9311 5.0463 14.2213L9.213 16.4533C9.70458 16.7168 10.2954 16.7168 10.787 16.4533L14.9537 14.2213C15.4953 13.9311 15.8333 13.3665 15.8333 12.7521V9.16667"/></svg>
               </div>
-              <h4 className="font-bold text-white text-[17px]">Student or educator?</h4>
-              <p className="text-[15px] text-[#a1a1aa] leading-relaxed px-4">Discover Mobbin for Education and get a discount if you're eligible.</p>
+              <h4 className="font-bold text-white text-[17px]">Startup founder?</h4>
+              <p className="text-[15px] text-[#a1a1aa] leading-relaxed px-4">Discover Oxygen UI for Startups and get a discount if you're eligible.</p>
               <a href="#" className="text-[15px] font-semibold text-[#e4e4e7] underline mt-2 hover:text-white transition-colors">Read more</a>
            </div>
         </div>
@@ -185,25 +185,25 @@ export function Pricing() {
                </thead>
                <tbody>
                  <tr className="border-b border-white/10">
-                   <td className="p-4 pl-0 text-[15px] font-semibold text-white">Apps</td>
-                   <td className="p-4 text-[15px] text-[#a1a1aa]">Latest 4</td>
+                   <td className="p-4 pl-0 text-[15px] font-semibold text-white">Components</td>
+                   <td className="p-4 text-[15px] text-[#a1a1aa]">Latest 20</td>
                    <td className="p-4 bg-[#1d1f27] text-white"><CheckIcon /></td>
                    <td className="p-4 text-white"><CheckIcon /></td>
                  </tr>
                  <tr className="border-b border-white/10">
-                   <td className="p-4 pl-0 text-[15px] font-semibold text-white">Sites</td>
-                   <td className="p-4 text-[15px] text-[#a1a1aa]">Latest 4</td>
+                   <td className="p-4 pl-0 text-[15px] font-semibold text-white">Templates</td>
+                   <td className="p-4 text-[15px] text-[#a1a1aa]">Latest 2</td>
                    <td className="p-4 bg-[#1d1f27] text-white"><CheckIcon /></td>
                    <td className="p-4 text-white"><CheckIcon /></td>
                  </tr>
                  <tr className="border-b border-white/10">
-                   <td className="p-4 pl-0 text-[15px] font-semibold text-white">Flows</td>
+                   <td className="p-4 pl-0 text-[15px] font-semibold text-white">Pages</td>
                    <td className="p-4 text-[15px] text-[#a1a1aa]">Limited</td>
                    <td className="p-4 bg-[#1d1f27] text-white"><CheckIcon /></td>
                    <td className="p-4 text-white"><CheckIcon /></td>
                  </tr>
                  <tr className="border-b border-white/10">
-                   <td className="p-4 pl-0 text-[15px] font-semibold text-white">Collections</td>
+                   <td className="p-4 pl-0 text-[15px] font-semibold text-white">Projects</td>
                    <td className="p-4 text-[15px] text-[#a1a1aa]">Up to 3</td>
                    <td className="p-4 bg-[#1d1f27] text-[15px] text-white">Unlimited</td>
                    <td className="p-4 text-[15px] text-white">Unlimited</td>
