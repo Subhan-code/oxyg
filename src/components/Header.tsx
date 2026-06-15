@@ -1,52 +1,122 @@
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "motion/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import logoUrl from "../assets/oxygen-ui-logo.png";
+import { Menu, X } from "lucide-react";
 
 export function Header({ dark = false }: { dark?: boolean }) {
   const { scrollY } = useScroll();
   const [showJoin, setShowJoin] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    setShowJoin(latest > 150);
+    // Show dynamic Join button on desktop scroll
+    setShowJoin(latest > 150 && !isMenuOpen);
   });
 
+  // Close menu on resize if viewport becomes desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 640) {
+        setIsMenuOpen(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center mt-6 px-4 pointer-events-none">
+    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center mt-3 sm:mt-6 px-4 pointer-events-none">
       <motion.div 
-        initial={{ y: -50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        className={`${dark ? "bg-[#1d1f27]/90 border border-white/5" : "bg-[#ededed]/90"} backdrop-blur-[24px] rounded-full h-[60px] flex items-center px-6 w-full max-w-[584px] justify-between pointer-events-auto shadow-[0_4px_12px_rgba(0,0,0,0.03)] overflow-hidden`}
+        animate={{ 
+          height: isMenuOpen ? 480 : 60,
+          borderRadius: isMenuOpen ? "32px" : "9999px"
+        }}
+        transition={{ type: "spring", stiffness: 350, damping: 30 }}
+        className={`${
+          dark || isMenuOpen ? "bg-[#1d1f27]/95 border border-white/5 text-white" : "bg-[#ededed]/90 text-[#141414]"
+        } backdrop-blur-[24px] flex flex-col px-6 w-full max-w-[584px] pointer-events-auto shadow-[0_4px_12px_rgba(0,0,0,0.03)] overflow-hidden`}
       >
-        <a href="#/" className={`flex-shrink-0 flex items-center font-bold tracking-tight text-lg ${dark ? "text-white" : "text-[#141414]"}`} aria-label="Oxygen UI">
-          <svg className="w-5 h-5 mr-1" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
-          Oxygen UI
-        </a>
-        
-        <nav className="flex items-center h-full">
-          <div className="flex items-center gap-6">
-            <a href="#/pricing" className={`hidden sm:block text-[15px] font-[600] ${dark ? "text-[#f5f5f5]" : "text-neutral-900"} transition-colors hover:opacity-80`}>Pricing</a>
-            <a href="#/awards" className={`hidden sm:block text-[15px] font-[600] ${dark ? "text-[#f5f5f5]" : "text-neutral-900"} transition-colors hover:opacity-80`}>Awards</a>
-            <a href="#/login" className={`text-[15px] font-[600] ${dark ? "text-[#f5f5f5]" : "text-neutral-900"} transition-colors hover:opacity-80`}>Log in</a>
-          </div>
-          <AnimatePresence>
-            {showJoin && (
-              <motion.div
-                initial={{ width: 0, opacity: 0, paddingLeft: 0 }}
-                animate={{ width: "auto", opacity: 1, paddingLeft: 24 }}
-                exit={{ width: 0, opacity: 0, paddingLeft: 0 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="overflow-hidden block -mr-3"
-              >
+        {/* Top bar (always visible, height 60px) */}
+        <div className="h-[60px] flex items-center justify-between w-full shrink-0">
+          <a href="#/" className="flex-shrink-0 flex items-center font-bold tracking-tight text-lg" aria-label="Oxygen UI">
+            <img src={logoUrl} alt="Oxygen UI Logo" className="h-8 w-8 mr-2 object-contain" />
+            {!isMenuOpen && <span>Oxygen UI</span>}
+          </a>
+          
+          {/* Desktop Nav */}
+          <nav className="hidden sm:flex items-center h-full">
+            <div className="flex items-center gap-6">
+              <a href="#/pricing" className="text-[15px] font-[600] transition-colors hover:opacity-80">Pricing</a>
+              <a href="#/awards" className="text-[15px] font-[600] transition-colors hover:opacity-80">Awards</a>
+              <a href="#/login" className="text-[15px] font-[600] transition-colors hover:opacity-80">Log in</a>
+            </div>
+            <AnimatePresence>
+              {showJoin && (
+                <motion.div
+                  initial={{ width: 0, opacity: 0, paddingLeft: 0 }}
+                  animate={{ width: "auto", opacity: 1, paddingLeft: 24 }}
+                  exit={{ width: 0, opacity: 0, paddingLeft: 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="overflow-hidden block -mr-3"
+                >
+                  <a 
+                    href="#/signup"
+                    className={`${dark ? "bg-white text-neutral-900" : "bg-[#141414] text-white"} hover:opacity-90 transition-opacity h-[44px] px-4 rounded-full text-[15px] font-[600] flex items-center justify-center whitespace-nowrap`}
+                  >
+                    Join for free
+                  </a>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </nav>
+
+          {/* Mobile hamburger / close button */}
+          <button 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="sm:hidden flex items-center justify-center p-2 rounded-full cursor-pointer focus:outline-none"
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? (
+              <X className="w-6 h-6 opacity-80 hover:opacity-100 transition-opacity" />
+            ) : (
+              <Menu className="w-6 h-6 opacity-80 hover:opacity-100 transition-opacity" />
+            )}
+          </button>
+        </div>
+
+        {/* Mobile menu content (reveals dynamically) */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="flex flex-col w-full pb-6 pt-2 h-[420px] justify-between sm:hidden"
+            >
+              {/* Menu items list */}
+              <div className="flex flex-col gap-4 text-left px-2">
+                <a href="#/changelog" className="text-[20px] font-bold tracking-tight py-1 transition-colors hover:opacity-80">Changelog</a>
+                <a href="#/pricing" className="text-[20px] font-bold tracking-tight py-1 transition-colors hover:opacity-80">Pricing</a>
+                <a href="#/awards" className="text-[20px] font-bold tracking-tight py-1 transition-colors hover:opacity-80">Awards</a>
+                <a href="#/careers" className="text-[20px] font-bold tracking-tight py-1 transition-colors hover:opacity-80">Careers</a>
+                <a href="#/merch" className="text-[20px] font-bold tracking-tight py-1 transition-colors hover:opacity-80">Merch</a>
+                <a href="#/support" className="text-[20px] font-bold tracking-tight py-1 transition-colors hover:opacity-80">Support</a>
+                <a href="#/login" className="text-[20px] font-bold tracking-tight py-1 transition-colors hover:opacity-80">Log in</a>
+              </div>
+
+              {/* Action Button */}
+              <div className="w-full mt-4">
                 <a 
                   href="#/signup"
-                  className={`${dark ? "bg-white text-neutral-900" : "bg-[#141414] text-white"} hover:opacity-90 transition-opacity h-[44px] px-4 rounded-full text-[15px] font-[600] flex items-center justify-center whitespace-nowrap`}
+                  className="bg-white text-neutral-900 font-bold h-[54px] rounded-full text-[16px] flex items-center justify-center shadow-lg hover:bg-neutral-100 transition-colors w-full"
                 >
                   Join for free
                 </a>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </nav>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.div>
     </header>
   );

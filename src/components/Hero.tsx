@@ -59,7 +59,7 @@ const statContainerVariants = {
 
 export function Hero() {
   return (
-    <div className="flex flex-col items-center pt-40 pb-16 px-4 md:pt-48 md:pb-24 overflow-hidden relative">
+    <div className="flex flex-col items-center pt-28 pb-16 px-4 md:pt-36 md:pb-24 overflow-hidden relative">
       {/* Background glow effects could go here if needed */}
       
       {/* App Icons Stack */}

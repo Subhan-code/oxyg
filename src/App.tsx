@@ -39,7 +39,7 @@ export default function App() {
         ) : (
           <>
             <div 
-              className="relative z-10 bg-white shadow-[0_20px_60px_rgba(0,0,0,0.1)] rounded-b-[40px] md:rounded-b-[48px] mb-0 md:mb-[400px] border-b border-neutral-200/50"
+              className="relative z-10 bg-white shadow-[0_20px_60px_rgba(0,0,0,0.1)] rounded-b-[40px] md:rounded-b-[48px] mb-0 md:mb-[400px]"
               style={{ transform: "translateZ(0)" }}
             >
               <main>

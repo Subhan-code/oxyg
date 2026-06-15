@@ -96,7 +96,7 @@ export function FooterAndTestimonials() {
         </div>
       </div>
 
-      <div className="bg-white py-24 md:py-32 overflow-hidden relative">
+      <div className="bg-white py-24 md:py-32 overflow-hidden relative rounded-b-[40px] md:rounded-b-[48px]">
         <div className="max-w-4xl mx-auto px-4 text-center z-10 relative">
           <h2 className="text-[2.5rem] leading-[1.05] md:text-[80px] md:leading-[80px] font-bold tracking-[-0.6px] text-[#141414] mb-8">
             Never run out of <br className="hidden md:block" /> inspiration again.
@@ -133,10 +133,6 @@ export function FooterAndTestimonials() {
               </motion.div>
            ))}
         </div>
-        
-        {/* Soft fade at the edges of marquees */}
-        <div className="absolute bottom-0 left-0 w-16 md:w-32 h-[400px] bg-gradient-to-r from-white to-transparent pointer-events-none z-10" />
-        <div className="absolute bottom-0 right-0 w-16 md:w-32 h-[400px] bg-gradient-to-l from-white to-transparent pointer-events-none z-10" />
       </div>
     </>
   );
