@@ -16,32 +16,32 @@ export function Pricing() {
   ];
 
   return (
-    <div className="flex flex-col items-center w-full pt-[120px] md:pt-[160px] pb-32 bg-[#141414]">
+    <div className="flex flex-col items-center w-full pt-[88px] md:pt-[160px] pb-16 md:pb-32 bg-[#141414]">
       <div className="max-w-[1240px] w-full mx-auto px-4 md:px-12 flex flex-col items-center">
         
         {/* Header */}
-        <div className="text-center mb-12 md:mb-16">
-          <h1 className="text-[36px] leading-tight sm:text-5xl md:text-7xl font-bold tracking-tight text-white mb-6">
+        <div className="text-center mb-8 md:mb-16">
+          <h1 className="text-[28px] leading-tight sm:text-5xl md:text-7xl font-bold tracking-tight text-white mb-3 md:mb-6">
             Build <span className="whitespace-nowrap">like a Pro.</span>
           </h1>
-          <p className="text-lg md:text-xl text-[#a1a1aa] px-4">
-            Get full access to all components & features from only ₹26.30 per day —{" "}
+          <p className="text-[14px] md:text-xl text-[#a1a1aa] px-2">
+            Full access from only ₹26.30/day —{" "}
             <span className="whitespace-nowrap">Cancel anytime.</span>
           </p>
         </div>
 
         {/* Billing Toggle */}
-        <div className="flex flex-col items-center gap-4 mb-16">
-          <div className="relative flex items-center bg-[#27272a] rounded-full p-1 h-12 w-fit">
+        <div className="flex flex-col items-center gap-2 md:gap-4 mb-8 md:mb-16">
+          <div className="relative flex items-center bg-[#27272a] rounded-full p-1 h-10 md:h-12 w-fit">
             <button 
               onClick={() => setBillingInterval("yearly")}
-              className={`relative z-10 px-6 py-2 rounded-full text-[15px] font-semibold transition-colors ${billingInterval === "yearly" ? "text-white" : "text-[#a1a1aa]"}`}
+              className={`relative z-10 px-5 md:px-6 py-1.5 md:py-2 rounded-full text-[13px] md:text-[15px] font-semibold transition-colors ${billingInterval === "yearly" ? "text-white" : "text-[#a1a1aa]"}`}
             >
               Yearly
             </button>
             <button 
               onClick={() => setBillingInterval("quarterly")}
-              className={`relative z-10 px-6 py-2 rounded-full text-[15px] font-semibold transition-colors ${billingInterval === "quarterly" ? "text-white" : "text-[#a1a1aa]"}`}
+              className={`relative z-10 px-5 md:px-6 py-1.5 md:py-2 rounded-full text-[13px] md:text-[15px] font-semibold transition-colors ${billingInterval === "quarterly" ? "text-white" : "text-[#a1a1aa]"}`}
             >
               Quarterly
             </button>
@@ -51,13 +51,13 @@ export function Pricing() {
               transition={{ type: "spring", stiffness: 400, damping: 30 }}
             />
           </div>
-          <p className="text-[#a1a1aa] font-medium"><strong className="text-[#3b82f6]">Save 33%</strong> on a yearly subscription</p>
+          <p className="text-[13px] text-[#a1a1aa] font-medium"><strong className="text-[#3b82f6]">Save 33%</strong> on yearly</p>
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-[800px] mb-20 md:mb-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 w-full max-w-[800px] mb-10 md:mb-32">
           {/* Pro Card */}
-          <div className="flex flex-col p-8 rounded-3xl bg-[#1d1f27] border border-white/5 gap-6">
+          <div className="flex flex-col p-5 md:p-8 rounded-2xl md:rounded-3xl bg-[#1d1f27] border border-white/5 gap-4 md:gap-6">
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <h3 className="text-2xl font-bold text-white">Pro</h3>
@@ -104,7 +104,7 @@ export function Pricing() {
           </div>
 
           {/* Team Card */}
-          <div className="flex flex-col p-8 rounded-3xl bg-[#141414] border border-white/10 gap-6">
+          <div className="flex flex-col p-5 md:p-8 rounded-2xl md:rounded-3xl bg-[#141414] border border-white/10 gap-4 md:gap-6">
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <h3 className="text-2xl font-bold text-white">Team</h3>
@@ -151,7 +151,7 @@ export function Pricing() {
         </div>
 
         {/* Other Plans */}
-        <div className="flex flex-col md:flex-row gap-12 md:gap-24 w-full max-w-[800px] mb-32 justify-center">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-24 w-full max-w-[800px] mb-10 md:mb-32 justify-center">
            <div className="flex flex-col items-center gap-2 text-center flex-1">
               <div className="w-12 h-12 rounded-xl bg-[#27272a] flex items-center justify-center mb-2">
                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="text-white"><path d="M3.33333 15.8333H11.6667M3.33333 15.8333V5C3.33333 4.07953 4.07953 3.33333 5 3.33333H10C10.9205 3.33333 11.6667 4.07953 11.6667 5V6.66667M3.33333 15.8333H1.66667M11.6667 15.8333V6.66667M11.6667 15.8333H16.6667M11.6667 6.66667H15C15.9205 6.66667 16.6667 7.41286 16.6667 8.33333V15.8333M16.6667 15.8333H18.3333M8.33333 7.5H6.66667M6.66667 10.8333H8.33333"/></svg>

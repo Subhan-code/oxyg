@@ -1,11 +1,87 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Code2, Sparkles, Copy, Check, Download, Layers, X } from "lucide-react";
+import { Code2, Sparkles, Copy, Check, X, Search } from "lucide-react";
 import { SpacedChat } from "./demos/SpacedChat";
 import { Skiper21 } from "./demos/Skiper21";
-import { Skiper34 } from "./demos/Skiper34";
 import Scrubber from "./demos/Scrubber";
 import SignInDrawer from "./demos/SignInDrawer";
+import { UnderlayActionSheet } from "./demos/UnderlayActionSheet";
+import { MotionBlur } from "./demos/MotionBlur";
+import { ProgressiveBlur } from "./demos/ProgressiveBlur";
+import InputMorphMessage from "./demos/InputMorphMessage";
+import LabelIndicatorCarousel from "./demos/LabelIndicatorCarousel";
+import SwipeableStackCards from "./demos/SwipeableStackCards";
+import Subtle3DCarousel from "./demos/Subtle3DCarousel";
+import GooeyMenu from "./demos/GooeyMenu";
+import DraggableCurvedMenu from "./demos/DraggableCurvedMenu";
+import RunStatsStacks from "./demos/RunStatsStacks";
+import Timeline from "./demos/Timeline";
+import ThreeDPhotoCarousel3 from "./demos/ThreeDPhotoCarousel3";
+import ThreeDPhotoCarousel from "./demos/ThreeDPhotoCarousel";
+import FamilyPopoverMenu from "./demos/FamilyPopoverMenu";
+import ScrollRevealAnimationCSS from "./demos/ScrollRevealAnimationCSS";
+import { ButtonGooey } from "./demos/ButtonGooey";
+import { DistortedGlass } from "./demos/DistortedGlass";
+import { FractalGlass } from "./demos/FractalGlass";
+import MagneticBackgroundTabs from "./demos/MagneticBackgroundTabs";
+import { Scene } from "./animationsdev/scene";
+import AdaptiveCaretDemo from "./demos/AdaptiveCaretDemo";
+import CustomCursorDemo from "./demos/CustomCursorDemo";
+import { FoldableMap } from "./demos/FoldableMap";
+import MagneticButtonDemo from "./demos/MagneticButtonDemo";
+import { MaskAnimation } from "./demos/MaskAnimation";
+import { ScrollAnimation } from "./demos/ScrollAnimation";
+import { Skiper34 } from "./demos/Skiper34";
+import { AppleSpotlight } from "./ui/apple-spotlight";
+import { WorkTogether, StayInLoop } from "./CallToActionAndLoop";
+import WillemLoader from "./demos/WillemLoader";
+import UnderlayNav from "./demos/UnderlayNav";
+import BunnyPlayer from "./demos/BunnyPlayer";
+import ThreeJSWarpGallery from "./demos/ThreeJSWarpGallery";
+import WebGLPageTransitions from "./demos/WebGLPageTransitions";
+import WebGLMagazine from "./demos/WebGLMagazine";
+import R3FExperimentalCarousel from "./demos/R3FExperimentalCarousel";
+import ThreeDTextAnimation from "./demos/ThreeDTextAnimation";
+import ElasticGridScroll from "./demos/ElasticGridScroll";
+import GooeySearch from "./demos/GooeySearch";
+import ThreeDInfiniteParallaxCarousel from "./demos/ThreeDInfiniteParallaxCarousel";
+import PixelCanvasDemo from "./demos/PixelCanvasDemo";
+import Staggered3DGrid from "./demos/Staggered3DGrid";
+import OnScrollLayoutFormations from "./demos/OnScrollLayoutFormations";
+import GradientSlider from "./demos/GradientSlider";
+import ThreeDLettersMenuHover from "./demos/ThreeDLettersMenuHover";
+import { OnScrollLetterAnimations } from "./demos/OnScrollLetterAnimations";
+import { CircularTextEffect } from "./demos/CircularTextEffect";
+import { StickyGridScroll } from "./demos/StickyGridScroll";
+import { InfiniteScrollParallax } from "./demos/InfiniteScrollParallax";
+
+import { FlowScroll } from "./ui/flow-scroll";
+import { GlowingScrollIndicator } from "./ui/glowing-scroll-indicator";
+import { ScrollEffect } from "./ui/scroll-effect";
+import { PixelatedCarousel } from "./ui/pixelated-carousel";
+
+const DEMO_IMAGES = [
+  "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=800&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=800&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=800&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=800&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=800&auto=format&fit=crop"
+];
+
+const SCROLL_EFFECT_IMAGES = {
+  start: [
+    "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=600&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=600&auto=format&fit=crop"
+  ],
+  middle: [
+    "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=600&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=600&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1536924940846-227afb31e2a5?q=80&w=600&auto=format&fit=crop"
+  ],
+  featured: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=1200&auto=format&fit=crop"
+};
 
 interface ComponentPlayground {
   name: string;
@@ -15,87 +91,10 @@ interface ComponentPlayground {
 }
 
 const PLAYGROUNDS: Record<string, ComponentPlayground> = {
-  "iOS Toggle": {
-    name: "iOS Toggle Switch",
-    description: "A spring-loaded toggle switch matching the native iOS accessibility and motion design.",
-    code: `import { motion } from "motion/react";\nimport { useState } from "react";\n\nexport default function Toggle() {\n  const [isOn, setIsOn] = useState(false);\n  return (\n    <button\n      onClick={() => setIsOn(!isOn)}\n      className={\`w-14 h-8 flex items-center rounded-full p-1 transition-colors duration-300 \${\n        isOn ? "bg-[#34c759]" : "bg-neutral-200 dark:bg-neutral-800"\n      }\`}\n    >\n      <motion.div\n        layout\n        className="bg-white w-6 h-6 rounded-full shadow-md"\n        transition={{ type: "spring", stiffness: 500, damping: 30 }}\n      />\n    </button>\n  );\n}`,
-    render: (state, setState) => {
-      const isOn = !!state.toggle;
-      return (
-        <button
-          onClick={() => setState({ ...state, toggle: !isOn })}
-          className={`w-14 h-8 flex items-center rounded-full p-1 transition-colors duration-300 cursor-pointer ${
-            isOn ? "bg-[#34c759]" : "bg-neutral-200 dark:bg-neutral-800"
-          }`}
-        >
-          <motion.div
-            layout
-            className="bg-white w-6 h-6 rounded-full shadow-md"
-            transition={{ type: "spring", stiffness: 500, damping: 30 }}
-          />
-        </button>
-      );
-    }
-  },
-  "Segmented Control": {
-    name: "Segmented Picker",
-    description: "Sliding capsule tab selector with frictionless spring layout animations.",
-    code: `import { motion } from "motion/react";\nimport { useState } from "react";\n\nconst options = ["Light", "Dark", "System"];\n\nexport default function Segmented() {\n  const [selected, setSelected] = useState("Light");\n  return (\n    <div className="flex bg-neutral-100 dark:bg-neutral-900 p-1 rounded-xl h-10 w-64 relative border border-neutral-200/30 dark:border-white/5">\n      {options.map((opt) => (\n        <button\n          key={opt}\n          onClick={() => setSelected(opt)}\n          className="flex-1 relative text-[13px] font-[600] text-neutral-800 dark:text-neutral-200 z-10"\n        >\n          {selected === opt && (\n            <motion.div\n              layoutId="activeSegment"\n              className="absolute inset-0 bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200/50 dark:border-white/5 z-0"\n              transition={{ type: "spring", stiffness: 450, damping: 28 }}\n            />\n          )}\n          <span className="relative z-10">{opt}</span>\n        </button>\n      ))}\n    </div>\n  );\n}`,
-    render: (state, setState) => {
-      const options = ["Light", "Dark", "System"];
-      const selected = state.selectedSegment || "Light";
-      return (
-        <div className="flex bg-neutral-100 dark:bg-neutral-900 p-1 rounded-xl h-10 w-64 relative border border-neutral-200/30 dark:border-white/5">
-          {options.map((opt) => (
-            <button
-              key={opt}
-              onClick={() => setState({ ...state, selectedSegment: opt })}
-              className={`flex-1 relative text-[13px] font-[600] cursor-pointer z-10 transition-colors ${
-                selected === opt ? "text-neutral-950 dark:text-white" : "text-neutral-500 dark:text-neutral-400"
-              }`}
-            >
-              {selected === opt && (
-                <motion.div
-                  layoutId="activeSegmentPlay"
-                  className="absolute inset-0 bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200/50 dark:border-white/5 z-0"
-                  transition={{ type: "spring", stiffness: 450, damping: 28 }}
-                />
-              )}
-              <span className="relative z-10">{opt}</span>
-            </button>
-          ))}
-        </div>
-      );
-    }
-  },
-  "Slider": {
-    name: "iOS Slim Slider",
-    description: "Fluid progress control adjusting width, scale, and numeric details dynamically.",
-    code: `import { useState } from "react";\n\nexport default function Slider() {\n  const [val, setVal] = useState(50);\n  return (\n    <div className="w-64 flex flex-col gap-2">\n      <div className="flex justify-between text-[13px] font-semibold text-neutral-500">\n        <span>Volume</span>\n        <span>{val}%</span>\n      </div>\n      <input\n        type="range"\n        min="0" max="100"\n        value={val}\n        onChange={(e) => setVal(Number(e.target.value))}\n        className="w-full h-1.5 bg-neutral-200 dark:bg-neutral-800 rounded-lg appearance-none cursor-pointer accent-black dark:accent-white"\n      />\n    </div>\n  );\n}`,
-    render: (state, setState) => {
-      const val = state.sliderVal ?? 50;
-      return (
-        <div className="w-64 flex flex-col gap-2">
-          <div className="flex justify-between text-[13px] font-semibold text-neutral-500 dark:text-neutral-400">
-            <span>Volume Control</span>
-            <span>{val}%</span>
-          </div>
-          <input
-            type="range"
-            min="0"
-            max="100"
-            value={val}
-            onChange={(e) => setState({ ...state, sliderVal: Number(e.target.value) })}
-            className="w-full h-1.5 bg-neutral-200 dark:bg-neutral-800 rounded-lg appearance-none cursor-pointer accent-[#141414] dark:accent-white"
-          />
-        </div>
-      );
-    }
-  },
   "Spaced Chat Input": {
     name: "Spaced-out Chat Input",
     description: "Lab #016: Interactive message list & chat input with synthesized mechanical keyboard typing sounds and pops.",
-    code: `"use client";\n\nimport React, { useState, useEffect, useRef } from "react";\nimport { motion, AnimatePresence } from "motion/react";\nimport { Send } from "lucide-react";\n\nexport function SpacedChat() {\n  const [messages, setMessages] = useState([\n    { id: "1", text: "Welcome to Aconiti! 🔉 Turn sound ON", isSender: false },\n    { id: "2", text: "Type below to hear the clicks...", isSender: false }\n  ]);\n  const [inputValue, setInputValue] = useState("");\n  const [isFocused, setIsFocused] = useState(false);\n  const audioCtxRef = useRef(null);\n\n  const playClickSound = () => {\n    try {\n      const AudioCtx = window.AudioContext || window.webkitAudioContext;\n      if (!audioCtxRef.current && AudioCtx) audioCtxRef.current = new AudioCtx();\n      const ctx = audioCtxRef.current;\n      if (!ctx) return;\n      if (ctx.state === "suspended") ctx.resume();\n      const osc = ctx.createOscillator();\n      const gain = ctx.createGain();\n      osc.connect(gain);\n      gain.connect(ctx.destination);\n      osc.type = "sine";\n      osc.frequency.setValueAtTime(1300 + Math.random() * 500, ctx.currentTime);\n      gain.gain.setValueAtTime(0.04, ctx.currentTime);\n      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.03);\n      osc.start();\n      osc.stop(ctx.currentTime + 0.04);\n    } catch (e) {}\n  };\n\n  return (\n    <div className="w-[412px] h-[312px] rounded-[24px] bg-[#161A23] p-6 relative flex flex-col justify-end overflow-hidden border border-white/5">\n      {/* View full code on GitHub */}\n    </div>\n  );\n}`,
+    code: `"use client";\n\nimport React, { useState, useEffect, useRef } from "react";\nimport { motion, AnimatePresence } from "motion/react";\n\ninterface Bubble {\n  id: string;\n  text: string;\n}\n\nexport function SpacedChat() {\n  const [bubbles, setBubbles] = useState<Bubble[]>([]);\n  const [inputValue, setInputValue] = useState("");\n  const [isFocused, setIsFocused] = useState(false);\n  const [typingIntensity, setTypingIntensity] = useState(0);\n  const [activeRockets, setActiveRockets] = useState<{ id: number; x: number }[]>([]);\n  const audioCtxRef = useRef<AudioContext | null>(null);\n\n  // Audio synthesis helpers...\n  // Smooth decay for typingIntensity...\n\n  return (\n    <div className="max-w-[412px] min-w-[412px] max-h-[312px] min-h-[312px] rounded-[24px] z-10 relative flex items-center justify-center overflow-hidden bg-[#161A23] border border-white/5 font-sans">\n      {/* View full code on GitHub */}\n    </div>\n  );\n}`,
     render: (state, setState) => {
       return <SpacedChat />;
     }
@@ -108,28 +107,7 @@ const PLAYGROUNDS: Record<string, ComponentPlayground> = {
       return <Skiper21 />;
     }
   },
-  "Sticky Cards": {
-    name: "Sticky Scroll Cards",
-    description: "ReactLenis + Framer Motion: Interactive stacking scroll cards with perspective scaling and rotating tilt transforms.",
-    code: `"use client";\n\nimport {\n  motion,\n  useInView,\n  useMotionValue,\n  useScroll,\n  useTransform,\n} from "motion/react";\nimport { ReactLenis } from "lenis/react";\nimport React, { useEffect, useRef, useState } from "react";\n\nexport function Skiper34() {\n  return (\n    <ReactLenis root>\n      <section className="relative flex w-screen flex-col items-center gap-[10vh] px-4 pt-[50vh]">\n         {/* Stacking Sticky Cards scroll flow ... */}\n      </section>\n    </ReactLenis>\n  );\n}`,
-    render: (state, setState) => {
-      return (
-        <div className="flex flex-col items-center gap-4 text-center p-4">
-          <div className="w-12 h-12 rounded-full bg-[#3b82f6]/10 text-[#3b82f6] flex items-center justify-center animate-bounce">
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-          </div>
-          <span className="text-[15px] font-bold text-[#141414] dark:text-white">
-            Sticky Scroll is Active!
-          </span>
-          <p className="text-[12px] text-neutral-500 dark:text-neutral-400 max-w-[220px] leading-relaxed">
-            Scroll down the main page to see the card stack animation dynamically mount below this playground.
-          </p>
-        </div>
-      );
-    }
-  },
+
   "Scrubber": {
     name: "Scrubber Slider",
     description: "A keyboard-accessible drag scrubber slider with spring-loaded capsule thumb animations and tick marks.",
@@ -289,18 +267,583 @@ export default function SignInDrawer() {
   );
 }`,
     render: () => <SignInDrawer />
+  },
+  "Flow Scroll": {
+    name: "Flow Scroll Grid",
+    description: "Grid layouts that shift, scale, and rotate perspective based on the scroll position of the viewport.",
+    code: `<FlowScroll images={images} />`,
+    render: () => {
+      return (
+        <div className="flex flex-col items-center gap-4 text-center p-6 select-none">
+          <div className="w-12 h-12 rounded-full bg-blue-500/10 text-blue-500 flex items-center justify-center animate-bounce">
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </div>
+          <span className="text-[15px] font-bold text-neutral-800 dark:text-white">
+            Perspective Flow Scroll is Active!
+          </span>
+          <p className="text-[12px] text-neutral-500 dark:text-neutral-400 max-w-[240px] leading-relaxed">
+            Scroll down the main page to experience the 3D grid layout shifting and rotating dynamically in full viewport.
+          </p>
+        </div>
+      );
+    }
+  },
+  "Glowing Scroll Indicator": {
+    name: "Glowing Scroll Progress Bar",
+    description: "A liquid progress bar composed of glowing columns reactively scaling as you scroll.",
+    code: `<GlowingScrollIndicator scrollContainerId="scroll-area" direction="horizontal" />`,
+    render: () => {
+      return (
+        <div className="w-full max-w-[360px] bg-white text-[#141414] rounded-[24px] p-6 border border-neutral-200/60 flex flex-col gap-4 items-center justify-center shadow-sm">
+          <GlowingScrollIndicator direction="horizontal" />
+          <span className="text-[11px] text-neutral-400 font-semibold uppercase tracking-wider mt-2 select-none">Drag the red indicator stick left or right</span>
+        </div>
+      );
+    }
+  },
+  "Scroll Effect": {
+    name: "Scroll Mask Reveal",
+    description: "Curtain reveal mask effect that splits and expands nested image grids as you scroll down the page.",
+    code: `<ScrollEffect images={images} />`,
+    render: () => {
+      return (
+        <div className="flex flex-col items-center gap-4 text-center p-6 select-none">
+          <div className="w-12 h-12 rounded-full bg-indigo-500/10 text-indigo-500 flex items-center justify-center animate-bounce">
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </div>
+          <span className="text-[15px] font-bold text-neutral-800 dark:text-white">
+            Curtain Mask Reveal is Active!
+          </span>
+          <p className="text-[12px] text-neutral-500 dark:text-neutral-400 max-w-[240px] leading-relaxed">
+            Scroll down the main page to experience the splitting nested images expanding into full screen.
+          </p>
+        </div>
+      );
+    }
+  },
+  "Pixelated Carousel": {
+    name: "Pixelated Carousel Transition",
+    description: "Carousel images transitions employing custom pixel block delays creating a vintage rendering texture.",
+    code: `<PixelatedCarousel images={images} pixelSize={80} />`,
+    render: () => {
+      return (
+        <div className="w-full max-w-[320px] h-[220px] rounded-2xl overflow-hidden border border-neutral-200 dark:border-white/5 relative bg-neutral-950">
+          <PixelatedCarousel images={DEMO_IMAGES} pixelSize={40} />
+        </div>
+      );
+    }
+  },
+  "Underlay Action Sheet": {
+    name: "Underlay Action Sheet",
+    description: "Expandable bottom action sheet that scales down background content with border-radius transition.",
+    code: `import { UnderlayActionSheet } from "./demos/UnderlayActionSheet";\n\n// Usage:\n<UnderlayActionSheet />`,
+    render: () => <UnderlayActionSheet />
+  },
+  "Motion Blur": {
+    name: "CSS Motion Blur Effect",
+    description: "Simulates digital motion blur on movement transitions using CSS box-shadow and blur filter overlays.",
+    code: `import { MotionBlur } from "./demos/MotionBlur";\n\n// Usage:\n<MotionBlur />`,
+    render: () => <MotionBlur />
+  },
+  "Progressive Blur": {
+    name: "Progressive Backdrop Blur",
+    description: "Overlay masking that applies step-graded backdrop filters to create a smooth glass-like blur fade out.",
+    code: `import { ProgressiveBlur } from "./demos/ProgressiveBlur";\n\n// Usage:\n<ProgressiveBlur />`,
+    render: () => <ProgressiveBlur />
+  },
+  "Input Morph Message": {
+    name: "Input Morph Message",
+    description: "A chat input that morphs into a chat message bubble when submitted with smooth layout transitions.",
+    code: `import InputMorphMessage from "./demos/InputMorphMessage";\n\n// Usage:\n<InputMorphMessage />`,
+    render: () => <InputMorphMessage />
+  },
+  "Label Indicator Carousel": {
+    name: "Label Indicator Carousel",
+    description: "Interactive horizontal carousel with text pill indicators that expand and reveal text titles when active.",
+    code: `import LabelIndicatorCarousel from "./demos/LabelIndicatorCarousel";\n\n// Usage:\n<LabelIndicatorCarousel />`,
+    render: () => <LabelIndicatorCarousel />
+  },
+  "Swipeable Stack Cards": {
+    name: "Swipeable 3D Stack Cards",
+    description: "Stack of cards that can be dragged and swiped away to the back of the stack with interactive perspective rotation.",
+    code: `import SwipeableStackCards from "./demos/SwipeableStackCards";\n\n// Usage:\n<SwipeableStackCards />`,
+    render: () => <SwipeableStackCards />
+  },
+  "Subtle 3D Carousel": {
+    name: "Subtle 3D Perspective Carousel",
+    description: "Curved 3D card layout carousel rotating its items in space as you drag or paginate through them.",
+    code: `import Subtle3DCarousel from "./demos/Subtle3DCarousel";\n\n// Usage:\n<Subtle3DCarousel />`,
+    render: () => <Subtle3DCarousel />
+  },
+  "Gooey Menu": {
+    name: "Gooey Blob Navigation Menu",
+    description: "Sub-navigation actions popping out from a central button with organic liquid-metal gooey fusion filters.",
+    code: `import GooeyMenu from "./demos/GooeyMenu";\n\n// Usage:\n<GooeyMenu />`,
+    render: () => <GooeyMenu />
+  },
+  "Draggable Curved Menu": {
+    name: "Draggable Curved Spin Wheel Menu",
+    description: "Draggable curved wheel menu that rotates while dragging with highlight spotlight selection.",
+    code: `import DraggableCurvedMenu from "./demos/DraggableCurvedMenu";\n\n// Usage:\n<DraggableCurvedMenu />`,
+    render: () => <DraggableCurvedMenu />
+  },
+  "Run Stats Stacks": {
+    name: "Run Stats Stacks",
+    description: "Stacked run activity cards that expand and collapse in vertical 3D space on click.",
+    code: `import RunStatsStacks from "./demos/RunStatsStacks";\n\n// Usage:\n<RunStatsStacks />`,
+    render: () => <RunStatsStacks />
+  },
+  "Timeline Indicator": {
+    name: "Timeline Focus Indicator",
+    description: "Year timeline progress bar that reactively scales nearby items based on mouse focus distance.",
+    code: `import Timeline from "./demos/Timeline";\n\n// Usage:\n<Timeline />`,
+    render: () => <Timeline />
+  },
+  "Cylindrical Photo Carousel": {
+    name: "3D Cylindrical Photo Carousel",
+    description: "Cylindrical photo loop rotating 3D cards around a vertical pivot based on swipe gesture distance.",
+    code: `import ThreeDPhotoCarousel from "./demos/ThreeDPhotoCarousel";\n\n// Usage:\n<ThreeDPhotoCarousel />`,
+    render: () => <ThreeDPhotoCarousel />
+  },
+  "Flat 3D Photo Carousel": {
+    name: "3D Flat Face Photo Carousel",
+    description: "Flat-faced cylindrical photo rotation layout mapping Unsplash image nodes in 3D projection.",
+    code: `import ThreeDPhotoCarousel3 from "./demos/ThreeDPhotoCarousel3";\n\n// Usage:\n<ThreeDPhotoCarousel3 />`,
+    render: () => <ThreeDPhotoCarousel3 />
+  },
+  "Family Popover Menu": {
+    name: "Family Style Popover Menu",
+    description: "Popover expansion menu shifting elements cleanly into place with organic spring motion.",
+    code: `import FamilyPopoverMenu from "./demos/FamilyPopoverMenu";\n\n// Usage:\n<FamilyPopoverMenu />`,
+    render: () => <FamilyPopoverMenu />
+  },
+  "Scroll Reveal CSS": {
+    name: "Scroll Reveal Animation (CSS)",
+    description: "Easily create scroll reveal animations with CSS's animation-timeline property.",
+    code: `import ScrollRevealAnimationCSS from "./demos/ScrollRevealAnimationCSS";\n\n// Usage:\n<ScrollRevealAnimationCSS />`,
+    render: () => <ScrollRevealAnimationCSS />
+  },
+  "Gooey Button": {
+    name: "Gooey Button Hover Effect",
+    description: "Interactive black pill button with a bubble that gooey stretches out on hover state.",
+    code: `import { ButtonGooey } from "./demos/ButtonGooey";\n\n// Usage:\n<ButtonGooey />`,
+    render: () => <ButtonGooey />
+  },
+  "Distorted Glass": {
+    name: "Distorted Fractal Glass",
+    description: "A draggable circle showing distortion noise under a frosted glass panel overlay.",
+    code: `import { DistortedGlass } from "./demos/DistortedGlass";\n\n// Usage:\n<DistortedGlass />`,
+    render: () => <DistortedGlass />
+  },
+  "Fractal Glass Panels": {
+    name: "Fractal Glass Panels",
+    description: "Frosted vertical glass panes applying progressive backdrop filter blur overlay.",
+    code: `import { FractalGlass } from "./demos/FractalGlass";\n\n// Usage:\n<FractalGlass />`,
+    render: () => <FractalGlass />
+  },
+  "Magnetic Tabs": {
+    name: "Magnetic Background Tabs",
+    description: "Navigation link tabs with active backgrounds that magnetically track cursor hover displacement.",
+    code: `import MagneticBackgroundTabs from "./demos/MagneticBackgroundTabs";\n\n// Usage:\n<MagneticBackgroundTabs />`,
+    render: () => <MagneticBackgroundTabs />
+  },
+  "AnimationsDev Hero": {
+    name: "Animations.dev Hero Canvas",
+    description: "Interactive SVG micro-interactions canvas containing custom dragging bounce, code formatting, ticking clock, timeline slider, and click interactions.",
+    code: `import { Scene } from "./animationsdev/scene";\n\n// Usage:\n<Scene />`,
+    render: () => <Scene />
+  },
+  "Adaptive Caret": {
+    name: "Adaptive Cursor Caret",
+    description: "Interactive text field caret morphing in thickness and tracking coordinates inside inputs in real-time.",
+    code: `import AdaptiveCaretDemo from "./demos/AdaptiveCaretDemo";\n\n// Usage:\n<AdaptiveCaretDemo />`,
+    render: () => <AdaptiveCaretDemo />
+  },
+  "Custom Cursor": {
+    name: "Custom Adaptive Cursor",
+    description: "An isolated sandbox showcasing a text-adaptive custom cursor that follows the pointer and morphs into a typing caret over text elements.",
+    code: `import CustomCursorDemo from "./demos/CustomCursorDemo";\n\n// Usage:\n<CustomCursorDemo />`,
+    render: () => <CustomCursorDemo />
+  },
+  "Foldable Map": {
+    name: "3D Foldable Map Section",
+    description: "A three-panel map layout folding and skewing in 3D projection space reactively via drag gestures.",
+    code: `import { FoldableMap } from "./demos/FoldableMap";\n\n// Usage:\n<FoldableMap />`,
+    render: () => <FoldableMap />
+  },
+  "Magnetic Button": {
+    name: "Magnetic Action Button",
+    description: "Interactive action button snapping and moving towards the cursor's proximity coordinates.",
+    code: `import MagneticButtonDemo from "./demos/MagneticButtonDemo";\n\n// Usage:\n<MagneticButtonDemo />`,
+    render: () => <MagneticButtonDemo />
+  },
+  "Mask Animation": {
+    name: "Runway Style Mask Scroll",
+    description: "Dynamic background reveal scrolling effect where a container mask expands on scroll to show background image assets.",
+    code: `import { MaskAnimation } from "./demos/MaskAnimation";\n\n// Usage:\n<MaskAnimation />`,
+    render: () => <MaskAnimation />
+  },
+  "Scroll Animation": {
+    name: "Apple Style iPad Scroll Mask",
+    description: "Scroll-driven path mask animation opening a device showcase video container along a curved vector path.",
+    code: `import { ScrollAnimation } from "./demos/ScrollAnimation";\n\n// Usage:\n<ScrollAnimation />`,
+    render: () => <ScrollAnimation />
+  },
+  "Sticky Card Stack": {
+    name: "Interactive Card Stack",
+    description: "Immersive overlapping layout stack with scroll-based perspective scaling and tilting rotations.",
+    code: `import { Skiper34 } from "./demos/Skiper34";\n\n// Usage:\n<Skiper34 />`,
+    render: () => {
+      return (
+        <div className="flex flex-col items-center gap-4 text-center p-6 select-none bg-[#1d1f27] border border-white/5 rounded-2xl w-full max-w-[280px] mx-auto">
+          <div className="w-12 h-12 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center animate-bounce">
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </div>
+          <span className="text-[15px] font-bold text-white">Sticky Card Stack</span>
+          <p className="text-[12px] text-neutral-400 max-w-[220px] leading-relaxed">
+            Scroll down the viewport below to experience cards stack and shift dynamically.
+          </p>
+        </div>
+      );
+    }
+  },
+  "Apple Spotlight": {
+    name: "Spotlight Search Dialog",
+    description: "A macOS/iOS Command+K style spotlight utility search modal with shortcuts and live list filters.",
+    code: `import { AppleSpotlight } from "./ui/apple-spotlight";\n\n// Usage:\n<AppleSpotlight isOpen={isOpen} handleClose={handleClose} />`,
+    render: (state, setState) => {
+      const isOpen = state.isSpotlightOpen ?? false;
+      return (
+        <div className="flex flex-col items-center gap-4 text-center p-6 select-none bg-neutral-900 border border-white/5 rounded-2xl w-full max-w-[280px] mx-auto">
+          <Search className="w-10 h-10 text-neutral-400 mb-1" />
+          <span className="text-[15px] font-bold text-white">Spotlight Search</span>
+          <p className="text-[12px] text-neutral-400 max-w-[220px] leading-relaxed">
+            Interactive search dialog overlays. Click below to launch.
+          </p>
+          <button 
+            onClick={() => setState({ ...state, isSpotlightOpen: true })}
+            className="mt-2 text-[12px] font-bold bg-[#3b82f6] hover:bg-[#3b82f6]/95 text-white px-5 py-2 rounded-full transition-all shadow-lg"
+          >
+            Trigger Spotlight
+          </button>
+          <AppleSpotlight isOpen={isOpen} handleClose={() => setState({ ...state, isSpotlightOpen: false })} />
+        </div>
+      );
+    }
+  },
+  "Work Together": {
+    name: "Let's Work Together Banner",
+    description: "Responsive banner card with elegant gradient overlays and click-to-copy capability.",
+    code: `import { WorkTogether } from "./CallToActionAndLoop";\n\n// Usage:\n<WorkTogether triggerToast={triggerToast} />`,
+    render: () => {
+      return (
+        <div className="w-full flex justify-center scale-75 select-none overflow-hidden">
+          <WorkTogether triggerToast={(msg) => alert(msg)} />
+        </div>
+      );
+    }
+  },
+  "Stay in Loop": {
+    name: "Stay In Loop Newsletter",
+    description: "Smooth scroll-mask width transform layout container with input validation subscription forms.",
+    code: `import { StayInLoop } from "./CallToActionAndLoop";\n\n// Usage:\n<StayInLoop triggerToast={triggerToast} />`,
+    render: () => {
+      return (
+        <div className="w-full flex justify-center scale-75 select-none overflow-hidden">
+          <StayInLoop triggerToast={(msg) => alert(msg)} />
+        </div>
+      );
+    }
+  },
+  "Willem Loading Animation": {
+    name: "Willem Loading Animation",
+    description: "Premium GSAP loading animation with image reveals and typography scaling.",
+    code: `import WillemLoader from "./demos/WillemLoader";\n\n// Usage:\n<WillemLoader />`,
+    render: () => {
+      return (
+        <div className="w-full h-full max-h-[350px] min-h-[350px]">
+          <WillemLoader />
+        </div>
+      );
+    }
+  },
+  "Fixed Underlay Navigation": {
+    name: "Fixed Underlay Navigation",
+    description: "Underlay sliding menu overlay with spring easing and custom corners.",
+    code: `import UnderlayNav from "./demos/UnderlayNav";\n\n// Usage:\n<UnderlayNav />`,
+    render: () => {
+      return (
+        <div className="w-full h-full max-h-[350px] min-h-[350px]">
+          <UnderlayNav />
+        </div>
+      );
+    }
+  },
+  "Custom Bunny HLS Player": {
+    name: "Custom Bunny HLS Player (Basic)",
+    description: "Interactive HLS (.m3u8) video player with custom control overlay.",
+    code: `import BunnyPlayer from "./demos/BunnyPlayer";\n\n// Usage:\n<BunnyPlayer />`,
+    render: () => {
+      return (
+        <div className="w-full h-full flex items-center justify-center p-4 bg-black rounded-2xl overflow-hidden border border-white/5">
+          <BunnyPlayer />
+        </div>
+      );
+    }
+  },
+  "Three.js Warp Gallery": {
+    name: "Three.js Warp Gallery",
+    description: "Three.js WebGL image warp scroll gallery with interactive grids.",
+    code: `import ThreeJSWarpGallery from "./demos/ThreeJSWarpGallery";\n\n// Usage:\n<ThreeJSWarpGallery />`,
+    render: () => {
+      return (
+        <div className="w-full h-full max-h-[350px] min-h-[350px]">
+          <ThreeJSWarpGallery />
+        </div>
+      );
+    }
+  },
+  "WebGL Page Transitions": {
+    name: "WebGL Page Transitions",
+    description: "Fluid curved WebGL transition animations replicating Barba.js styles.",
+    code: `import WebGLPageTransitions from "./demos/WebGLPageTransitions";\n\n// Usage:\n<WebGLPageTransitions />`,
+    render: () => {
+      return (
+        <div className="w-full h-full max-h-[350px] min-h-[350px]">
+          <WebGLPageTransitions />
+        </div>
+      );
+    }
+  },
+  "WebGL Magazine": {
+    name: "WebGL Magazine / Book Turn",
+    description: "WebGL interactive magazine/book layout with realistic page turning animations.",
+    code: `import WebGLMagazine from "./demos/WebGLMagazine";\n\n// Usage:\n<WebGLMagazine />`,
+    render: () => {
+      return (
+        <div className="w-full h-full max-h-[350px] min-h-[350px]">
+          <WebGLMagazine />
+        </div>
+      );
+    }
+  },
+  "R3F Curved Carousel": {
+    name: "R3F Curved Carousel",
+    description: "Curved 3D image scroll carousels with GLSL shader wave deformations and 6 compound layouts.",
+    code: `import R3FExperimentalCarousel from "./demos/R3FExperimentalCarousel";\n\n// Usage:\n<R3FExperimentalCarousel />`,
+    render: () => {
+      return (
+        <div className="w-full h-full max-h-[350px] min-h-[350px]">
+          <R3FExperimentalCarousel />
+        </div>
+      );
+    }
+  },
+  "3D Text Scroll Layouts": {
+    name: "3D Text Scroll Layouts",
+    description: "CSS 3D transforms rendering Cylinder, interlocking Circle, and Tube text layouts driven by scroll.",
+    code: `import ThreeDTextAnimation from "./demos/ThreeDTextAnimation";\n\n// Usage:\n<ThreeDTextAnimation />`,
+    render: () => {
+      return (
+        <div className="w-full h-full max-h-[350px] min-h-[350px]">
+          <ThreeDTextAnimation />
+        </div>
+      );
+    }
+  },
+  "Elastic Grid Scroll": {
+    name: "Elastic Grid Scroll",
+    description: "Multi-column grid with symmetrical lag and velocity-driven squash/stretch deforms.",
+    code: `import ElasticGridScroll from "./demos/ElasticGridScroll";\n\n// Usage:\n<ElasticGridScroll />`,
+    render: () => {
+      return (
+        <div className="w-full h-full max-h-[350px] min-h-[350px]">
+          <ElasticGridScroll />
+        </div>
+      );
+    }
+  },
+  "Gooey Search Bar": {
+    name: "Gooey Search Bar",
+    description: "Expanding SVG gooey-filtered input with autocomplete suggestions.",
+    code: `import GooeySearch from "./demos/GooeySearch";\n\n// Usage:\n<GooeySearch />`,
+    render: () => {
+      return (
+        <div className="w-full h-full max-h-[350px] min-h-[350px] flex items-center justify-center">
+          <GooeySearch />
+        </div>
+      );
+    }
+  },
+  "3D Infinite Carousel": {
+    name: "3D Infinite Parallax Carousel",
+    description: "CSS 3D transformed drag-and-scroll carousel with image parallax.",
+    code: `import ThreeDInfiniteParallaxCarousel from "./demos/ThreeDInfiniteParallaxCarousel";\n\n// Usage:\n<ThreeDInfiniteParallaxCarousel />`,
+    render: () => {
+      return (
+        <div className="w-full h-full max-h-[350px] min-h-[350px] flex items-center justify-center">
+          <ThreeDInfiniteParallaxCarousel />
+        </div>
+      );
+    }
+  },
+  "Pixel Canvas": {
+    name: "Pixel Canvas Cards",
+    description: "Hover/focus-triggered animated grid canvases drawing responsive colors.",
+    code: `import PixelCanvasDemo from "./demos/PixelCanvasDemo";\n\n// Usage:\n<PixelCanvasDemo />`,
+    render: () => {
+      return (
+        <div className="w-full h-full max-h-[350px] min-h-[350px] flex items-center justify-center">
+          <PixelCanvasDemo />
+        </div>
+      );
+    }
+  },
+  "Staggered 3D Grid": {
+    name: "Staggered 3D Scroll Grid",
+    description: "3D staggered scroll grid applying random Z-offsets and dynamic filters.",
+    code: `import Staggered3DGrid from "./demos/Staggered3DGrid";\n\n// Usage:\n<Staggered3DGrid />`,
+    render: () => {
+      return (
+        <div className="w-full h-full max-h-[350px] min-h-[350px] flex items-center justify-center">
+          <Staggered3DGrid />
+        </div>
+      );
+    }
+  },
+  "Scroll Layout Formations": {
+    name: "On-Scroll Layout Formations",
+    description: "10 distinct photo layout formations triggered as you scroll.",
+    code: `import OnScrollLayoutFormations from "./demos/OnScrollLayoutFormations";\n\n// Usage:\n<OnScrollLayoutFormations />`,
+    render: () => {
+      return (
+        <div className="w-full h-full max-h-[350px] min-h-[350px] flex items-center justify-center">
+          <OnScrollLayoutFormations />
+        </div>
+      );
+    }
+  },
+  "Gradient 3D Slider": {
+    name: "Gradient 3D Slider",
+    description: "Horizontal infinite-scrolling slider with HTML5 radial gradient canvas background.",
+    code: `import GradientSlider from "./demos/GradientSlider";\n\n// Usage:\n<GradientSlider />`,
+    render: () => {
+      return (
+        <div className="w-full h-full max-h-[350px] min-h-[350px] flex items-center justify-center">
+          <GradientSlider />
+        </div>
+      );
+    }
+  },
+  "3D Letters Menu Hover": {
+    name: "3D Letters Menu Hover",
+    description: "Menu hover animations with rotating 3D character splits and cursor reveal image.",
+    code: `import ThreeDLettersMenuHover from "./demos/ThreeDLettersMenuHover";\n\n// Usage:\n<ThreeDLettersMenuHover />`,
+    render: () => {
+      return (
+        <div className="w-full h-full max-h-[350px] min-h-[350px] flex items-center justify-center">
+          <ThreeDLettersMenuHover />
+        </div>
+      );
+    }
+  },
+  "On-Scroll Letters": {
+    name: "On-Scroll Letters",
+    description: "Bending typographic characters warping dynamically in response to scroll speed.",
+    code: `import { OnScrollLetterAnimations } from "./demos/OnScrollLetterAnimations";\n\n// Usage:\n<OnScrollLetterAnimations />`,
+    render: () => {
+      return (
+        <div className="w-full h-full max-h-[350px] min-h-[350px] flex items-center justify-center">
+          <div className="w-full max-w-md">
+            <OnScrollLetterAnimations />
+          </div>
+        </div>
+      );
+    }
+  },
+  "Circular Text Effect": {
+    name: "Circular Text Effect",
+    description: "Concentric rotating SVG typography expanding and fading out on click.",
+    code: `import { CircularTextEffect } from "./demos/CircularTextEffect";\n\n// Usage:\n<CircularTextEffect />`,
+    render: () => {
+      return (
+        <div className="w-full h-full max-h-[350px] min-h-[350px] flex items-center justify-center">
+          <div className="w-full max-w-md">
+            <CircularTextEffect />
+          </div>
+        </div>
+      );
+    }
+  },
+  "Sticky Grid Scroll": {
+    name: "Sticky Grid Scroll",
+    description: "A structured scroll-driven image grid zooming and splitting on scroll.",
+    code: `import { StickyGridScroll } from "./demos/StickyGridScroll";\n\n// Usage:\n<StickyGridScroll />`,
+    render: () => {
+      return (
+        <div className="w-full h-full max-h-[350px] min-h-[350px] flex items-center justify-center">
+          <div className="w-full max-w-md">
+            <StickyGridScroll />
+          </div>
+        </div>
+      );
+    }
+  },
+  "Infinite Scroll Parallax": {
+    name: "Infinite Scroll Parallax",
+    description: "Seamless vertical repeated loop with image depth parallax transforms.",
+    code: `import { InfiniteScrollParallax } from "./demos/InfiniteScrollParallax";\n\n// Usage:\n<InfiniteScrollParallax />`,
+    render: () => {
+      return (
+        <div className="w-full h-full max-h-[350px] min-h-[350px] flex items-center justify-center">
+          <div className="w-full max-w-md">
+            <InfiniteScrollParallax />
+          </div>
+        </div>
+      );
+    }
   }
 };
 
+function SidebarBlur({ direction }: { direction: "top" | "bottom" }) {
+  const gradientDirection = direction === "top" ? "to bottom" : "to top";
+  const positionClass = direction === "top" ? "top-0" : "bottom-0";
+  
+  return (
+    <div className={`pointer-events-none absolute left-0 right-2 h-14 z-20 ${positionClass} overflow-hidden rounded-t-2xl rounded-b-2xl`}>
+      {[0.5, 1, 2, 4].map((blur, i) => {
+        const opacity = (i + 1) / 4;
+        const stopStart = (i * 25) + "%";
+        const stopEnd = ((i + 1) * 25) + "%";
+        return (
+          <div
+            key={i}
+            className="absolute inset-0 w-full h-full pointer-events-none"
+            style={{
+              backdropFilter: `blur(${blur}px)`,
+              WebkitBackdropFilter: `blur(${blur}px)`,
+              maskImage: `linear-gradient(${gradientDirection}, rgba(0,0,0,${opacity}) ${stopStart}, rgba(0,0,0,0) ${stopEnd})`,
+              WebkitMaskImage: `linear-gradient(${gradientDirection}, rgba(0,0,0,${opacity}) ${stopStart}, rgba(0,0,0,0) ${stopEnd})`,
+            }}
+          />
+        );
+      })}
+      <div className={`absolute inset-0 bg-gradient-to-${direction === "top" ? "b" : "t"} from-white dark:from-[#141414] via-transparent to-transparent opacity-60 pointer-events-none`} />
+    </div>
+  );
+}
+
 export function InteractiveShowcase() {
-  const [activePlayground, setActivePlayground] = useState("iOS Toggle");
+  const [activePlayground, setActivePlayground] = useState("Spaced Chat Input");
   const [copied, setCopied] = useState(false);
   const [showCode, setShowCode] = useState(false);
-  const [state, setState] = useState({
-    toggle: false,
-    selectedSegment: "Light",
-    sliderVal: 65
-  });
+  const [state, setState] = useState({});
 
   const handleCopy = () => {
     navigator.clipboard.writeText(PLAYGROUNDS[activePlayground].code);
@@ -312,20 +855,22 @@ export function InteractiveShowcase() {
     <div className="w-full bg-white dark:bg-[#141414] flex flex-col items-center">
       
       {/* 1. Component Sandbox Playground */}
-      <section className="py-24 md:py-32 w-full max-w-[1280px] px-6 flex flex-col items-center border-t border-neutral-100 dark:border-white/5">
-        <div className="text-center mb-16 max-w-2xl">
-          <span className="text-[11px] font-bold tracking-[0.15em] uppercase text-neutral-400 dark:text-neutral-500 block mb-3">Interactive Sandbox</span>
-          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-[#141414] dark:text-white mb-4">
+      <section className="py-10 md:py-32 w-full max-w-[1280px] px-4 md:px-6 flex flex-col items-center border-t border-neutral-100 dark:border-white/5">
+        <div className="text-center mb-8 md:mb-16 max-w-2xl">
+          <span className="text-[10px] md:text-[11px] font-bold tracking-[0.15em] uppercase text-neutral-400 dark:text-neutral-500 block mb-2">Interactive Sandbox</span>
+          <h2 className="text-[1.6rem] md:text-5xl font-extrabold tracking-tight text-[#141414] dark:text-white mb-2 md:mb-4">
             Component Playground
           </h2>
-          <p className="text-neutral-500 dark:text-neutral-400 font-medium">
+          <p className="text-[13px] md:text-base text-neutral-500 dark:text-neutral-400 font-medium">
             Test animations and copy production-ready code directly in your browser.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full">
-          {/* Menu Selector Column */}
-          <div className="lg:col-span-3 flex flex-col gap-2">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 w-full">
+          {/* ── Mobile: 2-col grid selector ── Desktop: vertical list */}
+
+          {/* MOBILE grid (hidden on lg+) */}
+          <div className="lg:hidden grid grid-cols-2 gap-2">
             {Object.keys(PLAYGROUNDS).map((key) => (
               <button
                 key={key}
@@ -333,20 +878,49 @@ export function InteractiveShowcase() {
                   setActivePlayground(key);
                   setCopied(false);
                 }}
-                className={`w-full px-5 py-4 rounded-2xl text-[15px] font-[600] text-left transition-all border flex items-center justify-between cursor-pointer ${
+                className={`px-3 py-2.5 rounded-xl text-[12px] font-semibold text-center transition-all border cursor-pointer leading-tight ${
                   activePlayground === key
-                    ? "bg-neutral-100 dark:bg-[#1d1f27] border-neutral-200 dark:border-white/5 text-[#141414] dark:text-white"
-                    : "bg-transparent border-transparent text-neutral-500 hover:bg-neutral-50 dark:hover:bg-white/[0.02] hover:text-[#141414] dark:hover:text-white"
+                    ? "bg-neutral-100 dark:bg-[#1d1f27] border-neutral-300 dark:border-white/10 text-[#141414] dark:text-white shadow-sm"
+                    : "bg-transparent border-neutral-200/60 dark:border-white/5 text-neutral-500 hover:bg-neutral-50 dark:hover:bg-white/[0.02] hover:text-[#141414] dark:hover:text-white"
                 }`}
               >
-                <span>{key}</span>
-                <Code2 className="w-4 h-4 opacity-50" />
+                {key}
               </button>
             ))}
           </div>
 
+          {/* DESKTOP vertical list (hidden below lg) with scrollbar and progressive blur */}
+          <div className="hidden lg:col-span-3 lg:flex flex-col relative h-[500px]">
+            {/* Top Progressive Blur */}
+            <SidebarBlur direction="top" />
+
+            {/* Scrollable list */}
+            <div className="flex flex-col gap-2 overflow-y-auto pr-2 h-full py-16">
+              {Object.keys(PLAYGROUNDS).map((key) => (
+                <button
+                  key={key}
+                  onClick={() => {
+                    setActivePlayground(key);
+                    setCopied(false);
+                  }}
+                  className={`w-full px-5 py-4 rounded-2xl text-[15px] font-[600] text-left transition-all border flex items-center justify-between gap-2 cursor-pointer shrink-0 ${
+                    activePlayground === key
+                      ? "bg-neutral-100 dark:bg-[#1d1f27] border-neutral-200 dark:border-white/5 text-[#141414] dark:text-white shadow-sm"
+                      : "bg-transparent border-transparent text-neutral-500 hover:bg-neutral-50 dark:hover:bg-white/[0.02] hover:text-[#141414] dark:hover:text-white"
+                  }`}
+                >
+                  <span>{key}</span>
+                  <Code2 className="w-4 h-4 opacity-50 shrink-0" />
+                </button>
+              ))}
+            </div>
+
+            {/* Bottom Progressive Blur */}
+            <SidebarBlur direction="bottom" />
+          </div>
+
           {/* Playground Interactive Output Area */}
-          <div className={`${showCode ? "lg:col-span-4" : "lg:col-span-9"} bg-neutral-50 dark:bg-[#1d1f27]/30 border border-neutral-200/50 dark:border-white/5 rounded-[32px] min-h-[350px] flex flex-col justify-between p-8 relative overflow-hidden shadow-sm transition-all duration-350 ease-in-out`}>
+          <div className={`${showCode ? "lg:col-span-4" : "lg:col-span-9"} bg-neutral-50 dark:bg-[#1d1f27]/30 border border-neutral-200/50 dark:border-white/5 rounded-[24px] md:rounded-[32px] min-h-[300px] md:min-h-[350px] flex flex-col justify-between p-5 md:p-8 relative overflow-hidden shadow-sm transition-all duration-350 ease-in-out`}>
             <div className="flex justify-between items-start gap-4">
               <div className="flex flex-col gap-2 text-left">
                 <span className="text-[11px] font-bold tracking-wider text-neutral-400 dark:text-neutral-500 uppercase">Interactive Preview</span>
@@ -362,20 +936,15 @@ export function InteractiveShowcase() {
               </button>
             </div>
             
-            <div className="my-auto flex justify-center items-center py-8">
+            <div className="flex-grow w-full flex items-center justify-center py-4">
               {PLAYGROUNDS[activePlayground].render(state, setState)}
-            </div>
-
-            <div className="flex items-center gap-1.5 text-[12px] font-semibold text-neutral-400 dark:text-neutral-500">
-              <Sparkles className="w-4 h-4 text-amber-500 animate-pulse" />
-              <span>Click to interact with preview</span>
             </div>
           </div>
 
           {/* Styled Code Viewer */}
           {showCode && (
-            <div className="lg:col-span-5 bg-[#1d1f27] rounded-[32px] border border-white/5 shadow-lg overflow-hidden flex flex-col justify-between h-[350px] md:h-auto animate-fade-in">
-              <div className="flex justify-between items-center px-6 py-4 border-b border-white/5 bg-[#141414]/50">
+            <div className="lg:col-span-5 bg-[#1d1f27] rounded-[24px] md:rounded-[32px] border border-white/5 shadow-lg overflow-hidden flex flex-col justify-between h-[320px] md:h-auto animate-fade-in">
+              <div className="flex justify-between items-center px-4 md:px-6 py-4 border-b border-white/5 bg-[#141414]/50">
                 <div className="flex items-center gap-2">
                   <span className="w-3 h-3 rounded-full bg-[#ff5f56]" />
                   <span className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
@@ -399,7 +968,7 @@ export function InteractiveShowcase() {
                   )}
                 </button>
               </div>
-              <pre className="p-6 text-[13px] font-mono text-neutral-300 overflow-y-auto no-scrollbar flex-grow bg-[#1d1f27] text-left leading-relaxed">
+              <pre className="p-4 md:p-6 text-[12px] md:text-[13px] font-mono text-neutral-300 overflow-y-auto no-scrollbar flex-grow bg-[#1d1f27] text-left leading-relaxed">
                 <code>{PLAYGROUNDS[activePlayground].code}</code>
               </pre>
             </div>
@@ -407,86 +976,25 @@ export function InteractiveShowcase() {
         </div>
       </section>
 
-      {activePlayground === "Sticky Cards" && (
-        <div className="w-full border-y border-neutral-100 dark:border-white/5 bg-neutral-50/50 dark:bg-black/10 py-12 flex flex-col items-center">
+      {activePlayground === "Flow Scroll" && (
+        <div className="w-full border-t border-neutral-100 dark:border-white/5">
+          <FlowScroll images={DEMO_IMAGES} />
+        </div>
+      )}
+
+      {activePlayground === "Scroll Effect" && (
+        <div className="w-full border-t border-neutral-100 dark:border-white/5">
+          <ScrollEffect images={SCROLL_EFFECT_IMAGES} className="w-full" />
+        </div>
+      )}
+
+      {activePlayground === "Sticky Card Stack" && (
+        <div className="w-full border-t border-neutral-100 dark:border-white/5 bg-[#141414]">
           <Skiper34 />
         </div>
       )}
 
-      {/* 2. Figma Plugin Integration Showcase */}
-      <section className="py-24 md:py-32 w-full max-w-[1280px] px-6 border-t border-neutral-100 dark:border-white/5">
-        <div className="bg-neutral-950 text-white rounded-[40px] p-8 md:p-16 lg:p-20 relative overflow-hidden shadow-2xl flex flex-col lg:flex-row gap-12 justify-between items-center border border-white/5">
-          {/* Background Gradient Glow */}
-          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#0065ff]/10 rounded-full blur-[100px] pointer-events-none" />
-          
-          <div className="flex flex-col gap-6 max-w-xl text-left z-10">
-            <span className="text-[11px] font-bold tracking-[0.15em] uppercase text-neutral-500 dark:text-neutral-400 block mb-1">Figma Workflow</span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight">
-              Design and code, <br />synced in one click.
-            </h2>
-            <p className="text-lg text-neutral-400 leading-relaxed font-medium">
-              A premium drag-and-drop Figma plugin connects your designs straight to development. Copy component structures or complete responsive pages directly into your web project without leaving the canvas.
-            </p>
-            <div className="flex flex-wrap items-center gap-4 mt-2">
-              <a href="#" className="bg-white text-neutral-950 font-semibold px-6 py-3 rounded-full text-[15px] flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all cursor-pointer">
-                <Download className="w-4 h-4" /> Install Figma Plugin
-              </a>
-              <a href="#" className="bg-transparent border border-white/20 text-white hover:bg-white/5 font-semibold px-6 py-3 rounded-full text-[15px] flex items-center gap-2 active:scale-95 transition-all cursor-pointer">
-                <Layers className="w-4 h-4" /> Explore UI Kit
-              </a>
-            </div>
-          </div>
 
-          {/* Plugin Interactive Graphic Mockup */}
-          <div className="w-full lg:w-[480px] h-[350px] bg-neutral-900 border border-white/10 rounded-[32px] p-6 shadow-2xl relative flex flex-col justify-between overflow-hidden z-10">
-            {/* Top Bar of Plugin mock */}
-            <div className="flex justify-between items-center border-b border-white/5 pb-4">
-              <div className="flex items-center gap-2">
-                <div className="w-6 h-6 rounded-lg bg-white/10 flex items-center justify-center font-bold text-[12px] text-white">O₂</div>
-                <span className="text-[13px] font-bold text-white tracking-tight">Oxygen UI Plugin</span>
-              </div>
-              <span className="bg-[#3b82f6]/20 text-[#3b82f6] text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-[#3b82f6]/10 uppercase tracking-wider">v1.2.0</span>
-            </div>
-
-            {/* Content Mock List */}
-            <div className="flex flex-col gap-3 my-auto py-4">
-              <div className="flex justify-between items-center p-3.5 bg-white/5 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#34c759]/10 border border-[#34c759]/20 flex items-center justify-center text-xs text-[#34c759]">T</div>
-                  <div className="flex flex-col text-left">
-                    <span className="text-[13px] font-bold text-white leading-tight">iOS Toggle Switch</span>
-                    <span className="text-[11px] text-neutral-400">Interactive motion switch</span>
-                  </div>
-                </div>
-                <span className="text-[12px] text-[#3b82f6] font-semibold">Ready</span>
-              </div>
-
-              <div className="flex justify-between items-center p-3.5 bg-white/5 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#5856d6]/10 border border-[#5856d6]/20 flex items-center justify-center text-xs text-[#5856d6]">S</div>
-                  <div className="flex flex-col text-left">
-                    <span className="text-[13px] font-bold text-white leading-tight">Segmented Picker</span>
-                    <span className="text-[11px] text-neutral-400">Smooth sliding navigation control</span>
-                  </div>
-                </div>
-                <span className="text-[12px] text-[#3b82f6] font-semibold">Ready</span>
-              </div>
-            </div>
-
-            {/* Drag Drop Hint Footer */}
-            <div className="bg-[#141414] rounded-2xl p-4 flex justify-between items-center border border-white/5">
-              <span className="text-[12px] font-medium text-neutral-400">Hover & click to drop frame to Figma canvas</span>
-              <motion.div 
-                animate={{ y: [0, -4, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                className="w-8 h-8 bg-white text-neutral-900 rounded-full flex items-center justify-center shadow-lg"
-              >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </section>
 
     </div>
   );

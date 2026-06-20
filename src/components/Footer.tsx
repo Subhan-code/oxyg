@@ -3,14 +3,14 @@ import logoUrl from "../assets/oxygen-ui-logo.png";
 
 export function Footer() {
   return (
-    <footer className="relative md:fixed md:bottom-0 md:left-0 w-full h-auto md:h-[400px] z-10 md:z-0 bg-[#141414] flex flex-col justify-end pb-12 pt-16 md:pt-20 px-6 md:px-12 text-[#f5f5f5] font-sans">
-      <div className="max-w-[1240px] w-full mx-auto flex flex-col md:flex-row justify-between items-start gap-10 md:gap-12 z-10">
-        <div className="flex flex-col gap-4 md:max-w-[320px]">
-           <div className="flex items-center gap-3">
-             <img src={logoUrl} alt="Oxygen UI Logo" className="h-8 w-auto object-contain" />
-             <span className="font-bold text-[28px] md:text-[32px] tracking-tight text-white mb-1">Oxygen UI</span>
+    <footer className="relative md:fixed md:bottom-0 md:left-0 w-full h-auto md:h-[400px] z-0 bg-[#141414] flex flex-col justify-end pb-8 pt-10 md:pt-20 md:pb-12 px-5 md:px-12 text-[#f5f5f5] font-sans">
+      <div className="max-w-[1240px] w-full mx-auto flex flex-col md:flex-row justify-between items-start gap-6 md:gap-12 z-10">
+        <div className="flex flex-col gap-2 md:gap-4 md:max-w-[320px]">
+           <div className="flex items-center gap-2 md:gap-3">
+             <img src={logoUrl} alt="Oxygen UI Logo" className="h-6 md:h-8 w-auto object-contain" />
+             <span className="font-bold text-[22px] md:text-[32px] tracking-tight text-white">Oxygen UI</span>
            </div>
-           <p className="text-[15px] md:text-[17px] font-normal leading-relaxed text-[#a1a1aa]">Build better digital experiences <br className="hidden sm:block" />with Oxygen UI.</p>
+           <p className="text-[13px] md:text-[17px] font-normal leading-relaxed text-[#a1a1aa]">Build better digital experiences with Oxygen UI.</p>
         </div>
 
         <div className="grid grid-cols-2 md:flex gap-x-12 gap-y-8 md:gap-[120px] lg:gap-[160px] w-full md:w-auto h-auto">

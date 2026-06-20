@@ -85,7 +85,7 @@ export function iOSFAQ() {
   };
 
   return (
-    <section className="w-full max-w-[800px] mx-auto px-6 py-20 font-sans select-none text-neutral-900 bg-white dark:bg-[#141414] dark:text-white transition-colors duration-300">
+    <section className="w-full max-w-[800px] mx-auto px-4 md:px-6 py-8 md:py-20 font-sans select-none text-neutral-900 bg-white dark:bg-[#141414] dark:text-white transition-colors duration-300">
       <div className="flex flex-col items-center">
         {/* Section Header */}
         <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-center mb-2">
@@ -118,9 +118,10 @@ export function iOSFAQ() {
           </div>
         </div>
 
-        {/* iOS Segmented Control */}
+        {/* iOS Segmented Control - scrollable on small screens */}
         {!searchQuery && (
-          <div className="bg-neutral-100 dark:bg-[#1c1c1e] p-1 rounded-[16px] flex w-full max-w-md gap-1 mb-8 relative">
+          <div className="bg-neutral-100 dark:bg-[#1c1c1e] p-1 rounded-[16px] flex w-full max-w-md gap-1 mb-8 relative overflow-x-auto no-scrollbar">
+
             {CATEGORIES.map((category) => {
               const isActive = activeCategory === category;
               return (

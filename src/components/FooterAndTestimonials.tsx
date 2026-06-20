@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
+import { CallToActionAndLoop } from "./CallToActionAndLoop";
 
 // Testimonial data from original site
 const TESTIMONIALS = [
@@ -29,7 +30,7 @@ const TESTIMONIALS = [
     company: "DesignCode",
     avatar: "https://framerusercontent.com/images/3ndODJ5P689x5Lc8nWC29cfMUs.png?width=512&height=512",
     companyLogo: "https://framerusercontent.com/images/BMmuPME8dhjWzSCoEF4saVhh02I.png?width=96&height=96",
-    text: "Mobbin is a game-changer for designers looking to step up their understanding of UX and UI design patterns. It’s so massive, meticulously organized, has deep user flows and even a figma plugin!"
+    text: "Mobbin is a game-changer for designers looking to step up their understanding of UX and UI design patterns. It's so massive, meticulously organized, has deep user flows and even a figma plugin!"
   },
 ];
 
@@ -63,12 +64,12 @@ const APP_ROWS = [
   ]
 ];
 
-export function FooterAndTestimonials() {
+export function FooterAndTestimonials({ triggerToast }: { triggerToast: (msg: string) => void }) {
   return (
     <>
-      <div className="py-24 md:py-32 bg-white relative border-t border-neutral-100">
+      <div className="py-10 md:py-32 bg-white relative border-t border-neutral-100">
         <div className="max-w-[1280px] mx-auto px-4 md:px-8">
-          <h2 className="text-[2.25rem] md:text-6xl font-bold tracking-[-0.04em] text-neutral-900 text-center mb-16 md:mb-24">
+          <h2 className="text-[1.6rem] md:text-6xl font-bold tracking-[-0.04em] text-neutral-900 text-center mb-8 md:mb-24">
             What our users are saying.
           </h2>
           
@@ -96,9 +97,11 @@ export function FooterAndTestimonials() {
         </div>
       </div>
 
-      <div className="bg-white py-24 md:py-32 overflow-hidden relative rounded-b-[40px] md:rounded-b-[48px]">
+      <CallToActionAndLoop triggerToast={triggerToast} />
+
+      <div className="bg-white py-12 md:py-32 overflow-hidden relative rounded-b-[32px] md:rounded-b-[48px]">
         <div className="max-w-4xl mx-auto px-4 text-center z-10 relative">
-          <h2 className="text-[2.5rem] leading-[1.05] md:text-[80px] md:leading-[80px] font-bold tracking-[-0.6px] text-[#141414] mb-8">
+          <h2 className="text-[2rem] leading-[1.05] md:text-[80px] md:leading-[80px] font-bold tracking-[-0.6px] text-[#141414] mb-6 md:mb-8">
             Never run out of <br className="hidden md:block" /> inspiration again.
           </h2>
           <p className="text-[16px] md:text-[20px] text-[#717171] font-[450] mb-10 md:mb-12 max-w-xl mx-auto px-4 leading-[26px]">
@@ -116,18 +119,19 @@ export function FooterAndTestimonials() {
           </div>
         </div>
 
-        <div className="mt-24 md:mt-32 flex flex-col gap-6 md:gap-10 overflow-hidden relative opacity-100 pointer-events-none pb-12">
+        {/* Mobile-friendly app marquee rows - smaller text and icons on mobile */}
+        <div className="mt-20 md:mt-32 flex flex-col gap-4 md:gap-10 overflow-hidden relative opacity-100 pointer-events-none pb-12 w-full">
            {APP_ROWS.map((row, index) => (
              <motion.div 
                 key={index}
                 animate={{ x: index % 2 === 1 ? ["-50%", "0%"] : ["0%", "-50%"] }}
                 transition={{ ease: "linear", duration: 30 + index * 5, repeat: Infinity }}
-                className="flex gap-6 md:gap-10 min-w-max"
+                className="flex gap-3 md:gap-10 min-w-max"
               >
                 {[...row, ...row].map((app, i) => (
-                  <div key={i} className="flex items-center gap-4 shrink-0 px-2 group">
-                    <img src={app.icon} className="w-16 md:w-[64px] h-16 md:h-[64px] rounded-[16px] border border-neutral-100 shadow-[0_2px_4px_rgba(0,0,0,0.02)]" alt={app.name} />
-                    <span className="text-[20px] md:text-[32px] font-bold text-[#141414] tracking-[-0.6px]">{app.name}</span>
+                  <div key={i} className="flex items-center gap-2 md:gap-4 shrink-0 px-1 md:px-2 group">
+                    <img src={app.icon} className="w-9 md:w-[64px] h-9 md:h-[64px] rounded-xl md:rounded-[16px] border border-neutral-100 shadow-[0_2px_4px_rgba(0,0,0,0.02)]" alt={app.name} />
+                    <span className="text-[15px] md:text-[32px] font-bold text-[#141414] tracking-[-0.6px]">{app.name}</span>
                   </div>
                 ))}
               </motion.div>

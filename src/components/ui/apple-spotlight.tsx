@@ -182,20 +182,24 @@ export function AppleSpotlight({ shortcuts = DEFAULT_SHORTCUTS, isOpen = true, h
         <AnimatePresence mode="wait">
             {isOpen && (
                 <motion.div
-                    initial={{ opacity: 0, filter: 'blur(20px)', scaleX: 1.3, scaleY: 1.1, y: -10 }}
-                    animate={{ opacity: 1, filter: 'blur(0px)', scaleX: 1, scaleY: 1, y: 0 }}
-                    exit={{ opacity: 0, filter: 'blur(20px)', scaleX: 1.3, scaleY: 1.1, y: 10 }}
-                    transition={{ stiffness: 550, damping: 50, type: 'spring' }}
-                    className="fixed inset-0 z-50 flex flex-col items-center justify-center"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/50 backdrop-blur-sm"
                     onClick={handleClose}
                 >
                     <SVGFilter />
-                    <div
+                    <motion.div
+                        initial={{ scale: 0.95, y: -20 }}
+                        animate={{ scale: 1, y: 0 }}
+                        exit={{ scale: 0.95, y: 20 }}
+                        transition={{ stiffness: 550, damping: 50, type: 'spring' }}
                         onMouseEnter={() => setHovered(true)}
                         onMouseLeave={() => { setHovered(false); setHoveredShortcut(null); }}
                         onClick={(e) => e.stopPropagation()}
                         className={cn(
-                            'w-full flex items-center justify-end gap-4 z-20 group',
+                            'w-full flex items-center justify-end gap-4 z-20 group px-4',
                             '[&>div]:bg-neutral-100 [&>div]:text-black [&>div]:rounded-full [&>div]:backdrop-blur-xl',
                             '[&_svg]:size-7 [&_svg]:stroke-[1.4]',
                             'max-w-3xl'
@@ -235,7 +239,7 @@ export function AppleSpotlight({ shortcuts = DEFAULT_SHORTCUTS, isOpen = true, h
                                 </motion.div>
                             ))}
                         </AnimatePresence>
-                    </div>
+                    </motion.div>
                 </motion.div>
             )}
         </AnimatePresence>
