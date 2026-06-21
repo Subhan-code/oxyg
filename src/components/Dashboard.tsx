@@ -69,6 +69,8 @@ import { OnScrollLetterAnimations } from "./demos/OnScrollLetterAnimations";
 import { CircularTextEffect } from "./demos/CircularTextEffect";
 import { StickyGridScroll } from "./demos/StickyGridScroll";
 import { InfiniteScrollParallax } from "./demos/InfiniteScrollParallax";
+import { GradientShimmerDemo } from "./demos/GradientShimmerDemo";
+import { GradientShimmer } from "./ui/gradient-shimmer";
 
 // Constants for showcase demo images
 const DEMO_IMAGES = [
@@ -845,6 +847,17 @@ const DASHBOARD_ITEMS: ScreenItem[] = [
     platform: "Web",
     badge: "New",
     likes: 4980
+  },
+  {
+    id: "gradient-shimmer",
+    appName: "Gradient Shimmer Text",
+    appLogo: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=64&auto=format&fit=crop",
+    category: "Design",
+    uiElement: "Text Effect",
+    flow: "Microinteractions & Gestures",
+    platform: "Web",
+    badge: "New",
+    likes: 5120
   }
 ];
 
@@ -1237,7 +1250,8 @@ export function Dashboard() {
                 "staggered-3d-grid",
                 "scroll-layout-formations",
                 "gradient-slider",
-                "3d-letters-menu"
+                "3d-letters-menu",
+                "gradient-shimmer"
               ].includes(item.id);
 
               return (
@@ -1910,6 +1924,40 @@ export function Dashboard() {
                           </button>
                         </div>
                       </div>
+                    ) : item.id === "gradient-shimmer" ? (
+                      <div onClick={(e) => e.stopPropagation()} className="w-full flex flex-col items-center justify-center gap-4 z-20 px-2 py-4">
+                        {/* Live shimmer preview */}
+                        <div className="w-full flex flex-col items-center gap-3 bg-[#111] rounded-2xl border border-white/[0.05] p-5">
+                          <p className="text-[10px] font-semibold tracking-widest uppercase text-neutral-600">gradient-shimmer</p>
+                          <p className="text-2xl font-bold text-center leading-snug">
+                            <GradientShimmer gradient="sunrise" easing="smooth" duration={1.6} pauseOnScroll={false} baseColor="white">
+                              Build faster.
+                            </GradientShimmer>
+                          </p>
+                          <p className="text-xl font-semibold text-center">
+                            <GradientShimmer gradient="mint" easing="gentle" duration={2} pauseBetween={600} pauseOnScroll={false} baseColor="white">
+                              Premium components.
+                            </GradientShimmer>
+                          </p>
+                          <p className="text-base font-medium text-center">
+                            <GradientShimmer gradient="bubble" easing="snappy" duration={1.2} pauseBetween={400} pauseOnScroll={false} baseColor="white">
+                              500+ UI elements.
+                            </GradientShimmer>
+                          </p>
+                        </div>
+                        {/* Swatch row */}
+                        <div className="flex gap-1.5">
+                          {(["sunrise","mint","bubble","peach","bay"] as const).map(name => (
+                            <span key={name} className="w-4 h-4 rounded-full border border-white/10" style={{ background: `linear-gradient(135deg, ${name === 'sunrise' ? '#EF9B62,#F888A0' : name === 'mint' ? '#7DC0FB,#00C7A6' : name === 'bubble' ? '#EBBDDE,#78B0FF' : name === 'peach' ? '#FCBAC9,#F0B3F5' : '#2D8E9A,#262C81'})` }} />
+                          ))}
+                        </div>
+                        <button
+                          onClick={() => setSelectedScreen(item)}
+                          className="text-[10px] font-bold bg-white/5 hover:bg-white/10 text-white px-4 py-1.5 rounded-full transition-all border border-white/10"
+                        >
+                          Open Interactive Demo
+                        </button>
+                      </div>
                     ) : item.platform === "iOS" ? (
                       <PhoneMockup>
                         {/* Status bar */}
@@ -2375,6 +2423,12 @@ export function Dashboard() {
                   <div className="w-full h-full flex items-center justify-center z-10 p-4">
                     <div className="w-full max-w-2xl rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
                       <InfiniteScrollParallax />
+                    </div>
+                  </div>
+                ) : selectedScreen.id === "gradient-shimmer" ? (
+                  <div className="w-full h-full flex items-center justify-center z-10 p-4">
+                    <div className="w-full max-w-2xl rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                      <GradientShimmerDemo />
                     </div>
                   </div>
                 ) : selectedScreen.id === "bunny-player" ? (
