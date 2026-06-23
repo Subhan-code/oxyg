@@ -227,10 +227,10 @@ export function BespokeSection() {
           variants={fadeInReveal}
           className="text-center max-w-xl mx-auto"
         >
-          <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white mb-2">
+          <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white mb-2 text-balance">
             Membership Plans
           </h3>
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">
+          <p className="text-sm text-zinc-500 dark:text-zinc-400 text-pretty">
             Become part of a highly skilled creative community. Flexible plans to elevate your production speed.
           </p>
         </motion.div>
@@ -281,7 +281,7 @@ export function BespokeSection() {
 
                 {/* Price */}
                 <div className="flex items-baseline gap-1.5 mt-4 mb-6">
-                  <span className="text-4xl font-bold text-zinc-900 dark:text-white">
+                  <span className="text-4xl font-bold text-zinc-900 dark:text-white tabular-nums">
                     {plan.price}
                   </span>
                   {plan.priceUnit && (
@@ -308,7 +308,7 @@ export function BespokeSection() {
               <div className="mt-8">
                 <a
                   href={plan.ctaLink}
-                  className={`w-full h-12 rounded-xl font-semibold flex items-center justify-center text-sm transition-all duration-200 active:scale-98 ${
+                  className={`w-full h-12 rounded-xl font-semibold flex items-center justify-center text-sm transition-[background-color,transform] duration-200 active:scale-[0.96] ${
                     plan.highlight
                       ? "bg-blue-500 text-white hover:bg-blue-600 shadow-sm shadow-blue-500/10"
                       : "bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200"

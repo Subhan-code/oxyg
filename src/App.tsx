@@ -6,11 +6,12 @@ import { Features } from "./components/Features";
 import { FooterAndTestimonials } from "./components/FooterAndTestimonials";
 import { Footer } from "./components/Footer";
 import { Pricing } from "./components/Pricing";
-import { iOSFAQ } from "./components/iOSFAQ";
+import { iOSFAQ as IOSFAQ } from "./components/iOSFAQ";
 import { InteractiveShowcase } from "./components/InteractiveShowcase";
 import { BespokeSection } from "./components/BespokeSection";
 import { Login } from "./components/Login";
 import { Dashboard } from "./components/Dashboard";
+import { ThreeDTextScrollSection } from "./components/ThreeDTextScrollSection";
 
 // Import toast dependencies
 import { motion, AnimatePresence } from "motion/react";
@@ -38,7 +39,7 @@ export default function App() {
 
   return (
     <ReactLenis root={!isViewportLocked}>
-      <div className={`font-sans antialiased selection:bg-neutral-900 selection:text-white relative z-0 min-h-screen transition-colors duration-300 bg-[#141414] overflow-x-hidden ${
+      <div className={`font-sans antialiased selection:bg-neutral-900 selection:text-white relative z-0 min-h-screen transition-colors duration-300 bg-[#141414] overflow-x-clip ${
         currentPath === "/pricing" || isViewportLocked ? "text-white" : "text-[#141414]"
       }`}>
         {!isViewportLocked && <Header dark={currentPath === "/pricing"} />}
@@ -65,7 +66,7 @@ export default function App() {
                 <Features />
                 <InteractiveShowcase />
                 <BespokeSection />
-                <iOSFAQ />
+                <IOSFAQ />
               </main>
               <FooterAndTestimonials triggerToast={triggerToast} />
             </div>

@@ -69,7 +69,7 @@ export function FooterAndTestimonials({ triggerToast }: { triggerToast: (msg: st
     <>
       <div className="py-10 md:py-32 bg-white relative border-t border-neutral-100">
         <div className="max-w-[1280px] mx-auto px-4 md:px-8">
-          <h2 className="text-[1.6rem] md:text-6xl font-bold tracking-[-0.04em] text-neutral-900 text-center mb-8 md:mb-24">
+          <h2 className="text-[1.6rem] md:text-6xl font-bold tracking-[-0.04em] text-neutral-900 text-center mb-8 md:mb-24 text-balance">
             What our users are saying.
           </h2>
           
@@ -78,7 +78,7 @@ export function FooterAndTestimonials({ triggerToast }: { triggerToast: (msg: st
                <div key={i} className="border border-neutral-200/80 bg-white rounded-3xl p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow flex flex-col gap-6">
                  <div className="flex items-center gap-3">
                    <div className="relative">
-                     <img src={t.avatar} className="w-12 h-12 rounded-full object-cover bg-neutral-100 border border-neutral-100" alt={t.name} />
+                     <img src={t.avatar} className="w-12 h-12 rounded-full object-cover bg-neutral-100 outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10" alt={t.name} />
                      {t.companyLogo && (
                        <img src={t.companyLogo} className="w-5 h-5 rounded-full border-2 border-white absolute -bottom-1 -right-1 bg-white" alt={t.company} />
                      )}
@@ -88,9 +88,9 @@ export function FooterAndTestimonials({ triggerToast }: { triggerToast: (msg: st
                      {t.company && <p className="text-neutral-500 text-[13px] font-medium">{t.company}</p>}
                    </div>
                  </div>
-                 <p className="text-neutral-600 text-[15px] leading-relaxed font-medium pb-2">
-                   "{t.text}"
-                 </p>
+                  <p className="text-neutral-600 text-[15px] leading-relaxed font-medium pb-2 text-pretty">
+                    "{t.text}"
+                  </p>
                </div>
             ))}
           </div>
@@ -101,18 +101,18 @@ export function FooterAndTestimonials({ triggerToast }: { triggerToast: (msg: st
 
       <div className="bg-white py-12 md:py-32 overflow-hidden relative rounded-b-[32px] md:rounded-b-[48px]">
         <div className="max-w-4xl mx-auto px-4 text-center z-10 relative">
-          <h2 className="text-[2rem] leading-[1.05] md:text-[80px] md:leading-[80px] font-bold tracking-[-0.6px] text-[#141414] mb-6 md:mb-8">
+          <h2 className="text-[2rem] leading-[1.05] md:text-[80px] md:leading-[80px] font-bold tracking-[-0.6px] text-[#141414] mb-6 md:mb-8 text-balance">
             Never run out of <br className="hidden md:block" /> inspiration again.
           </h2>
-          <p className="text-[16px] md:text-[20px] text-[#717171] font-[450] mb-10 md:mb-12 max-w-xl mx-auto px-4 leading-[26px]">
+          <p className="text-[16px] md:text-[20px] text-[#717171] font-[450] mb-10 md:mb-12 max-w-xl mx-auto px-4 leading-[26px] text-pretty">
             Use Mobbin for free as long as you like or get full access with any of our paid plans.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 px-4 w-full">
-            <button className="w-full sm:w-auto bg-[#141414] text-white px-6 py-[10px] rounded-full font-semibold text-[15px] hover:scale-105 active:scale-95 transition-all shadow-md">
+            <button className="w-full sm:w-auto bg-[#141414] text-white px-6 py-[10px] rounded-full font-semibold text-[15px] hover:scale-[1.02] active:scale-[0.96] transition-[transform,opacity] shadow-md">
               Join for free
             </button>
-            <button className="w-full sm:w-auto bg-transparent border border-[#0000001a] text-[#141414] px-6 py-[10px] rounded-full font-semibold text-[15px] hover:bg-neutral-50 active:scale-95 transition-all shadow-sm flex items-center justify-center gap-2">
+            <button className="w-full sm:w-auto bg-transparent border border-[#0000001a] text-[#141414] px-6 py-[10px] rounded-full font-semibold text-[15px] hover:bg-neutral-50 active:scale-[0.96] transition-[background-color,transform] shadow-sm flex items-center justify-center gap-2">
               See our plans
               <ArrowRight className="w-4 h-4 text-[#adadad]" />
             </button>
@@ -130,7 +130,7 @@ export function FooterAndTestimonials({ triggerToast }: { triggerToast: (msg: st
               >
                 {[...row, ...row].map((app, i) => (
                   <div key={i} className="flex items-center gap-2 md:gap-4 shrink-0 px-1 md:px-2 group">
-                    <img src={app.icon} className="w-9 md:w-[64px] h-9 md:h-[64px] rounded-xl md:rounded-[16px] border border-neutral-100 shadow-[0_2px_4px_rgba(0,0,0,0.02)]" alt={app.name} />
+                    <img src={app.icon} className="w-9 md:w-[64px] h-9 md:h-[64px] rounded-xl md:rounded-[16px] outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10 shadow-[0_2px_4px_rgba(0,0,0,0.02)]" alt={app.name} />
                     <span className="text-[15px] md:text-[32px] font-bold text-[#141414] tracking-[-0.6px]">{app.name}</span>
                   </div>
                 ))}

@@ -7,21 +7,21 @@ interface SectionProps {
 
 export function WorkTogether({ triggerToast }: SectionProps) {
   return (
-    <div className="my-6 mx-auto w-[calc(100%-2rem)] md:w-[calc(100%-4rem)] max-w-7xl bg-[#000] border border-white/[0.08] rounded-[2rem] py-10 md:py-14 px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-6 relative overflow-hidden transition-all duration-300 hover:border-white/12 shadow-lg select-none">
+    <div className="my-6 mx-auto w-[calc(100%-2rem)] md:w-[calc(100%-4rem)] max-w-7xl bg-[#000] border border-white/[0.08] rounded-[2rem] py-10 md:py-14 px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-6 relative overflow-hidden transition-[border-color] duration-300 hover:border-white/12 shadow-lg select-none">
       {/* Subtle gradient glow in background */}
       <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-white/[0.02] rounded-full blur-[80px] pointer-events-none" />
       
       <div className="flex flex-col gap-2 text-left max-w-2xl">
-        <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight font-sans">
+        <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight font-sans text-balance">
           Let's work <span className="font-serif italic font-medium text-neutral-200">together!</span>
         </h2>
-        <p className="text-xs md:text-sm text-neutral-400 font-medium leading-relaxed">
+        <p className="text-xs md:text-sm text-neutral-400 font-medium leading-relaxed text-pretty">
           Have an idea, or really just need stuff done? <span className="font-serif italic text-gray-300">Drop us a note!</span>
         </p>
       </div>
 
       <div 
-        className="flex items-center gap-3 bg-white/[0.04] hover:bg-white/[0.08] border border-white/5 rounded-full px-6 py-3.5 transition-colors cursor-pointer select-all shrink-0 hover:scale-[1.01] active:scale-[0.99] transition-transform duration-200"
+        className="flex items-center gap-3 bg-white/[0.04] hover:bg-white/[0.08] border border-white/5 rounded-full px-6 py-3.5 cursor-pointer select-all shrink-0 hover:scale-[1.01] active:scale-[0.96] transition-[background-color,border-color,transform] duration-200"
         onClick={() => {
           navigator.clipboard.writeText("hello@noteworthy.studio");
           triggerToast("Email copied to clipboard!");
@@ -57,7 +57,7 @@ export function StayInLoop({ triggerToast }: SectionProps) {
 
   return (
     <aside ref={containerRef} className="w-full bg-[#f8f9fa] border-y border-[#e9ecef] py-12 md:py-16 px-6 relative z-10 flex flex-col gap-8 justify-center items-center select-none">
-      <h1 className="mx-auto font-bold text-2xl md:text-4xl lg:text-5xl leading-[1.1] text-black text-center">
+      <h1 className="mx-auto font-bold text-2xl md:text-4xl lg:text-5xl leading-[1.1] text-black text-center text-balance">
         Stay in the <span className="font-serif italic font-medium tracking-tight">loop!</span>
       </h1>
       <div className="flex justify-center w-full">
@@ -89,7 +89,7 @@ export function StayInLoop({ triggerToast }: SectionProps) {
           </motion.div>
           <input
             type="submit"
-            className="flex-none px-6 md:px-8 h-12 bg-black text-white rounded-full font-bold text-base transition-transform hover:bg-stone-800 active:scale-[0.98] pointer-events-auto cursor-pointer shadow-md shrink-0"
+            className="flex-none px-6 md:px-8 h-12 bg-black text-white rounded-full font-bold text-base transition-transform hover:bg-stone-800 active:scale-[0.96] pointer-events-auto cursor-pointer shadow-md shrink-0"
             value="Subscribe"
           />
         </form>

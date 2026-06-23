@@ -12,6 +12,8 @@
 
 html {
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -24,11 +26,12 @@ body {
 
 /* Hide scrollbar for cleaner look if needed */
 .no-scrollbar::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
+
 .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 @theme inline {
@@ -147,9 +150,11 @@ body {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+
   html {
     @apply font-mono;
   }
@@ -157,7 +162,8 @@ body {
 
 @media (min-width: 768px) {
   .md-reveal-layer {
-    transform: translateZ(0);
+    /* Commented out to allow descendants with position: sticky to stick to the viewport */
+    /* transform: translateZ(0); */
   }
 }
 
@@ -189,7 +195,7 @@ body {
   height: calc(150px + (100% - 150px) * var(--k));
   z-index: 10;
   border-radius: calc(12px * (1 - var(--k)));
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
 /* Start images: positioned in a grid layout on the sides.
@@ -516,7 +522,7 @@ body {
   bottom: 0;
   right: 0;
   background-color: #1a1a1f;
-  border-left: 1px solid rgba(255,255,255,0.05);
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .underlay-nav__overlay {
@@ -524,7 +530,7 @@ body {
   cursor: pointer;
   position: absolute;
   inset: 0;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .underlay-nav__inner {
@@ -580,7 +586,7 @@ body {
   padding-top: 1em;
   display: flex;
   position: relative;
-  border-top: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .underlay-nav__bottom-col {
@@ -672,7 +678,8 @@ body {
   background-color: rgba(100, 100, 100, 0.35);
 }
 
-.bunny-player__play-svg, .bunny-player__pause-svg {
+.bunny-player__play-svg,
+.bunny-player__pause-svg {
   width: 100%;
   height: 100%;
   color: white;
@@ -692,8 +699,13 @@ body {
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Foldable Map Segment Styles */
@@ -703,18 +715,257 @@ body {
   background-repeat: no-repeat;
   height: 100%;
 }
+
 .map-image:nth-child(1) {
   background-position: 0% 50%;
 }
+
 .map-image:nth-child(2) {
   background-position: 50% 50%;
 }
+
 .map-image:nth-child(3) {
   background-position: 100% 50%;
 }
 
 /* Caret Blinking Animation */
 @keyframes caretBlink {
-  from, to { background-color: transparent }
-  50% { background-color: #007aff }
+
+  from,
+  to {
+    background-color: transparent
+  }
+
+  50% {
+    background-color: #007aff
+  }
+}
+
+/* === 3D TEXT SCROLL SECTION DEMO STYLES === */
+.circle__wrapper {
+  width: 100%;
+  height: 85vh;
+  position: sticky;
+  top: 7.5vh;
+}
+
+@media screen and (max-width: 1024px) {
+  .circle__wrapper {
+    height: 65vh;
+    top: 17.5vh;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .circle__wrapper {
+    height: 50vh;
+    top: 25vh;
+  }
+}
+
+.circle__wrapper ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.circle__text__wrapper__left {
+  position: absolute;
+  width: 100vw;
+  height: 100%;
+  transform: translateX(-100%);
+  transform-origin: right center;
+}
+
+.circle__text__wrapper__right {
+  position: absolute;
+  width: 100vw;
+  height: 100%;
+  text-align: right;
+  transform-origin: left center;
+}
+
+.circle__text__left__item,
+.circle__text__right__item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  text-transform: uppercase;
+}
+
+/* === DEMO 1: ORIGINAL VERSION === */
+.demo-1 .circle__text__wrapper__left {
+  left: 30%;
+}
+
+.demo-1 .circle__text__wrapper__right {
+  left: 70%;
+}
+
+.demo-1 .circle__text__left__item,
+.demo-1 .circle__text__right__item {
+  font-weight: 900;
+  color: #111;
+  font-size: clamp(0.9rem, 2vw, 1.6rem);
+  width: 13rem;
+}
+
+/* === DEMO 2: LITE COLOR VERSION === */
+.demo-2 .circle__text__wrapper__left {
+  left: 25%;
+}
+
+.demo-2 .circle__text__wrapper__right {
+  left: 75%;
+}
+
+.demo-2 .circle__text__left__item,
+.demo-2 .circle__text__right__item {
+  font-weight: 300;
+  color: #a3a3a3;
+  font-size: clamp(0.9rem, 2vw, 1.6rem);
+  width: 13rem;
+}
+
+/* === DEMO 3: DISTANCE & AESTHETIC (LARGER IOS) === */
+.demo-3 .circle__text__wrapper__left {
+  left: 15%;
+  transform: translateX(-100%) scale(0.9);
+}
+
+.demo-3 .circle__text__wrapper__right {
+  left: 85%;
+  transform: scale(0.9);
+}
+
+.demo-3 .circle__text__left__item,
+.demo-3 .circle__text__right__item {
+  font-weight: 700;
+  color: #a3a3a3;
+  font-size: clamp(1rem, 2.5vw, 2rem);
+  width: 15rem;
+}
+
+/* === DEMO 4: PREMIUM COMPONENTS & SMOOTH === */
+.demo-4 .circle__text__wrapper__left {
+  left: 20%;
+  transform: translateX(-100%) scale(0.8);
+}
+
+.demo-4 .circle__text__wrapper__right {
+  left: 80%;
+  transform: scale(0.8);
+}
+
+.demo-4 .circle__text__left__item,
+.demo-4 .circle__text__right__item {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 800;
+  color: #171717;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  font-size: clamp(0.8rem, 1.6vw, 1.4rem);
+  text-transform: capitalize;
+  letter-spacing: -0.02em;
+  width: 11rem;
+}
+
+/* demo-4 is now white background */
+
+/* Base item widths for mobile across all demos */
+@media screen and (max-width: 768px) {
+  .circle__text__wrapper__left {
+    font-size: 1.2rem;
+  }
+
+  .circle__text__wrapper__right {
+    font-size: 1.2rem;
+  }
+
+  .circle__text__left__item,
+  .circle__text__right__item {
+    width: 15rem;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .circle__text__wrapper__left {
+    font-size: 1rem;
+  }
+
+  .circle__text__wrapper__right {
+    font-size: 1rem;
+  }
+
+  .circle__text__left__item,
+  .circle__text__right__item {
+    width: 10rem;
+  }
+}
+
+.circle__center__text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: inherit;
+  color: #111;
+  text-align: center;
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.center-line-fixed {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+/* Demo 1 center text */
+.demo-1 .center-line {
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-weight: 900;
+  text-transform: capitalize;
+  opacity: 0;
+}
+
+/* Demo 2 center text (Bold, blur/ios anim) */
+.demo-2 .center-line {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 700;
+  text-transform: capitalize;
+  opacity: 0;
+  filter: blur(10px);
+}
+
+/* Demo 3 center text (Large, bold) */
+.demo-3 .center-line {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  opacity: 0;
+  filter: blur(15px);
+}
+
+/* Demo 4 center text (Premium) */
+.demo-4 .center-line-fixed {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  letter-spacing: -0.01em;
+  color: #707075;
+}
+
+.demo-4 .center-line {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 900;
+  color: #171717;
+  text-transform: none;
+  letter-spacing: -0.03em;
+  opacity: 0;
+  filter: blur(10px);
 }

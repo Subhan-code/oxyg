@@ -70,7 +70,7 @@ import { CircularTextEffect } from "./demos/CircularTextEffect";
 import { StickyGridScroll } from "./demos/StickyGridScroll";
 import { InfiniteScrollParallax } from "./demos/InfiniteScrollParallax";
 import { GradientShimmerDemo } from "./demos/GradientShimmerDemo";
-import { GradientShimmer } from "./ui/gradient-shimmer";
+import { GradientShimmer } from "gradient-shimmer";
 
 // Constants for showcase demo images
 const DEMO_IMAGES = [
@@ -952,7 +952,7 @@ export function Dashboard() {
                   setActiveTab("Apps");
                   triggerToast("Browsing Mobile Apps");
                 }}
-                className={`transition-colors cursor-pointer ${activeTab === "Apps" ? "text-white" : "text-gray-500 hover:text-white"}`}
+                className={`transition-[color,transform] active:scale-[0.96] cursor-pointer ${activeTab === "Apps" ? "text-white" : "text-gray-500 hover:text-white"}`}
               >
                 Apps
               </button>
@@ -961,7 +961,7 @@ export function Dashboard() {
                   setActiveTab("Sites");
                   triggerToast("Browsing Websites");
                 }}
-                className={`transition-colors cursor-pointer ${activeTab === "Sites" ? "text-white" : "text-gray-500 hover:text-white"}`}
+                className={`transition-[color,transform] active:scale-[0.96] cursor-pointer ${activeTab === "Sites" ? "text-white" : "text-gray-500 hover:text-white"}`}
               >
                 Sites
               </button>
@@ -976,7 +976,7 @@ export function Dashboard() {
               placeholder={`Search on ${platform === "iOS" ? "iOS" : "Web"}...`}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full h-10 pl-11 pr-11 rounded-full bg-[#1c1c1e] text-sm placeholder-gray-500 text-white focus:outline-none focus:ring-1 focus:ring-white/20 transition-all border border-white/[0.02]"
+              className="w-full h-10 pl-11 pr-11 rounded-full bg-[#1c1c1e] text-sm placeholder-gray-500 text-white focus:outline-none focus:ring-1 focus:ring-white/20 transition-[box-shadow,background-color] border border-white/[0.02]"
             />
             <button className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white transition-colors cursor-pointer">
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -1099,7 +1099,7 @@ export function Dashboard() {
                       setShowOnlyBookmarks(false);
                       triggerToast(`Filtering by ${item} components`);
                     }}
-                    className={`text-[15px] font-extrabold px-6 py-2.5 rounded-full transition-all border cursor-pointer ${
+                    className={`text-[15px] font-extrabold px-6 py-2.5 rounded-full transition-[background-color,border-color,transform,box-shadow] active:scale-[0.96] border cursor-pointer ${
                       selectedItem === item 
                         ? "bg-white text-black border-white shadow-lg shadow-white/5" 
                         : "bg-transparent text-gray-400 border-white/5 hover:text-white hover:border-white/10"
@@ -1125,7 +1125,7 @@ export function Dashboard() {
                 setPlatform("iOS");
                 triggerToast("Switched to iOS Screens");
               }}
-              className={`text-xs font-bold px-4 py-1.5 rounded-md transition-all cursor-pointer ${
+              className={`text-xs font-bold px-4 py-1.5 rounded-md transition-[background-color,transform] active:scale-[0.96] cursor-pointer ${
                 platform === "iOS" ? "bg-[#2c2c2e] text-white" : "text-gray-500 hover:text-white"
               }`}
             >
@@ -1136,7 +1136,7 @@ export function Dashboard() {
                 setPlatform("Web");
                 triggerToast("Switched to Web Layouts");
               }}
-              className={`text-xs font-bold px-4 py-1.5 rounded-md transition-all cursor-pointer ${
+              className={`text-xs font-bold px-4 py-1.5 rounded-md transition-[background-color,transform] active:scale-[0.96] cursor-pointer ${
                 platform === "Web" ? "bg-[#2c2c2e] text-white" : "text-gray-500 hover:text-white"
               }`}
             >
@@ -1169,7 +1169,7 @@ export function Dashboard() {
         {/* Filter Toggle Button */}
         <button 
           onClick={() => setIsFilterOpen(!isFilterOpen)}
-          className={`flex items-center gap-2 text-xs font-black px-4.5 py-2 rounded-xl border transition-all cursor-pointer ${
+          className={`flex items-center gap-2 text-xs font-black px-4.5 py-2 rounded-xl border transition-[background-color,transform,border-color] active:scale-[0.96] cursor-pointer ${
             isFilterOpen 
               ? "bg-white text-black border-white" 
               : "bg-transparent text-gray-400 border-neutral-800 hover:text-white hover:border-neutral-700"

@@ -28,7 +28,7 @@ export const SquiCircleFilterStatic = () => (
 /* Compact section heading used in multiple places */
 function SectionHead({ lines }: { lines: string[] }) {
   return (
-    <h2 className="text-[1.75rem] md:text-6xl font-bold tracking-[-0.04em] text-neutral-900 text-center leading-[1.1] flex flex-col items-center">
+    <h2 className="text-[1.75rem] md:text-6xl font-bold tracking-[-0.04em] text-neutral-900 text-center leading-[1.1] flex flex-col items-center text-balance">
       {lines.map((line, i) => (
         <span key={i} className="overflow-hidden block mt-0.5">
           <motion.span
@@ -53,7 +53,7 @@ export function Features() {
     <div className="bg-white flex flex-col items-center overflow-x-hidden w-full">
 
       {/* ── Design Patterns ── */}
-      <div className="py-10 md:py-32 w-full overflow-hidden flex flex-col items-center border-t border-neutral-100 mt-6 md:mt-12">
+      <div className="pt-0 pb-10 md:pt-2 md:pb-32 w-full overflow-hidden flex flex-col items-center">
         <SectionHead lines={["Find exactly what", "you need."]} />
 
         {/* Tab pills — flex-1 on mobile so all 4 fit equally, fixed size on desktop */}
@@ -62,7 +62,7 @@ export function Features() {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`relative flex-1 md:flex-none px-2 md:px-4 py-2 text-[11px] md:text-[15px] font-semibold rounded-full transition-colors text-center leading-tight ${
+              className={`relative flex-1 md:flex-none px-2 md:px-4 py-2 text-[11px] md:text-[15px] font-semibold rounded-full transition-[color,transform] active:scale-[0.96] text-center leading-tight ${
                 activeTab === tab ? "text-neutral-900" : "text-neutral-500 hover:text-neutral-800"
               }`}
             >
@@ -87,7 +87,7 @@ export function Features() {
           >
             {[...IMAGES, ...IMAGES].map((src, i) => (
               <div key={i} className="w-[120px] md:w-[260px] shrink-0 transform transition-transform hover:-translate-y-2 rounded-[1.5rem] md:rounded-[2rem] duration-300">
-                <img src={src} className="w-full h-auto rounded-[1.5rem] md:rounded-[2rem] border border-neutral-200/60 shadow-sm bg-neutral-50" alt="Pattern screen" />
+                <img src={src} className="w-full h-auto rounded-[1.5rem] md:rounded-[2rem] outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10 shadow-sm bg-neutral-50" alt="Pattern screen" />
               </div>
             ))}
           </motion.div>
@@ -105,22 +105,22 @@ export function Features() {
             {/* Card 1 */}
             <div className="flex flex-col gap-3 md:gap-6 group">
               <div className="bg-[#f0f0f0] rounded-[1.5rem] md:rounded-[2rem] pt-7 md:pt-12 px-6 md:px-20 h-[220px] md:h-[500px] flex justify-center items-end overflow-hidden border border-neutral-200/60 transition-colors group-hover:bg-[#e8e8e8]">
-                <video src="https://framerusercontent.com/assets/FYJ1R5B1aNNy9sN7S60vnazbQs0.mp4" autoPlay muted loop playsInline className="w-full max-w-[200px] md:max-w-[280px] h-auto object-cover rounded-t-2xl md:rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.1)] relative translate-y-3 group-hover:translate-y-1 transition-transform duration-500" />
+                <video src="https://framerusercontent.com/assets/FYJ1R5B1aNNy9sN7S60vnazbQs0.mp4" autoPlay muted loop playsInline className="w-full max-w-[200px] md:max-w-[280px] h-auto object-cover rounded-t-2xl md:rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.1)] relative translate-y-3 group-hover:translate-y-1 transition-transform duration-500 outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10" />
               </div>
               <div className="px-1">
                 <h3 className="text-lg md:text-2xl font-bold tracking-tight text-neutral-900 mb-1">Copy &amp; Paste</h3>
-                <p className="text-neutral-500 font-medium text-[14px] md:text-lg leading-relaxed">Copy production-ready React code straight into your app with zero setup.</p>
+                <p className="text-neutral-500 font-medium text-[14px] md:text-lg leading-relaxed text-pretty">Copy production-ready React code straight into your app with zero setup.</p>
               </div>
             </div>
 
             {/* Card 2 */}
             <div className="flex flex-col gap-3 md:gap-6 group">
               <div className="bg-[#f0f0f0] rounded-[1.5rem] md:rounded-[2rem] pt-7 md:pt-12 px-6 md:px-20 h-[220px] md:h-[500px] flex justify-center items-end overflow-hidden border border-neutral-200/60 transition-colors group-hover:bg-[#e8e8e8]">
-                <video src="https://framerusercontent.com/assets/j2fANRzLWcW5FqA2sPHYCykn8.mp4" autoPlay muted loop playsInline className="w-full max-w-[240px] md:max-w-[340px] h-auto object-cover rounded-t-2xl md:rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.1)] relative translate-y-3 group-hover:translate-y-1 transition-transform duration-500" />
+                <video src="https://framerusercontent.com/assets/j2fANRzLWcW5FqA2sPHYCykn8.mp4" autoPlay muted loop playsInline className="w-full max-w-[240px] md:max-w-[340px] h-auto object-cover rounded-t-2xl md:rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.1)] relative translate-y-3 group-hover:translate-y-1 transition-transform duration-500 outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10" />
               </div>
               <div className="px-1">
                 <h3 className="text-lg md:text-2xl font-bold tracking-tight text-neutral-900 mb-1">Customizable</h3>
-                <p className="text-neutral-500 font-medium text-[14px] md:text-lg leading-relaxed">Fully typed, easily themed, and designed to scale from prototype to enterprise.</p>
+                <p className="text-neutral-500 font-medium text-[14px] md:text-lg leading-relaxed text-pretty">Fully typed, easily themed, and designed to scale from prototype to enterprise.</p>
               </div>
             </div>
           </div>
@@ -158,11 +158,11 @@ export function Features() {
                   className="bg-[#f0f0f0] rounded-[1.5rem] md:rounded-[2rem] h-[200px] md:h-[340px] flex items-center justify-center transition-colors group-hover:bg-[#e8e8e8]"
                   style={{ filter: "url(#SkiperSquiCircleFilterLayout)", transform: "translateZ(0)" }}
                 >
-                  <video src={src} autoPlay muted loop playsInline className="w-[80%] h-auto object-cover shadow-xl rounded-xl group-hover:scale-105 transition-transform duration-500" />
+                  <video src={src} autoPlay muted loop playsInline className="w-[80%] h-auto object-cover shadow-xl rounded-xl group-hover:scale-105 transition-transform duration-500 outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10" />
                 </div>
                 <div className="text-center px-3">
                   <h3 className="text-base md:text-xl font-bold tracking-tight text-neutral-900 mb-1">{title}</h3>
-                  <p className="text-neutral-500 font-medium text-[13px] md:text-base leading-relaxed">{desc}</p>
+                  <p className="text-neutral-500 font-medium text-[13px] md:text-base leading-relaxed text-pretty">{desc}</p>
                 </div>
               </div>
             ))}

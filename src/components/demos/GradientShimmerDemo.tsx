@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { GradientShimmer, gradientPresets, type GradientPresetName, type EasingPreset } from "../ui/gradient-shimmer";
+import { GradientShimmer, gradientPresets, type GradientPresetName, type EasingPreset } from "gradient-shimmer";
 
 const PRESET_NAMES = Object.keys(gradientPresets) as GradientPresetName[];
 
@@ -174,7 +174,7 @@ export function GradientShimmerDemo() {
         <div className="rounded-2xl bg-[#1a1a1a] border border-white/[0.06] p-5 flex flex-col gap-3">
           <p className="text-xs font-semibold tracking-widest uppercase text-neutral-500">Usage</p>
           <pre className="text-xs text-neutral-400 bg-black/40 rounded-xl p-4 overflow-x-auto leading-relaxed font-mono">
-{`import { GradientShimmer } from "@/components/ui/gradient-shimmer"
+{`import { GradientShimmer } from "gradient-shimmer"
 
 <GradientShimmer
   gradient="${preset}"

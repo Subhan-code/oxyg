@@ -117,7 +117,7 @@ export function Header({ dark = false }: { dark?: boolean }) {
                 >
                   <a 
                     href="#/signup"
-                    className={`${dark ? "bg-white text-neutral-900" : "bg-[#141414] text-white"} hover:opacity-90 transition-opacity h-[44px] px-4 rounded-full text-[15px] font-[600] flex items-center justify-center whitespace-nowrap`}
+                    className={`${dark ? "bg-white text-neutral-900" : "bg-[#141414] text-white"} hover:opacity-90 transition-[opacity,transform] active:scale-[0.96] h-[44px] px-4 rounded-full text-[15px] font-[600] flex items-center justify-center whitespace-nowrap`}
                   >
                     Join for free
                   </a>
@@ -208,7 +208,7 @@ export function Header({ dark = false }: { dark?: boolean }) {
               >
                 <a 
                   href="#/signup"
-                  className="bg-white text-neutral-900 font-bold h-[54px] rounded-full text-[16px] flex items-center justify-center shadow-lg hover:bg-neutral-100 transition-colors w-full"
+                  className="bg-white text-neutral-900 font-bold h-[54px] rounded-full text-[16px] flex items-center justify-center shadow-lg hover:bg-neutral-100 transition-[background-color,transform] active:scale-[0.96] w-full"
                 >
                   Join for free
                 </a>
@@ -236,14 +236,14 @@ export function Header({ dark = false }: { dark?: boolean }) {
           >
             <button 
               onClick={handleCopySvg}
-              className="w-full flex items-center gap-2.5 px-3 py-2.5 text-[14px] font-[600] text-left hover:bg-white/10 rounded-xl transition-all cursor-pointer select-none text-white/90"
+              className="w-full flex items-center gap-2.5 px-3 py-2.5 text-[14px] font-[600] text-left hover:bg-white/10 rounded-xl transition-[background-color,transform] active:scale-[0.96] cursor-pointer select-none text-white/90"
             >
               <Copy className="w-4 h-4 text-white/70" />
               <span>Copy svg</span>
             </button>
             <button 
               onClick={handleDownloadWordmark}
-              className="w-full flex items-center gap-2.5 px-3 py-2.5 text-[14px] font-[600] text-left hover:bg-white/10 rounded-xl transition-all cursor-pointer select-none text-white/90"
+              className="w-full flex items-center gap-2.5 px-3 py-2.5 text-[14px] font-[600] text-left hover:bg-white/10 rounded-xl transition-[background-color,transform] active:scale-[0.96] cursor-pointer select-none text-white/90"
             >
               <Download className="w-4 h-4 text-white/70" />
               <span>Download wordmark</span>

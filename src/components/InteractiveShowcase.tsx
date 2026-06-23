@@ -54,6 +54,9 @@ import { OnScrollLetterAnimations } from "./demos/OnScrollLetterAnimations";
 import { CircularTextEffect } from "./demos/CircularTextEffect";
 import { StickyGridScroll } from "./demos/StickyGridScroll";
 import { InfiniteScrollParallax } from "./demos/InfiniteScrollParallax";
+import { Calligraph } from "calligraph";
+import { SlotText } from "slot-text/react";
+import "slot-text/style.css";
 
 import { FlowScroll } from "./ui/flow-scroll";
 import { GlowingScrollIndicator } from "./ui/glowing-scroll-indicator";
@@ -91,6 +94,54 @@ interface ComponentPlayground {
 }
 
 const PLAYGROUNDS: Record<string, ComponentPlayground> = {
+  "Calligraph Text": {
+    name: "Calligraph Text Transition",
+    description: "Fluid text transitions powered by Motion where shared characters slide to new positions.",
+    code: `import { Calligraph } from "calligraph";\nimport { useState } from "react";\n\nexport function CalligraphDemo() {\n  const [text, setText] = useState("Calligraph");\n  const words = ["Calligraph", "Typography", "Fluid Motion", "React 19", "Design Engineering"];\n\n  return (\n    <div className="flex flex-col items-center gap-6">\n      <h3 className="text-3xl font-extrabold tracking-tight text-neutral-900 dark:text-white">\n        <Calligraph variant="text" animation="bouncy">{text}</Calligraph>\n      </h3>\n      <button\n        onClick={() => {\n          const next = words[(words.indexOf(text) + 1) % words.length];\n          setText(next);\n        }}\n        className="bg-neutral-900 text-white dark:bg-white dark:text-neutral-950 px-4 py-2 rounded-full font-bold active:scale-[0.96] transition-transform text-sm cursor-pointer"\n      >\n        Change Text\n      </button>\n    </div>\n  );\n}`,
+    render: (state, setState) => {
+      const words = ["Calligraph", "Typography", "Fluid Motion", "React 19", "Design Engineering"];
+      const text = state.calligraphText ?? "Calligraph";
+      return (
+        <div className="flex flex-col items-center gap-6">
+          <h3 className="text-3xl font-extrabold tracking-tight text-neutral-900 dark:text-white">
+            <Calligraph variant="text" animation="bouncy">{text}</Calligraph>
+          </h3>
+          <button
+            onClick={() => {
+              const next = words[(words.indexOf(text) + 1) % words.length];
+              setState({ ...state, calligraphText: next });
+            }}
+            className="bg-neutral-900 text-white dark:bg-white dark:text-neutral-950 px-4 py-2 rounded-full font-bold active:scale-[0.96] transition-transform text-sm cursor-pointer"
+          >
+            Change Text
+          </button>
+        </div>
+      );
+    }
+  },
+  "SlotText Roll": {
+    name: "SlotText Roll Animation",
+    description: "Tactile text rolling transitions for small UI labels, tags, and status actions.",
+    code: `import { SlotText } from "slot-text/react";\nimport "slot-text/style.css";\nimport { useState } from "react";\n\nexport function SlotTextDemo() {\n  const [copied, setCopied] = useState(false);\n\n  return (\n    <button\n      onClick={() => {\n        setCopied(true);\n        setTimeout(() => setCopied(false), 2000);\n      }}\n      className="bg-neutral-900 text-white dark:bg-white dark:text-neutral-950 px-6 py-3 rounded-full font-bold active:scale-[0.96] transition-transform text-sm cursor-pointer"\n    >\n      <SlotText text={copied ? "Copied!" : "Click to Copy"} />\n    </button>\n  );\n}`,
+    render: (state, setState) => {
+      const clicked = state.slotTextClicked ?? false;
+      return (
+        <div className="flex flex-col items-center gap-6">
+          <button
+            onClick={() => {
+              setState({ ...state, slotTextClicked: true });
+              setTimeout(() => {
+                setState((prev: any) => ({ ...prev, slotTextClicked: false }));
+              }, 2000);
+            }}
+            className="bg-neutral-900 text-white dark:bg-white dark:text-neutral-950 px-6 py-3 rounded-full font-bold active:scale-[0.96] transition-transform text-sm cursor-pointer shadow-sm"
+          >
+            <SlotText text={clicked ? "Copied!" : "Click to Copy"} />
+          </button>
+        </div>
+      );
+    }
+  },
   "Spaced Chat Input": {
     name: "Spaced-out Chat Input",
     description: "Lab #016: Interactive message list & chat input with synthesized mechanical keyboard typing sounds and pops.",
@@ -858,10 +909,10 @@ export function InteractiveShowcase() {
       <section className="py-10 md:py-32 w-full max-w-[1280px] px-4 md:px-6 flex flex-col items-center border-t border-neutral-100 dark:border-white/5">
         <div className="text-center mb-8 md:mb-16 max-w-2xl">
           <span className="text-[10px] md:text-[11px] font-bold tracking-[0.15em] uppercase text-neutral-400 dark:text-neutral-500 block mb-2">Interactive Sandbox</span>
-          <h2 className="text-[1.6rem] md:text-5xl font-extrabold tracking-tight text-[#141414] dark:text-white mb-2 md:mb-4">
+          <h2 className="text-[1.6rem] md:text-5xl font-extrabold tracking-tight text-[#141414] dark:text-white mb-2 md:mb-4 text-balance">
             Component Playground
           </h2>
-          <p className="text-[13px] md:text-base text-neutral-500 dark:text-neutral-400 font-medium">
+          <p className="text-[13px] md:text-base text-neutral-500 dark:text-neutral-400 font-medium text-pretty">
             Test animations and copy production-ready code directly in your browser.
           </p>
         </div>
@@ -878,7 +929,7 @@ export function InteractiveShowcase() {
                   setActivePlayground(key);
                   setCopied(false);
                 }}
-                className={`px-3 py-2.5 rounded-xl text-[12px] font-semibold text-center transition-all border cursor-pointer leading-tight ${
+                className={`px-3 py-2.5 rounded-xl text-[12px] font-semibold text-center transition-[background-color,border-color,transform,color] active:scale-[0.96] border cursor-pointer leading-tight ${
                   activePlayground === key
                     ? "bg-neutral-100 dark:bg-[#1d1f27] border-neutral-300 dark:border-white/10 text-[#141414] dark:text-white shadow-sm"
                     : "bg-transparent border-neutral-200/60 dark:border-white/5 text-neutral-500 hover:bg-neutral-50 dark:hover:bg-white/[0.02] hover:text-[#141414] dark:hover:text-white"
@@ -903,7 +954,7 @@ export function InteractiveShowcase() {
                     setActivePlayground(key);
                     setCopied(false);
                   }}
-                  className={`w-full px-5 py-4 rounded-2xl text-[15px] font-[600] text-left transition-all border flex items-center justify-between gap-2 cursor-pointer shrink-0 ${
+                  className={`w-full px-5 py-4 rounded-2xl text-[15px] font-[600] text-left transition-[background-color,border-color,transform,color] active:scale-[0.96] border flex items-center justify-between gap-2 cursor-pointer shrink-0 ${
                     activePlayground === key
                       ? "bg-neutral-100 dark:bg-[#1d1f27] border-neutral-200 dark:border-white/5 text-[#141414] dark:text-white shadow-sm"
                       : "bg-transparent border-transparent text-neutral-500 hover:bg-neutral-50 dark:hover:bg-white/[0.02] hover:text-[#141414] dark:hover:text-white"
@@ -924,12 +975,14 @@ export function InteractiveShowcase() {
             <div className="flex justify-between items-start gap-4">
               <div className="flex flex-col gap-2 text-left">
                 <span className="text-[11px] font-bold tracking-wider text-neutral-400 dark:text-neutral-500 uppercase">Interactive Preview</span>
-                <h3 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-white">{PLAYGROUNDS[activePlayground].name}</h3>
+                <h3 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-white">
+                  <Calligraph>{PLAYGROUNDS[activePlayground].name}</Calligraph>
+                </h3>
                 <p className="text-[14px] text-neutral-500 dark:text-neutral-400 font-medium">{PLAYGROUNDS[activePlayground].description}</p>
               </div>
               <button
                 onClick={() => setShowCode(!showCode)}
-                className="flex items-center gap-1.5 text-[12px] font-semibold bg-white/10 dark:bg-white/5 hover:bg-neutral-100 dark:hover:bg-white/10 active:scale-95 text-neutral-800 dark:text-white border border-neutral-200 dark:border-white/5 px-3.5 py-1.5 rounded-full transition-all cursor-pointer select-none shrink-0"
+                className="flex items-center gap-1.5 text-[12px] font-semibold bg-white/10 dark:bg-white/5 hover:bg-neutral-100 dark:hover:bg-white/10 active:scale-[0.96] text-neutral-800 dark:text-white border border-neutral-200 dark:border-white/5 px-3.5 py-1.5 rounded-full transition-[background-color,transform] cursor-pointer select-none shrink-0"
               >
                 <Code2 className="w-3.5 h-3.5" />
                 <span>{showCode ? "Hide Code" : "View Code"}</span>
@@ -953,19 +1006,14 @@ export function InteractiveShowcase() {
                 </div>
                 <button
                   onClick={handleCopy}
-                  className="flex items-center gap-1.5 text-[12px] font-semibold bg-white/5 hover:bg-white/10 active:scale-95 text-white border border-white/5 px-3.5 py-1.5 rounded-full transition-all cursor-pointer"
+                  className="flex items-center gap-1.5 text-[12px] font-semibold bg-white/5 hover:bg-white/10 active:scale-[0.96] text-white border border-white/5 px-3.5 py-1.5 rounded-full transition-[background-color,transform] cursor-pointer"
                 >
                   {copied ? (
-                    <>
-                      <Check className="w-3.5 h-3.5 text-green-400" />
-                      <span className="text-green-400">Copied!</span>
-                    </>
+                    <Check className="w-3.5 h-3.5 text-green-400" />
                   ) : (
-                    <>
-                      <Copy className="w-3.5 h-3.5 text-neutral-400" />
-                      <span>Copy code</span>
-                    </>
+                    <Copy className="w-3.5 h-3.5 text-neutral-400" />
                   )}
+                  <SlotText text={copied ? "Copied!" : "Copy code"} />
                 </button>
               </div>
               <pre className="p-4 md:p-6 text-[12px] md:text-[13px] font-mono text-neutral-300 overflow-y-auto no-scrollbar flex-grow bg-[#1d1f27] text-left leading-relaxed">

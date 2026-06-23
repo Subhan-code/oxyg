@@ -21,11 +21,11 @@ export function Pricing() {
         
         {/* Header */}
         <div className="text-center mb-8 md:mb-16">
-          <h1 className="text-[28px] leading-tight sm:text-5xl md:text-7xl font-bold tracking-tight text-white mb-3 md:mb-6">
+          <h1 className="text-[28px] leading-tight sm:text-5xl md:text-7xl font-bold tracking-tight text-white mb-3 md:mb-6 text-balance">
             Build <span className="whitespace-nowrap">like a Pro.</span>
           </h1>
           <p className="text-[14px] md:text-xl text-[#a1a1aa] px-2">
-            Full access from only ₹26.30/day —{" "}
+            Full access from only <span className="tabular-nums">₹26.30</span>/day —{" "}
             <span className="whitespace-nowrap">Cancel anytime.</span>
           </p>
         </div>
@@ -35,13 +35,13 @@ export function Pricing() {
           <div className="relative flex items-center bg-[#27272a] rounded-full p-1 h-10 md:h-12 w-fit">
             <button 
               onClick={() => setBillingInterval("yearly")}
-              className={`relative z-10 px-5 md:px-6 py-1.5 md:py-2 rounded-full text-[13px] md:text-[15px] font-semibold transition-colors ${billingInterval === "yearly" ? "text-white" : "text-[#a1a1aa]"}`}
+              className={`relative z-10 px-5 md:px-6 py-1.5 md:py-2 rounded-full text-[13px] md:text-[15px] font-semibold transition-[color,transform] active:scale-[0.96] ${billingInterval === "yearly" ? "text-white" : "text-[#a1a1aa]"}`}
             >
               Yearly
             </button>
             <button 
               onClick={() => setBillingInterval("quarterly")}
-              className={`relative z-10 px-5 md:px-6 py-1.5 md:py-2 rounded-full text-[13px] md:text-[15px] font-semibold transition-colors ${billingInterval === "quarterly" ? "text-white" : "text-[#a1a1aa]"}`}
+              className={`relative z-10 px-5 md:px-6 py-1.5 md:py-2 rounded-full text-[13px] md:text-[15px] font-semibold transition-[color,transform] active:scale-[0.96] ${billingInterval === "quarterly" ? "text-white" : "text-[#a1a1aa]"}`}
             >
               Quarterly
             </button>
@@ -67,14 +67,14 @@ export function Pricing() {
             </div>
             
             <div className="flex gap-2 items-center">
-              <span className="text-5xl font-bold text-white">₹800</span>
+              <span className="text-5xl font-bold text-white tabular-nums">₹800</span>
               <div className="flex flex-col">
                 <span className="text-[13px] font-medium text-[#a1a1aa] leading-tight">per month</span>
                 <span className="text-[13px] font-medium text-[#a1a1aa] leading-tight">billed {billingInterval}</span>
               </div>
             </div>
 
-            <button className="w-full bg-white hover:bg-[#f4f4f5] text-neutral-900 rounded-full h-12 font-semibold transition-colors">
+            <button className="w-full bg-white hover:bg-[#f4f4f5] text-neutral-900 rounded-full h-12 font-semibold transition-[background-color,transform] active:scale-[0.96]">
               Get started
             </button>
 
@@ -113,14 +113,14 @@ export function Pricing() {
             </div>
             
             <div className="flex gap-2 items-center">
-              <span className="text-5xl font-bold text-white">₹960</span>
+              <span className="text-5xl font-bold text-white tabular-nums">₹960</span>
               <div className="flex flex-col">
                 <span className="text-[13px] font-medium text-[#a1a1aa] leading-tight">per member/month</span>
                 <span className="text-[13px] font-medium text-[#a1a1aa] leading-tight">billed {billingInterval}</span>
               </div>
             </div>
 
-            <button className="w-full bg-transparent border border-white/20 hover:bg-white/5 text-white rounded-full h-12 font-semibold transition-colors">
+            <button className="w-full bg-transparent border border-white/20 hover:bg-white/5 text-white rounded-full h-12 font-semibold transition-[background-color,transform] active:scale-[0.96]">
               Get started
             </button>
 

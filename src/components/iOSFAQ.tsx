@@ -88,16 +88,16 @@ export function iOSFAQ() {
     <section className="w-full max-w-[800px] mx-auto px-4 md:px-6 py-8 md:py-20 font-sans select-none text-neutral-900 bg-white dark:bg-[#141414] dark:text-white transition-colors duration-300">
       <div className="flex flex-col items-center">
         {/* Section Header */}
-        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-center mb-2">
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-center mb-2 text-balance">
           FAQ
         </h2>
-        <p className="text-neutral-500 dark:text-neutral-400 text-center font-medium mb-8">
+        <p className="text-neutral-500 dark:text-neutral-400 text-center font-medium mb-8 text-pretty">
           Find answers to common questions about Oxygen UI.
         </p>
 
         {/* iOS Search Bar */}
         <div className="w-full relative mb-6">
-          <div className="relative flex items-center bg-neutral-100 dark:bg-[#1c1c1e] rounded-2xl px-4 py-3 text-neutral-500 dark:text-neutral-400 border border-transparent focus-within:border-neutral-200 dark:focus-within:border-neutral-800 transition-all">
+          <div className="relative flex items-center bg-neutral-100 dark:bg-[#1c1c1e] rounded-2xl px-4 py-3 text-neutral-500 dark:text-neutral-400 border border-transparent focus-within:border-neutral-200 dark:focus-within:border-neutral-800 transition-[border-color,background-color]">
             <Search className="w-5 h-5 mr-3 opacity-60 shrink-0" />
             <input
               type="text"
@@ -188,7 +188,7 @@ export function iOSFAQ() {
                         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                         className="overflow-hidden"
                       >
-                        <div className="px-6 pb-6 pt-1 text-[15px] md:text-[16px] leading-relaxed font-medium text-neutral-500 dark:text-neutral-400">
+                        <div className="px-6 pb-6 pt-1 text-[15px] md:text-[16px] leading-relaxed font-medium text-neutral-500 dark:text-neutral-400 text-pretty">
                           {faq.answer}
                         </div>
                       </motion.div>

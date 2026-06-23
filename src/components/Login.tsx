@@ -68,7 +68,7 @@ export function Login() {
           </a>
 
           {/* Centered Title */}
-          <h1 className="text-3xl font-[700] text-white tracking-tight leading-none mb-1 select-none">
+          <h1 className="text-3xl font-[700] text-white tracking-tight leading-none mb-1 select-none text-balance">
             Welcome back
           </h1>
 
@@ -78,7 +78,7 @@ export function Login() {
             <button 
               onClick={() => handleProviderLogin("google")}
               disabled={isSubmitting}
-              className="flex h-11 w-full items-center justify-center gap-2.5 rounded-full border border-neutral-800 bg-transparent hover:bg-white/[0.04] text-[14px] font-semibold text-white transition-all active:scale-98 cursor-pointer disabled:opacity-50"
+              className="flex h-11 w-full items-center justify-center gap-2.5 rounded-full border border-neutral-800 bg-transparent hover:bg-white/[0.04] text-[14px] font-semibold text-white transition-[background-color,transform] active:scale-[0.96] cursor-pointer disabled:opacity-50"
             >
               {isSubmitting && submitType === "google" ? (
                 <span className="w-4 h-4 rounded-full border-2 border-white/20 border-t-white animate-spin" />
@@ -102,7 +102,7 @@ export function Login() {
                   exit={{ opacity: 0, y: -5 }}
                   transition={{ duration: 0.15 }}
                   onClick={() => setShowOtherOptions(true)}
-                  className="flex h-11 w-full items-center justify-center rounded-full border border-neutral-800 bg-transparent hover:bg-white/[0.04] text-[14px] font-semibold text-white transition-all active:scale-98 cursor-pointer"
+                  className="flex h-11 w-full items-center justify-center rounded-full border border-neutral-800 bg-transparent hover:bg-white/[0.04] text-[14px] font-semibold text-white transition-[background-color,transform] active:scale-[0.96] cursor-pointer"
                 >
                   <span>See other options</span>
                 </motion.button>
@@ -119,7 +119,7 @@ export function Login() {
                   <button 
                     onClick={() => handleProviderLogin("facebook")}
                     disabled={isSubmitting}
-                    className="flex h-11 w-full items-center justify-center rounded-full border border-neutral-800 bg-transparent hover:bg-white/[0.04] text-white transition-all active:scale-98 cursor-pointer disabled:opacity-50"
+                    className="flex h-11 w-full items-center justify-center rounded-full border border-neutral-800 bg-transparent hover:bg-white/[0.04] text-white transition-[background-color,transform] active:scale-[0.96] cursor-pointer disabled:opacity-50"
                   >
                     {isSubmitting && submitType === "facebook" ? (
                       <span className="w-4 h-4 rounded-full border-2 border-white/20 border-t-white animate-spin" />
@@ -135,7 +135,7 @@ export function Login() {
                   <button 
                     onClick={() => handleProviderLogin("x")}
                     disabled={isSubmitting}
-                    className="flex h-11 w-full items-center justify-center rounded-full border border-neutral-800 bg-transparent hover:bg-white/[0.04] text-white transition-all active:scale-98 cursor-pointer disabled:opacity-50"
+                    className="flex h-11 w-full items-center justify-center rounded-full border border-neutral-800 bg-transparent hover:bg-white/[0.04] text-white transition-[background-color,transform] active:scale-[0.96] cursor-pointer disabled:opacity-50"
                   >
                     {isSubmitting && submitType === "x" ? (
                       <span className="w-4 h-4 rounded-full border-2 border-white/20 border-t-white animate-spin" />
@@ -167,13 +167,13 @@ export function Login() {
               placeholder="Enter email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="h-12 w-full px-5 rounded-2xl border border-neutral-800 bg-transparent focus:bg-[#161616]/30 focus:border-white focus:ring-1 focus:ring-white outline-none transition-all text-[15px] text-white placeholder-gray-600 text-left disabled:opacity-50"
+              className="h-12 w-full px-5 rounded-2xl border border-neutral-800 bg-transparent focus:bg-[#161616]/30 focus:border-white focus:ring-1 focus:ring-white outline-none transition-[border-color,background-color] text-[15px] text-white placeholder-gray-600 text-left disabled:opacity-50"
             />
 
             <button
               type="submit"
               disabled={isSubmitting || !email}
-              className="flex h-12 w-full items-center justify-center rounded-full bg-white text-black text-[15px] font-bold transition-all hover:bg-neutral-100 active:scale-98 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer mt-1"
+              className="flex h-12 w-full items-center justify-center rounded-full bg-white text-black text-[15px] font-bold transition-[background-color,transform] hover:bg-neutral-100 active:scale-[0.96] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer mt-1"
             >
               {isSubmitting && submitType === "email" ? (
                 <span className="w-4 h-4 rounded-full border-2 border-neutral-950/20 border-t-neutral-950 animate-spin" />
@@ -184,7 +184,7 @@ export function Login() {
           </form>
 
           {/* Footer Text */}
-          <p className="text-[11px] text-gray-500 text-center leading-normal font-medium mt-1 select-none">
+          <p className="text-[11px] text-gray-500 text-center leading-normal font-medium mt-1 select-none text-pretty">
             By continuing, you agree to Mobbin’s{" "}
             <a href="#/" className="text-gray-400 hover:text-white transition-colors underline decoration-white/20">Terms of Service</a>
             {" "}and{" "}
@@ -216,7 +216,7 @@ export function Login() {
             >
               {[...SCREENSHOTS_COL_1, ...SCREENSHOTS_COL_1].map((src, i) => (
                 <div key={i} className="w-full aspect-[9/16] rounded-2xl overflow-hidden border border-white/5 shadow-2xl">
-                  <img src={src} className="w-full h-full object-cover" alt="App screenshot col 1" />
+                  <img src={src} className="w-full h-full object-cover outline outline-1 -outline-offset-1 outline-white/10" alt="App screenshot" />
                 </div>
               ))}
             </motion.div>
@@ -231,7 +231,7 @@ export function Login() {
             >
               {[...SCREENSHOTS_COL_2, ...SCREENSHOTS_COL_2].map((src, i) => (
                 <div key={i} className="w-full aspect-[9/16] rounded-2xl overflow-hidden border border-white/5 shadow-2xl">
-                  <img src={src} className="w-full h-full object-cover" alt="App screenshot col 2" />
+                  <img src={src} className="w-full h-full object-cover outline outline-1 -outline-offset-1 outline-white/10" alt="App screenshot col 2" />
                 </div>
               ))}
             </motion.div>
@@ -246,7 +246,7 @@ export function Login() {
             >
               {[...SCREENSHOTS_COL_3, ...SCREENSHOTS_COL_3].map((src, i) => (
                 <div key={i} className="w-full aspect-[9/16] rounded-2xl overflow-hidden border border-white/5 shadow-2xl">
-                  <img src={src} className="w-full h-full object-cover" alt="App screenshot col 3" />
+                  <img src={src} className="w-full h-full object-cover outline outline-1 -outline-offset-1 outline-white/10" alt="App screenshot col 3" />
                 </div>
               ))}
             </motion.div>
