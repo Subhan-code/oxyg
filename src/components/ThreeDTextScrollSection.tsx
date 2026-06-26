@@ -24,11 +24,15 @@ const RIGHT_NAMES = [
 interface CircleOrbitalContainerProps {
   leftNames: string[];
   rightNames: string[];
+  scrollLength?: number;
+  scrollContainerRef?: React.RefObject<HTMLElement | null>;
 }
 
 const CircleOrbitalContainer = React.memo(({
   leftNames,
   rightNames,
+  scrollLength = 200,
+  scrollContainerRef,
 }: CircleOrbitalContainerProps) => {
   const circleWrapperRef = useRef<HTMLElement>(null);
 
@@ -39,7 +43,7 @@ const CircleOrbitalContainer = React.memo(({
     // Small delay to allow DOM to render and layouts to calculate widths
     timeout = setTimeout(() => {
       if (circleWrapperRef.current) {
-        circleInstance = new Circle(circleWrapperRef.current);
+        circleInstance = new Circle(circleWrapperRef.current, scrollContainerRef);
       }
 
       const handleResize = () => {
@@ -58,10 +62,10 @@ const CircleOrbitalContainer = React.memo(({
         circleInstance.destroy();
       }
     };
-  }, []);
+  }, [scrollContainerRef]);
 
   return (
-    <div className="relative w-full h-[65vh] md:h-[80vh] lg:h-[100vh] bg-transparent">
+    <div className="relative w-full h-screen bg-transparent">
       <section className="circle__wrapper w-full overflow-hidden select-none bg-transparent" ref={circleWrapperRef}>
         {/* Centered statistics */}
         <div className="circle__center__text">
@@ -95,13 +99,23 @@ const CircleOrbitalContainer = React.memo(({
 
 CircleOrbitalContainer.displayName = 'CircleOrbitalContainer';
 
-export const ThreeDTextScrollSection = React.memo(() => {
+export interface ThreeDTextScrollSectionProps {
+  scrollLength?: number;
+  scrollContainerRef?: React.RefObject<HTMLElement | null>;
+}
+
+export const ThreeDTextScrollSection = React.memo(({
+  scrollLength = 200,
+  scrollContainerRef,
+}: ThreeDTextScrollSectionProps) => {
   return (
     <div className="w-full overflow-x-clip bg-white text-neutral-900">
       <div className="demo-3">
         <CircleOrbitalContainer
           leftNames={LEFT_NAMES}
           rightNames={RIGHT_NAMES}
+          scrollLength={scrollLength}
+          scrollContainerRef={scrollContainerRef}
         />
       </div>
     </div>

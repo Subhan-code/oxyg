@@ -14,9 +14,17 @@ export class Circle {
   wrapper: HTMLElement;
   scrollTriggerInstance?: any;
   textAnimationInstance?: any;
+  scrollContainerRef?: React.RefObject<HTMLElement | null>;
+  scrollLength: number;
 
-  constructor(wrapper: HTMLElement) {
+  constructor(
+    wrapper: HTMLElement, 
+    scrollContainerRef?: React.RefObject<HTMLElement | null>,
+    scrollLength = 1200
+  ) {
     this.wrapper = wrapper;
+    this.scrollContainerRef = scrollContainerRef;
+    this.scrollLength = scrollLength;
     this.leftConfig = {
       wrapper: wrapper.querySelector(
         ".circle__text__wrapper__left"
@@ -86,8 +94,10 @@ export class Circle {
 
     this.scrollTriggerInstance = ScrollTrigger.create({
       trigger: parentTrigger,
+      scroller: this.scrollContainerRef?.current ?? undefined,
       start: "top top",
-      end: "bottom bottom",
+      end: `+=${this.scrollLength}`,
+      pin: true,
       scrub: 1,
       onUpdate: (self) => {
         const scrollY = self.progress * 0.5; // Fixed looping twice issue
@@ -103,8 +113,9 @@ export class Circle {
       ease: "power2.out",
       scrollTrigger: {
         trigger: parentTrigger,
+        scroller: this.scrollContainerRef?.current ?? undefined,
         start: "top top",
-        end: "bottom bottom",
+        end: `+=${this.scrollLength}`,
         scrub: 1,
       }
     });

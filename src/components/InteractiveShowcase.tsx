@@ -58,6 +58,13 @@ import { Calligraph } from "calligraph";
 import { SlotText } from "slot-text/react";
 import "slot-text/style.css";
 
+import InputClearDissolve from "./demos/InputClearDissolve";
+import ShimmerText from "./demos/ShimmerText";
+import PlusMenuMorph from "./demos/PlusMenuMorph";
+import AccordionExpand from "./demos/AccordionExpand";
+import SkeletonLoader from "./demos/SkeletonLoader";
+import ErrorStateShake from "./demos/ErrorStateShake";
+
 import { FlowScroll } from "./ui/flow-scroll";
 import { GlowingScrollIndicator } from "./ui/glowing-scroll-indicator";
 import { ScrollEffect } from "./ui/scroll-effect";
@@ -94,6 +101,42 @@ interface ComponentPlayground {
 }
 
 const PLAYGROUNDS: Record<string, ComponentPlayground> = {
+  "Input Clear Dissolve": {
+    name: "Input Clear with Dissolve",
+    description: "Lab #058: Input field with a multi-segment dissolve animation that translates and fades out text elements word-by-word.",
+    code: `import InputClearDissolve from "./demos/InputClearDissolve";\n\n// Usage:\n<InputClearDissolve />`,
+    render: () => <InputClearDissolve />
+  },
+  "Shimmer Text": {
+    name: "Pure CSS Shimmer Text",
+    description: "Lab #059: A pure CSS text shimmer effect utilizing a linear-gradient overlay masked to the glyph outline.",
+    code: `import ShimmerText from "./demos/ShimmerText";\n\n// Usage:\n<ShimmerText />`,
+    render: () => <ShimmerText />
+  },
+  "Plus Menu Morph": {
+    name: "Plus to Menu Morph",
+    description: "Lab #060: A fluid morphing action button expanding to a full navigation menu with staggered element reveals.",
+    code: `import PlusMenuMorph from "./demos/PlusMenuMorph";\n\n// Usage:\n<PlusMenuMorph />`,
+    render: () => <PlusMenuMorph />
+  },
+  "Accordion Expand": {
+    name: "Accordion Expand Transition",
+    description: "Lab #061: A zero-JS accordion expansion using CSS Grid fraction row-height transitions and scaleY chevrons.",
+    code: `import AccordionExpand from "./demos/AccordionExpand";\n\n// Usage:\n<AccordionExpand />`,
+    render: () => <AccordionExpand />
+  },
+  "Skeleton Loader": {
+    name: "Skeleton Loader & Reveal",
+    description: "Lab #062: A smooth skeleton pulse to content layout reveal with blur offsets and transition overrides.",
+    code: `import SkeletonLoader from "./demos/SkeletonLoader";\n\n// Usage:\n<SkeletonLoader />`,
+    render: () => <SkeletonLoader />
+  },
+  "Error State Shake": {
+    name: "Error State Shake Input",
+    description: "Lab #063: An input form container featuring custom multi-segment keyframe shakes and delayed validation error messages.",
+    code: `import ErrorStateShake from "./demos/ErrorStateShake";\n\n// Usage:\n<ErrorStateShake />`,
+    render: () => <ErrorStateShake />
+  },
   "Calligraph Text": {
     name: "Calligraph Text Transition",
     description: "Fluid text transitions powered by Motion where shared characters slide to new positions.",
