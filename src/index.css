@@ -1295,3 +1295,70 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .t-input { animation: none !important; transform: none !important; }
 }
+
+/* 13 MINUTES TO THE MOON ANIMATION COMPONENT */
+@font-face {
+    font-family: "MonumentExtended-Ultrabold";
+    src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/61488/MonumentExtended-Ultrabold.woff") format("woff"),
+        url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/61488/MonumentExtended-Ultrabold.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+.moon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: black;
+}
+
+.moon-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 611px;
+  max-height: 611px;
+  min-width: 611px;
+  min-height: 611px;
+  background: black;
+  cursor: pointer;
+  transform-origin: center center;
+  user-select: none;
+}
+
+.moon-container__base {
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  background: #D5CEC6;
+}
+
+.moon-el {
+  position: relative;
+  z-index: 2;
+  width: 611px;
+  height: 611px;
+}
+
+.moon__svg {
+  width: 611px;
+  height: 611px;
+}
+
+.moon__txt {
+  font-family: "MonumentExtended-Ultrabold", sans-serif;
+  font-size: 103px;
+  line-height: 1;
+  fill: black;
+  letter-spacing: 2.1px;
+}
+
+.moon__txt-overlay {
+  fill: rgba(0, 0, 0, 0.6);
+}

@@ -12,6 +12,7 @@ import { BespokeSection } from "./components/BespokeSection";
 import { Login } from "./components/Login";
 import { Dashboard } from "./components/Dashboard";
 import { ThreeDTextScrollSection } from "./components/ThreeDTextScrollSection";
+import { MinutesToMoon } from "./components/demos/MinutesToMoon";
 
 // Import toast dependencies
 import { motion, AnimatePresence } from "motion/react";
@@ -66,6 +67,36 @@ export default function App() {
                 <Features />
                 <InteractiveShowcase />
                 <BespokeSection />
+                
+                {/* ── 13 Minutes to the Moon Interactive Section ── */}
+                <section className="py-20 md:py-32 w-full max-w-[1280px] mx-auto px-4 md:px-6 flex flex-col lg:flex-row items-center gap-12 border-t border-neutral-100">
+                  <div className="flex-1 flex flex-col gap-4 text-left max-w-xl">
+                    <span className="text-[10px] md:text-[11px] font-bold tracking-[0.15em] uppercase text-neutral-400">Design Engineering Feature</span>
+                    <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-[#141414] leading-tight text-balance">
+                      13 Minutes to the Moon
+                    </h2>
+                    <p className="text-sm md:text-base text-neutral-500 font-medium leading-relaxed">
+                      A premium, interactive GSAP timeline animation exploring clipping-path masking and organic image translation transitions. Click the canvas to trigger the sequence.
+                    </p>
+                    <div className="flex gap-3 mt-2">
+                      <button 
+                        onClick={() => {
+                          const showcaseEl = document.getElementById("sandbox-showcase");
+                          if (showcaseEl) {
+                            showcaseEl.scrollIntoView({ behavior: "smooth" });
+                          }
+                        }}
+                        className="bg-neutral-900 text-white hover:bg-neutral-800 transition-colors font-bold px-6 py-3.5 rounded-full text-[13px] active:scale-[0.96] cursor-pointer"
+                      >
+                        Explore Sandbox
+                      </button>
+                    </div>
+                  </div>
+                  <div className="flex-1 w-full max-w-[500px] h-[500px] flex items-center justify-center bg-black rounded-3xl overflow-hidden shadow-2xl relative z-10 border border-neutral-800">
+                    <MinutesToMoon />
+                  </div>
+                </section>
+
                 <IOSFAQ />
               </main>
               <FooterAndTestimonials triggerToast={triggerToast} />

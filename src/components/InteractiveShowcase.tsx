@@ -64,6 +64,7 @@ import PlusMenuMorph from "./demos/PlusMenuMorph";
 import AccordionExpand from "./demos/AccordionExpand";
 import SkeletonLoader from "./demos/SkeletonLoader";
 import ErrorStateShake from "./demos/ErrorStateShake";
+import { MinutesToMoon } from "./demos/MinutesToMoon";
 
 import { FlowScroll } from "./ui/flow-scroll";
 import { GlowingScrollIndicator } from "./ui/glowing-scroll-indicator";
@@ -100,7 +101,83 @@ interface ComponentPlayground {
   render: (state: any, setState: any) => React.ReactNode;
 }
 
+export const PLAYGROUND_CATEGORIES: Record<string, "components" | "templates" | "resources"> = {
+  "Input Clear Dissolve": "components",
+  "Shimmer Text": "components",
+  "Plus Menu Morph": "components",
+  "Accordion Expand": "components",
+  "Skeleton Loader": "components",
+  "Error State Shake": "components",
+  "Calligraph Text": "components",
+  "SlotText Roll": "components",
+  "Spaced Chat Input": "components",
+  "Family Wallet": "components",
+  "Scrubber": "components",
+  "SignIn Drawer": "components",
+  "Gooey Menu": "components",
+  "Draggable Curved Menu": "components",
+  "Family Popover Menu": "components",
+  "Gooey Button": "components",
+  "Magnetic Button": "components",
+  "Adaptive Caret": "components",
+  "Custom Cursor": "components",
+  "Underlay Action Sheet": "components",
+
+  "AnimationsDev Hero": "templates",
+  "Willem Loading Animation": "templates",
+  "Fixed Underlay Navigation": "templates",
+  "Three.js Warp Gallery": "templates",
+  "WebGL Magazine": "templates",
+  "WebGL Page Transitions": "templates",
+  "Custom Bunny HLS Player": "templates",
+  "13 Minutes to the Moon": "templates",
+
+  "Flow Scroll": "resources",
+  "Scroll Effect": "resources",
+  "Sticky Card Stack": "resources",
+  "Glowing Scroll Indicator": "resources",
+  "Pixelated Carousel": "resources",
+  "Motion Blur": "resources",
+  "Progressive Blur": "resources",
+  "Input Morph Message": "resources",
+  "Label Indicator Carousel": "resources",
+  "Swipeable Stack Cards": "resources",
+  "Subtle 3D Carousel": "resources",
+  "Run Stats Stacks": "resources",
+  "Timeline Indicator": "resources",
+  "Cylindrical Photo Carousel": "resources",
+  "Flat 3D Photo Carousel": "resources",
+  "Scroll Reveal CSS": "resources",
+  "Distorted Glass": "resources",
+  "Fractal Glass Panels": "resources",
+  "Magnetic Tabs": "resources",
+  "Mask Animation": "resources",
+  "Scroll Animation": "resources",
+  "Apple Spotlight": "resources",
+  "Work Together": "resources",
+  "Stay in Loop": "resources",
+  "ThreeD Photo Carousel": "resources",
+  "ThreeD Photo Carousel3": "resources",
+  "ThreeD Letters Menu Hover": "resources",
+  "ThreeD Text Animation": "resources",
+  "Elastic Grid Scroll": "resources",
+  "ThreeD Infinite Parallax Carousel": "resources",
+  "Pixel Canvas Demo": "resources",
+  "Staggered 3D Grid": "resources",
+  "On Scroll Layout Formations": "resources",
+  "On Scroll Letter Animations": "resources",
+  "Sticky Grid Scroll": "resources",
+  "Gradient Slider": "resources",
+  "Circular Text Effect": "resources"
+};
+
 const PLAYGROUNDS: Record<string, ComponentPlayground> = {
+  "13 Minutes to the Moon": {
+    name: "13 Minutes to the Moon",
+    description: "Lab #064: An interactive SVG mask animation with staggered GSAP morphing and text reveals mapping the moon landing trajectory.",
+    code: `import { MinutesToMoon } from "./demos/MinutesToMoon";\n\n// Usage:\n<MinutesToMoon />`,
+    render: () => <MinutesToMoon />
+  },
   "Input Clear Dissolve": {
     name: "Input Clear with Dissolve",
     description: "Lab #058: Input field with a multi-segment dissolve animation that translates and fades out text elements word-by-word.",
@@ -934,10 +1011,25 @@ function SidebarBlur({ direction }: { direction: "top" | "bottom" }) {
 }
 
 export function InteractiveShowcase() {
+  const [activeCategory, setActiveCategory] = useState<"components" | "templates" | "resources">("components");
   const [activePlayground, setActivePlayground] = useState("Spaced Chat Input");
   const [copied, setCopied] = useState(false);
   const [showCode, setShowCode] = useState(false);
   const [state, setState] = useState({});
+
+  const filteredKeys = Object.keys(PLAYGROUNDS).filter(
+    (key) => (PLAYGROUND_CATEGORIES[key] || "components") === activeCategory
+  );
+
+  const handleCategoryChange = (category: "components" | "templates" | "resources") => {
+    setActiveCategory(category);
+    const keys = Object.keys(PLAYGROUNDS).filter(
+      (k) => (PLAYGROUND_CATEGORIES[k] || "components") === category
+    );
+    if (keys.length > 0) {
+      setActivePlayground(keys[0]);
+    }
+  };
 
   const handleCopy = () => {
     navigator.clipboard.writeText(PLAYGROUNDS[activePlayground].code);
@@ -949,7 +1041,7 @@ export function InteractiveShowcase() {
     <div className="w-full bg-white dark:bg-[#141414] flex flex-col items-center">
       
       {/* 1. Component Sandbox Playground */}
-      <section className="py-10 md:py-32 w-full max-w-[1280px] px-4 md:px-6 flex flex-col items-center border-t border-neutral-100 dark:border-white/5">
+      <section id="sandbox-showcase" className="py-10 md:py-32 w-full max-w-[1280px] px-4 md:px-6 flex flex-col items-center border-t border-neutral-100 dark:border-white/5">
         <div className="text-center mb-8 md:mb-16 max-w-2xl">
           <span className="text-[10px] md:text-[11px] font-bold tracking-[0.15em] uppercase text-neutral-400 dark:text-neutral-500 block mb-2">Interactive Sandbox</span>
           <h2 className="text-[1.6rem] md:text-5xl font-extrabold tracking-tight text-[#141414] dark:text-white mb-2 md:mb-4 text-balance">
@@ -960,12 +1052,29 @@ export function InteractiveShowcase() {
           </p>
         </div>
 
+        {/* ── Category Filtering Tabs ── */}
+        <div className="flex bg-neutral-100/50 dark:bg-white/5 p-1 rounded-2xl mb-8 w-full max-w-[500px] gap-1 border border-neutral-200/50 dark:border-white/5 relative z-30 select-none">
+          {(["components", "templates", "resources"] as const).map((cat) => (
+            <button
+              key={cat}
+              onClick={() => handleCategoryChange(cat)}
+              className={`flex-1 py-2.5 rounded-xl text-[13px] font-bold tracking-tight capitalize transition-all duration-200 cursor-pointer select-none ${
+                activeCategory === cat
+                  ? "bg-white dark:bg-[#1d1f27] text-neutral-900 dark:text-white shadow-sm border border-neutral-200/50 dark:border-white/5"
+                  : "text-[#737373] hover:text-[#141414] dark:hover:text-white"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 w-full">
           {/* ── Mobile: 2-col grid selector ── Desktop: vertical list */}
 
           {/* MOBILE grid (hidden on lg+) */}
           <div className="lg:hidden grid grid-cols-2 gap-2">
-            {Object.keys(PLAYGROUNDS).map((key) => (
+            {filteredKeys.map((key) => (
               <button
                 key={key}
                 onClick={() => {
@@ -990,7 +1099,7 @@ export function InteractiveShowcase() {
 
             {/* Scrollable list */}
             <div className="flex flex-col gap-2 overflow-y-auto pr-2 h-full py-16">
-              {Object.keys(PLAYGROUNDS).map((key) => (
+              {filteredKeys.map((key) => (
                 <button
                   key={key}
                   onClick={() => {
