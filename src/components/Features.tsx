@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { useState } from "react";
 
-const TABS = ["Components", "Templates", "Hooks", "Integrations"];
+const TABS = ["Components", "Templates"];
 
 const IMAGES = [
   "https://framerusercontent.com/images/yT3kv5drMsbZmpGqxH03q2Xr6zw.png?width=768&height=1662",
@@ -11,6 +11,55 @@ const IMAGES = [
   "https://framerusercontent.com/images/HIQb9tOP3UYygdQttzMC1wtS2I.png?width=768&height=1662",
   "https://framerusercontent.com/images/7DCnfay6uGITLECOMgaJT1BG9DU.png?width=768&height=1662",
   "https://framerusercontent.com/images/ebUAozvxXnmlBH0EN7OkDSGtFA.png?width=768&height=1662",
+];
+
+const COMPONENTS_DATA = [
+  { title: "Spaced Chat UI", video: "https://framerusercontent.com/assets/FYJ1R5B1aNNy9sN7S60vnazbQs0.mp4" },
+  { title: "Gooey Search Panel", video: "https://framerusercontent.com/assets/j2fANRzLWcW5FqA2sPHYCykn8.mp4" },
+  { title: "Adaptive Caret Input", video: "https://framerusercontent.com/assets/MkRqx95luhv3HrzWUVBPk3lbk.mp4" },
+  { title: "Worm Progress Loader", video: "https://framerusercontent.com/assets/jqYjBn39McfA2B8VkBvj3Ca2U0.mp4" },
+  { title: "Interactive Canvas Art", video: "https://framerusercontent.com/assets/DpMFb4zuxQzqPqM9HQtesX9P6AE.mp4" },
+  { title: "3D Perspective Grid", video: "https://framerusercontent.com/assets/TcvHfVe9bKWL2Gwru24KshXLEno.mp4" },
+];
+
+const TEMPLATES_DATA = [
+  { title: "SaaS Analytics Dashboard", video: "https://framerusercontent.com/assets/FYJ1R5B1aNNy9sN7S60vnazbQs0.mp4" },
+  { title: "Crypto Finance Wallet UI", video: "https://framerusercontent.com/assets/j2fANRzLWcW5FqA2sPHYCykn8.mp4" },
+  { title: "E-Commerce Storefront App", video: "https://framerusercontent.com/assets/MkRqx95luhv3HrzWUVBPk3lbk.mp4" },
+  { title: "Creative Portfolio Showcase", video: "https://framerusercontent.com/assets/jqYjBn39McfA2B8VkBvj3Ca2U0.mp4" },
+  { title: "Mobile Fitness Tracker Layout", video: "https://framerusercontent.com/assets/DpMFb4zuxQzqPqM9HQtesX9P6AE.mp4" },
+  { title: "Minimal Booking Interface", video: "https://framerusercontent.com/assets/TcvHfVe9bKWL2Gwru24KshXLEno.mp4" },
+];
+
+const FLOWS_DATA = [
+  {
+    title: "User Onboarding Journey",
+    screens: [
+      "https://framerusercontent.com/images/yT3kv5drMsbZmpGqxH03q2Xr6zw.png?width=768&height=1662",
+      "https://framerusercontent.com/images/TBajAWvUPazrHQCytuqOtiVHro.png?width=768&height=1662",
+    ],
+  },
+  {
+    title: "Secure Purchase & Checkout",
+    screens: [
+      "https://framerusercontent.com/images/lGjk1RJWmlw5bKuImRCUdUADQuE.png?width=768&height=1662",
+      "https://framerusercontent.com/images/Bw18qHLeyyYXs4Nd0tB4vajWA.png?width=768&height=1662",
+    ],
+  },
+  {
+    title: "Account Verification & Setup",
+    screens: [
+      "https://framerusercontent.com/images/HIQb9tOP3UYygdQttzMC1wtS2I.png?width=768&height=1662",
+      "https://framerusercontent.com/images/7DCnfay6uGITLECOMgaJT1BG9DU.png?width=768&height=1662",
+    ],
+  },
+  {
+    title: "Workspace Invitation Flow",
+    screens: [
+      "https://framerusercontent.com/images/ebUAozvxXnmlBH0EN7OkDSGtFA.png?width=768&height=1662",
+      "https://framerusercontent.com/images/yT3kv5drMsbZmpGqxH03q2Xr6zw.png?width=768&height=1662",
+    ],
+  },
 ];
 
 export const SquiCircleFilterStatic = () => (
@@ -49,6 +98,35 @@ function SectionHead({ lines }: { lines: string[] }) {
 export function Features() {
   const [activeTab, setActiveTab] = useState(TABS[0]);
 
+  const renderMarqueeContent = () => {
+    switch (activeTab) {
+      case "Components":
+        return [...COMPONENTS_DATA, ...COMPONENTS_DATA].map((item, i) => (
+          <div key={i} className="w-[260px] md:w-[360px] shrink-0 p-3 md:p-4 bg-zinc-950 hover:bg-white rounded-3xl border border-zinc-900 hover:border-zinc-200 transition-all duration-300 flex flex-col hover:scale-[1.025] shadow-lg hover:shadow-md group">
+            <div className="w-full h-[150px] md:h-[210px] rounded-2xl overflow-hidden border border-zinc-900/50 bg-[#1c1c1e] relative group-hover:border-zinc-200/50 transition-colors duration-300">
+              <video src={item.video} autoPlay muted loop playsInline className="w-full h-full object-cover" />
+            </div>
+            <div className="mt-3 px-1 text-left">
+              <h4 className="text-sm md:text-base font-bold text-zinc-100 group-hover:text-zinc-950 transition-colors duration-300 tracking-tight leading-tight">{item.title}</h4>
+            </div>
+          </div>
+        ));
+      case "Templates":
+        return [...TEMPLATES_DATA, ...TEMPLATES_DATA].map((item, i) => (
+          <div key={i} className="w-[260px] md:w-[360px] shrink-0 p-3 md:p-4 bg-zinc-950 hover:bg-white rounded-3xl border border-zinc-900 hover:border-zinc-200 transition-all duration-300 flex flex-col hover:scale-[1.025] shadow-lg hover:shadow-md group">
+            <div className="w-full h-[150px] md:h-[210px] rounded-2xl overflow-hidden border border-zinc-900/50 bg-[#1c1c1e] relative group-hover:border-zinc-200/50 transition-colors duration-300">
+              <video src={item.video} autoPlay muted loop playsInline className="w-full h-full object-cover" />
+            </div>
+            <div className="mt-3 px-1 text-left">
+              <h4 className="text-sm md:text-base font-bold text-zinc-100 group-hover:text-zinc-950 transition-colors duration-300 tracking-tight leading-tight">{item.title}</h4>
+            </div>
+          </div>
+        ));
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="bg-white flex flex-col items-center overflow-x-hidden w-full">
 
@@ -56,7 +134,7 @@ export function Features() {
       <div className="pt-0 pb-10 md:pt-2 md:pb-32 w-full overflow-hidden flex flex-col items-center">
         <SectionHead lines={["Find exactly what", "you need."]} />
 
-        {/* Tab pills — flex-1 on mobile so all 4 fit equally, fixed size on desktop */}
+        {/* Tab pills — flex-1 on mobile so all fit equally, fixed size on desktop */}
         <div className="mt-5 md:mt-10 flex items-center bg-neutral-100/80 p-1 rounded-full mx-4 shadow-inner border border-neutral-200/50 w-[calc(100%-2rem)] md:w-auto">
           {TABS.map((tab) => (
             <button
@@ -78,54 +156,19 @@ export function Features() {
           ))}
         </div>
 
-        {/* Marquee */}
-        <div className="mt-8 md:mt-16 w-full flex overflow-hidden relative group">
+        {/* Marquee with decreased block height via vertical padding and margins */}
+        <div className="mt-6 md:mt-10 py-4 md:py-6 w-full flex overflow-hidden relative group">
           <motion.div
+            key={activeTab}
             animate={{ x: ["0%", "-50%"] }}
-            transition={{ ease: "linear", duration: 40, repeat: Infinity }}
+            transition={{ ease: "linear", duration: 45, repeat: Infinity }}
             className="flex gap-3 md:gap-6 min-w-max px-3 md:px-4 group-hover:[animation-play-state:paused]"
           >
-            {[...IMAGES, ...IMAGES].map((src, i) => (
-              <div key={i} className="w-[120px] md:w-[260px] shrink-0 transform transition-transform hover:-translate-y-2 rounded-[1.5rem] md:rounded-[2rem] duration-300">
-                <img src={src} className="w-full h-auto rounded-[1.5rem] md:rounded-[2rem] outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10 shadow-sm bg-neutral-50" alt="Pattern screen" />
-              </div>
-            ))}
+            {renderMarqueeContent()}
           </motion.div>
         </div>
       </div>
 
-      {/* ── Journeys / Copy & Paste ── */}
-      <div className="py-10 md:py-32 w-full bg-neutral-50/50 border-y border-neutral-100">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-8">
-          <div className="flex flex-col items-center justify-center mb-8 md:mb-24">
-            <SectionHead lines={["Complete application", "templates ready to deploy."]} />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-12">
-            {/* Card 1 */}
-            <div className="flex flex-col gap-3 md:gap-6 group">
-              <div className="bg-[#f0f0f0] rounded-[1.5rem] md:rounded-[2rem] pt-7 md:pt-12 px-6 md:px-20 h-[220px] md:h-[500px] flex justify-center items-end overflow-hidden border border-neutral-200/60 transition-colors group-hover:bg-[#e8e8e8]">
-                <video src="https://framerusercontent.com/assets/FYJ1R5B1aNNy9sN7S60vnazbQs0.mp4" autoPlay muted loop playsInline className="w-full max-w-[200px] md:max-w-[280px] h-auto object-cover rounded-t-2xl md:rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.1)] relative translate-y-3 group-hover:translate-y-1 transition-transform duration-500 outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10" />
-              </div>
-              <div className="px-1">
-                <h3 className="text-lg md:text-2xl font-bold tracking-tight text-neutral-900 mb-1">Copy &amp; Paste</h3>
-                <p className="text-neutral-500 font-medium text-[14px] md:text-lg leading-relaxed text-pretty">Copy production-ready React code straight into your app with zero setup.</p>
-              </div>
-            </div>
-
-            {/* Card 2 */}
-            <div className="flex flex-col gap-3 md:gap-6 group">
-              <div className="bg-[#f0f0f0] rounded-[1.5rem] md:rounded-[2rem] pt-7 md:pt-12 px-6 md:px-20 h-[220px] md:h-[500px] flex justify-center items-end overflow-hidden border border-neutral-200/60 transition-colors group-hover:bg-[#e8e8e8]">
-                <video src="https://framerusercontent.com/assets/j2fANRzLWcW5FqA2sPHYCykn8.mp4" autoPlay muted loop playsInline className="w-full max-w-[240px] md:max-w-[340px] h-auto object-cover rounded-t-2xl md:rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.1)] relative translate-y-3 group-hover:translate-y-1 transition-transform duration-500 outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10" />
-              </div>
-              <div className="px-1">
-                <h3 className="text-lg md:text-2xl font-bold tracking-tight text-neutral-900 mb-1">Customizable</h3>
-                <p className="text-neutral-500 font-medium text-[14px] md:text-lg leading-relaxed text-pretty">Fully typed, easily themed, and designed to scale from prototype to enterprise.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* ── Creation Section ── */}
       <div className="py-10 md:py-32 w-full">

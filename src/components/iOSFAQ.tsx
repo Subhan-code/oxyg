@@ -70,7 +70,7 @@ const CATEGORIES = ["General", "Usage", "Billing", "Figma"];
 export function iOSFAQ() {
   const [activeCategory, setActiveCategory] = useState("General");
   const [searchQuery, setSearchQuery] = useState("");
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(0);
 
   const filteredFAQs = FAQS.filter((faq) => {
     const matchesSearch =

@@ -6,3 +6,12 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Scratch and Agents folders
+scratch/
+.agents/
+
+# Root binary assets
+stamp (1).png
+stamp (2).png
+tstamp.png

@@ -1,0 +1,205 @@
+.recording-toggle-wrapper {
+  --hue: 223;
+  --red: hsl(3, 90%, 50%);
+  --white: hsl(0, 0%, 100%);
+  --primary: hsl(var(--hue), 90%, 50%);
+  --primary-t: hsla(var(--hue), 90%, 50%, 0);
+  --gray1: hsl(var(--hue), 10%, 90%);
+  --gray2: hsl(var(--hue), 10%, 80%);
+  --gray3: hsl(var(--hue), 10%, 70%);
+  --gray4: hsl(var(--hue), 10%, 60%);
+  --gray5: hsl(var(--hue), 10%, 50%);
+  --gray6: hsl(var(--hue), 10%, 40%);
+  --gray7: hsl(var(--hue), 10%, 30%);
+  --gray8: hsl(var(--hue), 10%, 20%);
+  --gray9: hsl(var(--hue), 10%, 10%);
+  --trans-dur: 0.3s;
+  --trans-timing: cubic-bezier(0.65, 0, 0.35, 1);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  font-family: "DM Sans", -apple-system, sans-serif;
+  color: var(--gray9);
+
+  .recorder {
+    background-color: transparent;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    outline: transparent;
+    -webkit-appearance: none;
+    appearance: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .recorder__label-start,
+  .recorder__label-end {
+    display: block;
+    position: relative;
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+
+  .recorder__label-start,
+  .recorder__label-end-text {
+    transition: opacity var(--trans-dur);
+  }
+
+  .recorder__label-start {
+    margin-inline: 0 0.5em;
+    color: var(--gray9);
+  }
+
+  .recorder__label-end {
+    margin-inline: 0.5em 0;
+    color: var(--gray9);
+  }
+
+  .recorder__label-end-text {
+    opacity: 0.4;
+  }
+
+  .recorder__label-end-text + .recorder__label-end-text {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  [dir="rtl"] .recorder__label-end-text + .recorder__label-end-text {
+    right: 0;
+    left: auto;
+  }
+
+  .recorder__switch {
+    background-color: var(--white);
+    border-radius: 0.75em;
+    box-shadow:
+      0 0 0 0.125em var(--primary-t),
+      0 0.25em 0.25em hsla(0, 0%, 0%, 0.1);
+    display: flex;
+    padding: 0.25em;
+    width: 2.5em;
+    height: 1.5em;
+    transition:
+      background-color var(--trans-dur),
+      box-shadow var(--trans-dur),
+      transform var(--trans-dur) var(--trans-timing),
+      transform-origin var(--trans-dur) var(--trans-timing);
+  }
+
+  .recorder__switch-handle {
+    background-color: var(--gray3);
+    border-radius: 50%;
+    display: block;
+    transform-origin: 0 0.5em;
+    width: 1em;
+    height: 1em;
+    transition:
+      background-color var(--trans-dur),
+      box-shadow var(--trans-dur),
+      transform var(--trans-dur) var(--trans-timing),
+      transform-origin var(--trans-dur) var(--trans-timing);
+  }
+
+  [dir="rtl"] .recorder__switch-handle {
+    transform-origin: 100% 0.5em;
+  }
+
+  .recorder__timer {
+    display: block;
+    overflow: visible;
+    width: 100%;
+    height: auto;
+  }
+
+  .recorder__timer-ring {
+    transition:
+      r var(--trans-dur) var(--trans-timing),
+      stroke-dasharray var(--trans-dur) var(--trans-timing),
+      stroke-dashoffset var(--trans-dur) var(--trans-timing),
+      stroke-width var(--trans-dur) var(--trans-timing);
+  }
+
+  .recorder:focus-visible .recorder__switch {
+    box-shadow:
+      0 0 0 0.125em var(--primary),
+      0 0.25em 0.25em hsla(0, 0%, 0%, 0.1);
+  }
+
+  .recorder:active .recorder__switch-handle {
+    transform: scaleX(1.5);
+  }
+
+  /* recording state */
+  .recorder[aria-pressed="true"] .recorder__label-start {
+    opacity: 0.4;
+  }
+
+  .recorder[aria-pressed="true"] .recorder__label-end-text {
+    opacity: 0;
+  }
+
+  .recorder[aria-pressed="true"] .recorder__label-end-text + .recorder__label-end-text {
+    opacity: 1;
+  }
+
+  .recorder[aria-pressed="true"] .recorder__switch-handle {
+    background-color: var(--red);
+    transform: translateX(100%);
+    transform-origin: 100% 0.5em;
+  }
+
+  [dir="rtl"] .recorder[aria-pressed="true"] .recorder__switch-handle {
+    transform: translateX(-100%);
+    transform-origin: 0 0.5em;
+  }
+
+  .recorder[aria-pressed="true"] .recorder__timer-ring {
+    r: 6.5px;
+    stroke-width: 3px;
+  }
+
+  .recorder[aria-pressed="true"]:active .recorder__switch-handle {
+    transform: translateX(100%) scaleX(1.5);
+  }
+
+  [dir="rtl"] .recorder[aria-pressed="true"]:active .recorder__switch-handle {
+    transform: translateX(-100%) scaleX(1.5);
+  }
+
+  /* Dark theme context compatibility */
+  &.dark-mode {
+    color: var(--gray1);
+
+    .recorder__label-start,
+    .recorder__label-end {
+      color: var(--gray2);
+    }
+
+    .recorder__switch {
+      background-color: var(--gray8);
+      box-shadow:
+        0 0 0 0.125em var(--primary-t),
+        0 0.25em 0.25em hsla(0, 0%, 0%, 0.2);
+    }
+
+    .recorder__switch-handle {
+      background-color: var(--gray6);
+    }
+
+    .recorder:focus-visible .recorder__switch {
+      box-shadow:
+        0 0 0 0.125em var(--primary),
+        0 0.25em 0.25em hsla(0, 0%, 0%, 0.2);
+    }
+  }
+}

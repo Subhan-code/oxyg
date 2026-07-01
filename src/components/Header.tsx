@@ -101,9 +101,9 @@ export function Header({ dark = false }: { dark?: boolean }) {
           {/* Desktop Nav */}
           <nav className="hidden sm:flex items-center h-full">
             <div className="flex items-center gap-6">
-              <a href="#/dashboard" className="text-[15px] font-[600] transition-colors hover:opacity-80">Dashboard</a>
+              <a href="#/installation" className="text-[15px] font-[600] transition-colors hover:opacity-80">Installation</a>
               <a href="#/pricing" className="text-[15px] font-[600] transition-colors hover:opacity-80">Pricing</a>
-              <a href="#/awards" className="text-[15px] font-[600] transition-colors hover:opacity-80">Awards</a>
+              <a href="#contact" className="text-[15px] font-[600] transition-colors hover:opacity-80">Contact</a>
               <a href="#/login" className="text-[15px] font-[600] transition-colors hover:opacity-80">Log in</a>
             </div>
             <AnimatePresence>
@@ -175,10 +175,10 @@ export function Header({ dark = false }: { dark?: boolean }) {
               {/* Menu items list */}
               <div className="flex flex-col gap-3.5 text-left px-2">
                 {[
-                  { href: "#/dashboard", label: "Dashboard" },
-                  { href: "#/changelog", label: "Changelog" },
+                  { href: "#/installation", label: "Installation" },
                   { href: "#/pricing", label: "Pricing" },
-                  { href: "#/awards", label: "Awards" },
+                  { href: "#contact", label: "Contact" },
+                  { href: "#/changelog", label: "Changelog" },
                   { href: "#/careers", label: "Careers" },
                   { href: "#/merch", label: "Merch" },
                   { href: "#/support", label: "Support" },
@@ -191,7 +191,11 @@ export function Header({ dark = false }: { dark?: boolean }) {
                       open: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 350, damping: 25 } }
                     }}
                   >
-                    <a href={item.href} className="text-[20px] font-bold tracking-tight py-1 transition-colors hover:opacity-80 block">
+                    <a 
+                      href={item.href} 
+                      onClick={() => setIsMenuOpen(false)}
+                      className="text-[20px] font-bold tracking-tight py-1 transition-colors hover:opacity-80 block"
+                    >
                       {item.label}
                     </a>
                   </motion.div>

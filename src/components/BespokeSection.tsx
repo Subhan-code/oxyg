@@ -3,11 +3,8 @@ import { motion, useScroll, useTransform, useSpring } from "motion/react";
 
 // ── Card images cycling through 5 Wheel assets ──────────────────────────────
 const WHEEL_IMGS = [
-  "https://cdn.prod.website-files.com/64591e5db836f60c02bb97e9/68041d3a168231fd02125027_wheel-island-card_01.webp",
-  "https://cdn.prod.website-files.com/64591e5db836f60c02bb97e9/68041d3a8e86bb68129afa1f_wheel-island-card_02.webp",
-  "https://cdn.prod.website-files.com/64591e5db836f60c02bb97e9/68041d3ad674b660e6cf1413_wheel-island-card_03.webp",
-  "https://cdn.prod.website-files.com/64591e5db836f60c02bb97e9/68041d3a92a9bac9ab04da2f_wheel-island-card_04.webp",
-  "https://cdn.prod.website-files.com/64591e5db836f60c02bb97e9/68041d3a7b5199127fa42fcb_wheel-island-card_05.webp",
+  "/stamp-1.png",
+  "/stamp-2.png",
 ];
 
 // 24 equally-spaced cards around 360°
@@ -112,6 +109,7 @@ const PLANS = [
   },
 ];
 
+
 // ── Main Section ─────────────────────────────────────────────────────────────
 export function BespokeSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -130,7 +128,7 @@ export function BespokeSection() {
   });
 
   // Map scroll progress 0→1 to rotation angle. Starts at a default skew of 12.24deg and rotates from there
-  const wheelRotation = useTransform(smoothProgress, [0, 1], [12.2413, 102.2413]);
+  const wheelRotation = useTransform(smoothProgress, [0, 1], [12.2413, 122.2413]);
 
   // 2. Framer Motion Scroll Reveal variants
   const fadeInReveal = {
@@ -140,7 +138,7 @@ export function BespokeSection() {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: [0.16, 1, 0.3, 1],
+        ease: [0.16, 1, 0.3, 1] as const,
       },
     },
   };
@@ -173,8 +171,8 @@ export function BespokeSection() {
                 style={{ transform: `rotate(${angle}deg) translateY(-600px)` }}
               >
                 <img
-                  alt="island card"
-                  className="w-[84px] sm:w-[106px] object-contain drop-shadow-xl select-none pointer-events-none"
+                  alt="stamp card"
+                  className="w-[84px] sm:w-[106px] object-contain drop-shadow-xl select-none pointer-events-none dark:invert"
                   src={WHEEL_IMGS[i % WHEEL_IMGS.length]}
                   loading="lazy"
                 />

@@ -72,6 +72,16 @@ import { InfiniteScrollParallax } from "./demos/InfiniteScrollParallax";
 import { GradientShimmerDemo } from "./demos/GradientShimmerDemo";
 import { GradientShimmer } from "gradient-shimmer";
 
+// Added demo components
+import GlobeDemo from "./demos/GlobeDemo";
+import VerticalImageStackDemo from "./demos/VerticalImageStackDemo";
+import WormLoaderDemo from "./demos/WormLoaderDemo";
+import FlipButtonDemo from "./demos/FlipButtonDemo";
+import BubbleTextDemo from "./demos/BubbleTextDemo";
+import ProgressiveFluxLoaderDemo from "./demos/ProgressiveFluxLoaderDemo";
+import InkRevealDemo from "./demos/InkRevealDemo";
+import GlowHorizonDemo from "./demos/GlowHorizonDemo";
+
 // Constants for showcase demo images
 const DEMO_IMAGES = [
   "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=800&auto=format&fit=crop",
@@ -858,6 +868,94 @@ const DASHBOARD_ITEMS: ScreenItem[] = [
     platform: "Web",
     badge: "New",
     likes: 5120
+  },
+  {
+    id: "globe-webgl",
+    appName: "Interactive WebGL Globe",
+    appLogo: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=64&auto=format&fit=crop",
+    category: "Design",
+    uiElement: "Three.js WebGL Canvas",
+    flow: "Interactions & Proximity",
+    platform: "Web",
+    badge: "New",
+    likes: 4350
+  },
+  {
+    id: "vertical-image-stack",
+    appName: "Vertical Image Stack",
+    appLogo: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=64&auto=format&fit=crop",
+    category: "Design",
+    uiElement: "Card Stack",
+    flow: "Gestures & 3D Transforms",
+    platform: "Web",
+    badge: "New",
+    likes: 4210
+  },
+  {
+    id: "worm-loader",
+    appName: "Worm Loader",
+    appLogo: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=64&auto=format&fit=crop",
+    category: "Design",
+    uiElement: "Loading Animation",
+    flow: "Onboarding & Loader",
+    platform: "Web",
+    badge: "New",
+    likes: 3910
+  },
+  {
+    id: "flip-button",
+    appName: "3D Flip Button",
+    appLogo: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=64&auto=format&fit=crop",
+    category: "Design",
+    uiElement: "Button",
+    flow: "Microinteractions & Gestures",
+    platform: "Web",
+    badge: "New",
+    likes: 4120
+  },
+  {
+    id: "bubble-text",
+    appName: "Bubble Text Effect",
+    appLogo: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=64&auto=format&fit=crop",
+    category: "Design",
+    uiElement: "Text Effect",
+    flow: "Microinteractions & Gestures",
+    platform: "Web",
+    badge: "New",
+    likes: 4280
+  },
+  {
+    id: "progressive-flux-loader",
+    appName: "Progressive Flux Loader",
+    appLogo: "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=64&auto=format&fit=crop",
+    category: "Design",
+    uiElement: "Loading Animation",
+    flow: "Onboarding & Loader",
+    platform: "Web",
+    badge: "New",
+    likes: 4450
+  },
+  {
+    id: "ink-reveal",
+    appName: "Ink Reveal Canvas",
+    appLogo: "https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=64&auto=format&fit=crop",
+    category: "Design",
+    uiElement: "Interactive SVG Canvas",
+    flow: "Microinteractions & Gestures",
+    platform: "Web",
+    badge: "New",
+    likes: 4760
+  },
+  {
+    id: "glow-horizon",
+    appName: "Glow Horizon Cinematic",
+    appLogo: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=64&auto=format&fit=crop",
+    category: "Design",
+    uiElement: "Card",
+    flow: "Scroll Reveal Animations",
+    platform: "Web",
+    badge: "New",
+    likes: 4950
   }
 ];
 
@@ -2435,6 +2533,48 @@ export function Dashboard() {
                   <div className="w-full h-full flex items-center justify-center z-10 p-4">
                     <div className="w-full max-w-2xl rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black">
                       <BunnyPlayer />
+                    </div>
+                  </div>
+                ) : selectedScreen.id === "globe-webgl" ? (
+                  <div className="w-full h-full flex items-center justify-center z-10 p-4">
+                    <div className="w-full max-w-2xl rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-white animate-fade-in">
+                      <GlobeDemo />
+                    </div>
+                  </div>
+                ) : selectedScreen.id === "vertical-image-stack" ? (
+                  <div className="w-full h-full flex items-center justify-center z-10 p-4">
+                    <div className="w-full max-w-md h-[500px] rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-[#fafafa]">
+                      <VerticalImageStackDemo />
+                    </div>
+                  </div>
+                ) : selectedScreen.id === "worm-loader" ? (
+                  <div className="w-full h-full flex items-center justify-center z-10 p-4">
+                    <div className="w-full max-w-md bg-neutral-900 border border-neutral-800 p-8 rounded-2xl flex items-center justify-center">
+                      <WormLoaderDemo />
+                    </div>
+                  </div>
+                ) : selectedScreen.id === "flip-button" ? (
+                  <div className="w-full h-full flex items-center justify-center z-10 p-4">
+                    <FlipButtonDemo />
+                  </div>
+                ) : selectedScreen.id === "bubble-text" ? (
+                  <div className="w-full h-full flex items-center justify-center z-10 p-4">
+                    <BubbleTextDemo />
+                  </div>
+                ) : selectedScreen.id === "progressive-flux-loader" ? (
+                  <div className="w-full h-full flex items-center justify-center z-10 p-4">
+                    <ProgressiveFluxLoaderDemo />
+                  </div>
+                ) : selectedScreen.id === "ink-reveal" ? (
+                  <div className="w-full h-full flex items-center justify-center z-10 p-4 bg-[#fafafa]">
+                    <div className="w-full max-w-2xl h-[400px] rounded-2xl overflow-hidden shadow-2xl border border-neutral-200">
+                      <InkRevealDemo />
+                    </div>
+                  </div>
+                ) : selectedScreen.id === "glow-horizon" ? (
+                  <div className="w-full h-full flex items-center justify-center z-10 p-4 bg-[#050507]">
+                    <div className="w-full max-w-2xl rounded-2xl overflow-hidden border border-neutral-800 shadow-2xl">
+                      <GlowHorizonDemo />
                     </div>
                   </div>
                 ) : (

@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "motion/react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Copy, Check } from "lucide-react";
 import { useState, useEffect } from "react";
 import { ThreeDTextScrollSection } from "./ThreeDTextScrollSection";
 
@@ -43,59 +43,90 @@ function LogoSlot({ index, interval }: { index: number; interval: number }) {
 }
 
 export function Hero() {
+  const [copied, setCopied] = useState(false);
+  const command = "pnpm dlx shadcn@latest add @oxygen-ui";
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(command);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <div className="flex flex-col items-center pt-20 pb-0 px-4 md:pt-36 md:pb-0 overflow-x-hidden relative w-full">
 
-      {/* App Icons Stack — smaller on mobile */}
+      {/* shadcn copy badge */}
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
+        initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className="relative w-[64px] h-[64px] md:w-[88px] md:h-[88px]"
+        className="flex items-center bg-[#ededed]/60 dark:bg-neutral-900/60 backdrop-blur-md rounded-full border border-neutral-200/50 dark:border-neutral-800/80 px-4 py-2 select-none shadow-sm gap-2.5 font-mono text-[12px] md:text-[13px] text-neutral-800 dark:text-neutral-200 cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+        onClick={handleCopy}
       >
-        <div className="absolute inset-0 rounded-[18px] md:rounded-[24px] overflow-hidden -translate-y-1.5 scale-[0.81] bg-[rgba(116,116,116,0.2)] backdrop-blur-[32px] z-0" />
-        <div className="absolute inset-0 rounded-[18px] md:rounded-[24px] overflow-hidden translate-y-0 scale-[0.99] z-10">
-          <img src="https://framerusercontent.com/images/I7KFVdmQeFvr0TmuNPPlRY3aX4.png?width=800&height=800" alt="Wise" className="w-full h-full object-cover" />
-        </div>
-        <div className="absolute inset-0 rounded-[18px] md:rounded-[24px] overflow-hidden translate-y-[14px] md:translate-y-[18px] scale-100 z-20 shadow-sm">
-          <img src="https://framerusercontent.com/images/ypqhfxC308Hy6HXSBtQErurStI.png?width=800&height=800" alt="Shop" className="w-full h-full object-cover" />
-        </div>
+        <span className="flex items-center gap-1.5 font-semibold">
+          <span className="text-blue-500 font-bold select-none">$</span>
+          <span>{command}</span>
+        </span>
+        <button className="text-neutral-400 hover:text-neutral-700 dark:hover:text-white transition-colors ml-1.5 focus:outline-none">
+          {copied ? (
+            <Check className="w-3.5 h-3.5 text-green-500 animate-scale-in" />
+          ) : (
+            <Copy className="w-3.5 h-3.5" />
+          )}
+        </button>
       </motion.div>
 
-      {/* Hero headline — 36px on mobile, scales up on larger screens */}
-      <motion.h1
-        initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
-        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
-        className="text-[36px] leading-[1.05] md:text-[64px] md:leading-[64px] lg:text-[80px] lg:leading-[80px] font-[700] tracking-[-0.5px] text-center max-w-[900px] text-[#141414] mt-6 md:mt-12 text-balance"
-      >
-        Build faster with<br />premium components.
-      </motion.h1>
+      {/* Hero headline with slide-up reveals */}
+      <h1 className="text-[36px] leading-[1.05] md:text-[64px] md:leading-[68px] lg:text-[76px] lg:leading-[80px] font-[800] tracking-[-0.03em] text-center max-w-[950px] text-[#141414] mt-6 md:mt-10 text-balance flex flex-col items-center">
+        <span className="overflow-hidden block">
+          <motion.span
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="block"
+          >
+            Animated components
+          </motion.span>
+        </span>
+        <span className="overflow-hidden block">
+          <motion.span
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
+            className="block text-[#717171] mt-1 md:mt-2"
+          >
+            that actually ship.
+          </motion.span>
+        </span>
+      </h1>
 
-      {/* Sub-text — smaller on mobile, single line */}
+      {/* Sub-text */}
       <motion.p
-        initial={{ opacity: 0, y: 16 }}
+        initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.12 }}
-        className="mt-3 md:mt-8 text-[14px] md:text-[20px] text-[#717171] font-medium text-center max-w-2xl px-2 text-pretty"
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+        className="mt-4 md:mt-8 text-[14px] md:text-[18px] lg:text-[20px] text-[#717171] font-medium text-center max-w-2xl px-2 text-pretty leading-relaxed"
       >
-        500+ crafted UI elements &amp; templates. Built for modern devs.
+        A curated collection of 40+ copy-paste React components built with Tailwind CSS, TypeScript &amp; Framer Motion. Drop into any project — zero configuration, zero compromise.
       </motion.p>
 
-      {/* CTA Buttons — side by side on mobile too */}
+      {/* CTA Buttons */}
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-        className="mt-5 md:mt-10 flex flex-row items-center justify-center gap-2 md:gap-4 w-full px-4"
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.26 }}
+        className="mt-5 md:mt-10 flex flex-row flex-wrap items-center justify-center gap-2 md:gap-4 w-full px-4"
       >
         <button className="flex-1 sm:flex-none sm:w-auto bg-[#141414] text-white px-5 py-[9px] rounded-full font-semibold text-[14px] md:text-[15px] hover:scale-[1.02] active:scale-[0.96] transition-[transform,opacity] shadow-md">
           Join for free
         </button>
-        <button className="flex-1 sm:flex-none sm:w-auto bg-transparent border border-[#0000001a] text-[#141414] px-5 py-[9px] rounded-full font-semibold text-[14px] md:text-[15px] hover:bg-neutral-50 active:scale-[0.96] transition-[background-color,transform] shadow-sm flex items-center justify-center gap-1.5">
+        <a href="#/pricing" className="flex-1 sm:flex-none sm:w-auto bg-transparent border border-[#0000001a] text-[#141414] px-5 py-[9px] rounded-full font-semibold text-[14px] md:text-[15px] hover:bg-neutral-50 active:scale-[0.96] transition-[background-color,transform] shadow-sm flex items-center justify-center gap-1.5">
           See plans
           <ArrowRight className="w-3.5 h-3.5 text-[#adadad]" />
-        </button>
+        </a>
+        <a href="#/dashboard" className="flex-1 sm:flex-none sm:w-auto bg-neutral-100 hover:bg-neutral-200 text-neutral-800 px-5 py-[9px] rounded-full font-semibold text-[14px] md:text-[15px] hover:scale-[1.02] active:scale-[0.96] transition-[transform,background-color] shadow-sm flex items-center justify-center">
+          Dashboard
+        </a>
       </motion.div>
 
       {/* ScrollLaunch Badge — hidden on mobile to save space */}
