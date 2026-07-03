@@ -30,13 +30,25 @@ export function Dashboard() {
   const [premiumFilter, setPremiumFilter] = useState<"All" | "Free" | "Pro">("All");
   const [sortOption, setSortOption] = useState<"Default" | "Newest">("Default");
   const [showOnlyBookmarks, setShowOnlyBookmarks] = useState(false);
-  const [bookmarks, setBookmarks] = useState<string[]>([]);
+  const [bookmarks, setBookmarks] = useState<string[]>(() => {
+    try {
+      const stored = localStorage.getItem("oxygi-bookmarks");
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      return [];
+    }
+  });
   const [showToast, setShowToast] = useState<string | null>(null);
+  const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({});
 
   // Scroll to top on mount
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("oxygi-bookmarks", JSON.stringify(bookmarks));
+  }, [bookmarks]);
 
   const triggerToast = (msg: string) => {
     setShowToast(msg);
@@ -311,102 +323,122 @@ export function Dashboard() {
 
           {/* Grid Category Listing Sections */}
           <div className="flex flex-col gap-20 mt-4 w-full">
-            {filteredCategories.map((cat) => (
-              <section key={cat.slug} id={cat.slug} className="flex flex-col gap-8 w-full border-t border-zinc-200 pt-10">
-                
-                {/* Section Header */}
-                <div className="flex items-start justify-between gap-3 text-left">
-                  <div className="flex flex-col gap-1.5">
-                    <div className="inline-flex items-center gap-3">
-                      <h2 className="text-xl md:text-2xl font-extrabold tracking-tight text-black">{cat.title}</h2>
-                      <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-zinc-100 border border-zinc-200 px-2 text-[10px] font-black text-zinc-600">
-                        {cat.items.length}
-                      </span>
+            {filteredCategories.map((cat) => {
+              const isExpanded = expandedCategories[cat.slug] !== false;
+              return (
+                <section key={cat.slug} id={cat.slug} className="flex flex-col w-full border-t border-zinc-200 pt-10">
+                  
+                  {/* Section Header */}
+                  <div className="flex items-start justify-between gap-3 text-left mb-6">
+                    <div className="flex flex-col gap-1.5">
+                      <div className="inline-flex items-center gap-3">
+                        <button onClick={() => setExpandedCategories(prev => ({ ...prev, [cat.slug]: !isExpanded }))} className="flex items-center gap-3 group cursor-pointer text-left">
+                          <div className="w-6 h-6 rounded-full bg-zinc-100 border border-zinc-200 flex items-center justify-center transition-transform duration-300 group-hover:bg-zinc-200" style={{ transform: isExpanded ? 'rotate(90deg)' : 'rotate(0deg)' }}>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-600"><path d="m9 18 6-6-6-6"/></svg>
+                          </div>
+                          <h2 className="text-xl md:text-2xl font-extrabold tracking-tight text-black">{cat.title}</h2>
+                        </button>
+                        <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-zinc-100 border border-zinc-200 px-2 text-[10px] font-black text-zinc-600">
+                          {cat.items.length}
+                        </span>
+                      </div>
+                      <p className="text-sm text-zinc-600 max-w-2xl pl-9">{cat.description}</p>
                     </div>
-                    <p className="text-sm text-zinc-600 max-w-2xl">{cat.description}</p>
                   </div>
-                </div>
 
-                {/* Responsive Cards Grid (Uses subtle soft dark background items on black page) */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-                  {cat.items.map((item) => {
-                    const isBookmarked = bookmarks.includes(item.name);
-                    return (
-                      <Link
-                        key={item.name}
-                        to={`/components/${item.name}`}
-                        className="group/link block h-full select-none"
+                  {/* Responsive Cards Grid (Uses subtle soft dark background items on black page) */}
+                  <AnimatePresence initial={false}>
+                    {isExpanded && (
+                      <motion.div 
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="overflow-hidden"
                       >
-                        <div className="group relative flex flex-col rounded-[24px] p-2 bg-white border border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 transition-all duration-300 cursor-pointer h-[260px] justify-between shadow-sm">
-                          
-                          <div className="relative w-full h-[200px] shrink-0 overflow-hidden rounded-[18px]">
-                            
-                            {/* Inner shifted card container on hover */}
-                            <div className="absolute top-0 left-0 w-full overflow-hidden bg-zinc-100 rounded-[18px] transition-all duration-500 ease-out h-full group-hover/link:h-[calc(100%-2.25rem)] shadow-inner border border-zinc-200">
-                              
-                              {/* Scale preview container on hover */}
-                              <div className="absolute inset-0 size-full overflow-hidden rounded-[18px] transition-transform duration-700 ease-[cubic-bezier(0.2,1,0.2,1)] group-hover/link:scale-[1.025]">
-                                {renderCardPlaceholder(item.name)}
-                              </div>
-
-                              {/* Save Bookmark button */}
-                              <button
-                                onClick={(e) => handleToggleBookmark(item.name, e)}
-                                className={`absolute top-3 left-3 z-20 p-2 rounded-full border transition-all cursor-pointer bg-black/50 backdrop-blur-md ${
-                                  isBookmarked 
-                                    ? "border-red-500/50 text-red-500" 
-                                    : "border-white/10 text-zinc-500 hover:text-white"
-                                }`}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full pb-8">
+                          {cat.items.map((item) => {
+                            const isBookmarked = bookmarks.includes(item.name);
+                            return (
+                              <Link
+                                key={item.name}
+                                to={`/components/${item.name}`}
+                                className="group/link block h-full select-none"
                               >
-                                <svg xmlns="http://www.w3.org/2000/svg" fill={isBookmarked ? "currentColor" : "none"} viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-3.5 h-3.5">
-                                  <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
-                                </svg>
-                              </button>
+                                <div className="group relative flex flex-col rounded-[24px] p-2 bg-white border border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 transition-all duration-300 cursor-pointer h-[260px] justify-between shadow-sm">
+                                  
+                                  <div className="relative w-full h-[200px] shrink-0 overflow-hidden rounded-[18px]">
+                                    
+                                    {/* Inner shifted card container on hover */}
+                                    <div className="absolute top-0 left-0 w-full overflow-hidden bg-zinc-100 rounded-[18px] transition-all duration-500 ease-out h-full group-hover/link:h-[calc(100%-2.25rem)] shadow-inner border border-zinc-200">
+                                      
+                                      {/* Scale preview container on hover */}
+                                      <div className="absolute inset-0 size-full overflow-hidden rounded-[18px] transition-transform duration-700 ease-[cubic-bezier(0.2,1,0.2,1)] group-hover/link:scale-[1.025]">
+                                        {renderCardPlaceholder(item.name)}
+                                      </div>
 
-                              {/* Floating status tag */}
-                              {item.isNew && (
-                                <div className="absolute top-3 right-3 z-10 flex items-center gap-1.5 px-2.5 py-0.5 text-neutral-100 bg-black/50 backdrop-blur-md rounded-full font-medium border border-white/10 shadow-sm">
-                                  <span className="relative flex size-1.5">
-                                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 bg-blue-400" />
-                                    <span className="relative inline-flex size-1.5 rounded-full bg-blue-400" />
-                                  </span>
-                                  <span className="text-[9px] leading-none tracking-wide drop-shadow-md">New</span>
+                                      {/* Save Bookmark button */}
+                                      <button
+                                        onClick={(e) => handleToggleBookmark(item.name, e)}
+                                        className={`absolute top-3 left-3 z-20 p-2 rounded-full border transition-all cursor-pointer bg-black/50 backdrop-blur-md ${
+                                          isBookmarked 
+                                            ? "border-red-500/50 text-red-500" 
+                                            : "border-white/10 text-zinc-500 hover:text-white"
+                                        }`}
+                                      >
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill={isBookmarked ? "currentColor" : "none"} viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-3.5 h-3.5">
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
+                                        </svg>
+                                      </button>
+
+                                      {/* Floating status tag */}
+                                      {item.isNew && (
+                                        <div className="absolute top-3 right-3 z-10 flex items-center gap-1.5 px-2.5 py-0.5 text-neutral-100 bg-black/50 backdrop-blur-md rounded-full font-medium border border-white/10 shadow-sm">
+                                          <span className="relative flex size-1.5">
+                                            <span className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 bg-blue-400" />
+                                            <span className="relative inline-flex size-1.5 rounded-full bg-blue-400" />
+                                          </span>
+                                          <span className="text-[9px] leading-none tracking-wide drop-shadow-md">New</span>
+                                        </div>
+                                      )}
+                                    </div>
+
+                                    {/* Revealing bottom action bar on hover */}
+                                    <div className="absolute bottom-0 left-0 w-full h-[2.25rem] flex items-center justify-start px-3.5 opacity-0 group-hover/link:opacity-100 translate-y-2 group-hover/link:translate-y-0 transition-all duration-300 pointer-events-none">
+                                      <div className="flex flex-row items-center gap-2 justify-center">
+                                        {item.premium ? (
+                                          <>
+                                            <svg viewBox="0 0 24 24" fill="none" className="size-4 text-amber-500"><circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" /><path d="M12 7v1m0 8v1M9.5 9.5C9.5 8.67 10.67 8 12 8s2.5.67 2.5 1.5S13.33 11 12 11s-2.5.67-2.5 1.5S10.67 14.5 12 14.5c1.33 0 2.5-.67 2.5-1.5" stroke="currentColor" strokeWidth="1.5" stroke-linecap="round" /></svg>
+                                            <span className="text-[12px] font-bold tracking-tight text-amber-500">Pro component</span>
+                                          </>
+                                        ) : (
+                                          <>
+                                            <svg viewBox="0 0 24 24" fill="none" className="size-4 text-emerald-400"><circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 3" /></svg>
+                                            <span className="text-[12px] font-bold tracking-tight text-emerald-450">Free component</span>
+                                          </>
+                                        )}
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  {/* Title and details row */}
+                                  <div className="flex items-center justify-between px-2 pb-1.5 transition-all duration-300">
+                                    <span className="text-sm font-bold tracking-tight text-zinc-700 group-hover/link:text-black transition-colors truncate">
+                                      {item.title}
+                                    </span>
+                                    <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400 opacity-0 group-hover/link:opacity-100 transition-opacity" />
+                                  </div>
                                 </div>
-                              )}
-                            </div>
-
-                            {/* Revealing bottom action bar on hover */}
-                            <div className="absolute bottom-0 left-0 w-full h-[2.25rem] flex items-center justify-start px-3.5 opacity-0 group-hover/link:opacity-100 translate-y-2 group-hover/link:translate-y-0 transition-all duration-300 pointer-events-none">
-                              <div className="flex flex-row items-center gap-2 justify-center">
-                                {item.premium ? (
-                                  <>
-                                    <svg viewBox="0 0 24 24" fill="none" className="size-4 text-amber-500"><circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" /><path d="M12 7v1m0 8v1M9.5 9.5C9.5 8.67 10.67 8 12 8s2.5.67 2.5 1.5S13.33 11 12 11s-2.5.67-2.5 1.5S10.67 14.5 12 14.5c1.33 0 2.5-.67 2.5-1.5" stroke="currentColor" strokeWidth="1.5" stroke-linecap="round" /></svg>
-                                    <span className="text-[12px] font-bold tracking-tight text-amber-500">Pro component</span>
-                                  </>
-                                ) : (
-                                  <>
-                                    <svg viewBox="0 0 24 24" fill="none" className="size-4 text-emerald-400"><circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 3" /></svg>
-                                    <span className="text-[12px] font-bold tracking-tight text-emerald-450">Free component</span>
-                                  </>
-                                )}
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Title and details row */}
-                          <div className="flex items-center justify-between px-2 pb-1.5 transition-all duration-300">
-                            <span className="text-sm font-bold tracking-tight text-zinc-700 group-hover/link:text-black transition-colors truncate">
-                              {item.title}
-                            </span>
-                            <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400 opacity-0 group-hover/link:opacity-100 transition-opacity" />
-                          </div>
+                              </Link>
+                            );
+                          })}
                         </div>
-                      </Link>
-                    );
-                  })}
-                </div>
-              </section>
-            ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </section>
+              );
+            })}
 
             {totalCount === 0 && (
               <div className="flex flex-col items-center justify-center text-center py-32 max-w-sm mx-auto w-full">

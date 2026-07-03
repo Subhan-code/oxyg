@@ -99,7 +99,14 @@ export default function AnimatedRoutes() {
           } />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Navigate to="/components" replace />} />
-          <Route path="/components" element={<Dashboard />} />
+          <Route path="/components" element={
+            <>
+              <div className="relative z-10 bg-white shadow-[0_20px_60px_rgba(0,0,0,0.5)] rounded-b-[40px] md:rounded-b-[48px] overflow-hidden border-b border-neutral-200">
+                <Dashboard />
+              </div>
+              <Footer />
+            </>
+          } />
           <Route path="/components/:name" element={<ComponentPage />} />
         </Routes>
 
