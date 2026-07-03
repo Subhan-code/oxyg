@@ -25,7 +25,7 @@ function Home({ triggerToast }: { triggerToast: (msg: string) => void }) {
     <div className="relative z-10 bg-white shadow-[0_20px_60px_rgba(0,0,0,0.1)] rounded-b-[40px] md:rounded-b-[48px] overflow-hidden border-b border-neutral-200">
       <main>
         <Hero />
-        <section className="py-16 bg-[#fafafa] flex flex-col items-center justify-center border-b border-neutral-100 relative z-10 w-full overflow-hidden">
+        <section className="py-16 bg-white flex flex-col items-center justify-center border-b border-neutral-100 relative z-10 w-full overflow-hidden">
           <RecordingToggle />
         </section>
         <Features />
