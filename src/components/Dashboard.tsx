@@ -40,7 +40,13 @@ export function Dashboard() {
     }
   });
   const [showToast, setShowToast] = useState<string | null>(null);
-  const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({});
+  const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>(() => {
+    const initial: Record<string, boolean> = {};
+    categories.forEach(cat => {
+      initial[cat.slug] = true;
+    });
+    return initial;
+  });
 
   // Scroll to top on mount
   useEffect(() => {
@@ -137,7 +143,7 @@ export function Dashboard() {
   };
 
   return (
-    <div className="bg-white text-black min-h-[100dvh] pb-32 font-sans select-none flex flex-col">
+    <div className="bg-white text-black min-h-[100dvh] font-sans select-none flex flex-col">
       
       {/* Dynamic Action Toast */}
       <AnimatePresence>
@@ -256,35 +262,41 @@ export function Dashboard() {
 
       {/* Main Container */}
       <div className="relative overflow-visible flex flex-col items-center px-5" data-lenis-prevent>
-        <div className="px-6 lg:px-10 py-10 max-w-7xl w-full mx-auto flex flex-col gap-16 mt-2">
+        <div className="px-6 lg:px-10 pt-6 pb-10 max-w-7xl w-full mx-auto flex flex-col gap-8 mt-2">
           
           {/* Header intro / search block for mobile screen sizes */}
           <div className="flex flex-col gap-10">
             <div className="relative z-10 flex flex-col items-center justify-center pt-4">
               
               {/* Badges */}
-              <div className="mb-6 flex items-center gap-3 bg-zinc-100 border border-zinc-200 px-4 py-2 rounded-full shadow-sm">
-                <div className="flex items-center -space-x-1.5">
-                  <div className="h-5.5 w-5.5 rounded-full bg-white border border-zinc-200 flex items-center justify-center text-[10px] font-bold text-sky-400">R</div>
-                  <div className="h-5.5 w-5.5 rounded-full bg-white border border-zinc-200 flex items-center justify-center text-[10px] font-bold text-blue-500">TS</div>
-                  <div className="h-5.5 w-5.5 rounded-full bg-white border border-zinc-200 flex items-center justify-center text-[10px] font-bold text-teal-400">TW</div>
-                  <div className="h-5.5 w-5.5 rounded-full bg-white border border-zinc-200 flex items-center justify-center text-[10px] font-bold text-pink-500">M</div>
-                </div>
+              <div className="mb-6 flex items-center justify-center bg-zinc-100 border border-zinc-200 px-5 py-2 rounded-full shadow-sm">
                 <span className="text-[12px] font-semibold text-zinc-600">React · TS · Tailwind · Motion · shadcn</span>
               </div>
 
               {/* Title */}
-              <h1 className="text-4xl md:text-[64px] lg:text-[72px] whitespace-nowrap text-center font-black tracking-tighter leading-none text-black">
-                Component Library
-              </h1>
+              <div className="relative inline-block">
+                <h1 className="text-4xl md:text-[64px] lg:text-[72px] whitespace-nowrap text-center font-black tracking-tighter leading-none text-black">
+                  Component Library
+                </h1>
+                
+                <div className="absolute -top-8 -right-10 md:-top-12 md:-right-24 rotate-[6deg] flex flex-col items-center pointer-events-none hidden sm:flex">
+                  <span className="font-['Caveat'] text-2xl md:text-[32px] font-bold text-blue-500 tracking-wide whitespace-nowrap drop-shadow-sm">
+                    built to be copy-pasted!
+                  </span>
+                  <svg width="30" height="30" viewBox="0 0 60 60" className="text-blue-500 mt-1 mr-12 opacity-80 -rotate-[15deg]">
+                    <path d="M15 15 Q 35 15, 45 40" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" fill="none" />
+                    <path d="M30 38 L 45 40 L 48 25" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                  </svg>
+                </div>
+              </div>
               <span className="block font-medium md:text-lg sm:text-base text-sm text-center mt-4 text-zinc-600 max-w-xl text-balance">
                 High-performance primitives built for modern web experiences.
               </span>
             </div>
 
             {/* Sub Filter Row */}
-            <div className="flex flex-col gap-4 w-full">
-              <div className="flex flex-col sm:flex-row items-center gap-4 max-w-3xl mx-auto w-full">
+            <div className="flex flex-col gap-5 w-full">
+              <div className="flex flex-col items-center gap-4 max-w-3xl mx-auto w-full">
                 {/* Mobile Search input */}
               <div className="relative w-full md:hidden">
                 <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4.5 text-zinc-500 pointer-events-none" />
@@ -335,7 +347,7 @@ export function Dashboard() {
               </div>
 
               {/* Category Pills and Expand Toggle */}
-              <div className="flex items-center gap-3 w-full max-w-5xl mx-auto px-4 mt-2 justify-between">
+              <div className="flex flex-col md:flex-row items-center justify-center gap-3 w-full max-w-5xl mx-auto px-4 mt-2">
                 
                 {/* Expand / Collapse All */}
                 <button
@@ -398,27 +410,27 @@ export function Dashboard() {
         </div>
 
           {/* Grid Category Listing Sections */}
-          <div className="flex flex-col gap-10 mt-4 w-full">
+          <div className="flex flex-col gap-16 mt-12 w-full">
             {filteredCategories.map((cat) => {
               const isExpanded = expandedCategories[cat.slug] === true;
               return (
-                <section key={cat.slug} id={cat.slug} className="flex flex-col w-full border-t border-zinc-200 pt-10">
+                <section key={cat.slug} id={cat.slug} className="flex flex-col w-full border-t border-zinc-200/60 pt-12 md:pt-16">
                   
                   {/* Section Header */}
-                  <div className="flex items-start justify-between gap-3 text-left mb-6">
-                    <div className="flex flex-col gap-1.5">
+                  <div className="flex items-start justify-between gap-3 text-left mb-8">
+                    <div className="flex flex-col gap-2">
                       <div className="inline-flex items-center gap-3">
-                        <button onClick={() => setExpandedCategories(prev => ({ ...prev, [cat.slug]: !isExpanded }))} className="flex items-center gap-3 group cursor-pointer text-left">
-                          <div className="w-6 h-6 rounded-full bg-zinc-100 border border-zinc-200 flex items-center justify-center transition-transform duration-300 group-hover:bg-zinc-200" style={{ transform: isExpanded ? 'rotate(90deg)' : 'rotate(0deg)' }}>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-600"><path d="m9 18 6-6-6-6"/></svg>
+                        <button onClick={() => setExpandedCategories(prev => ({ ...prev, [cat.slug]: !isExpanded }))} className="flex items-center gap-3 group cursor-pointer text-left outline-none">
+                          <div className="w-6 h-6 rounded-full bg-zinc-50 border border-zinc-200 flex items-center justify-center transition-all duration-300 group-hover:bg-zinc-100 group-focus-visible:ring-2 group-focus-visible:ring-zinc-400" style={{ transform: isExpanded ? 'rotate(90deg)' : 'rotate(0deg)' }}>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-500"><path d="m9 18 6-6-6-6"/></svg>
                           </div>
-                          <h2 className="text-xl md:text-2xl font-extrabold tracking-tight text-black">{cat.title}</h2>
+                          <h2 className="text-2xl md:text-3xl font-black tracking-tighter text-black">{cat.title}</h2>
                         </button>
-                        <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-zinc-100 border border-zinc-200 px-2 text-[10px] font-black text-zinc-600">
+                        <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-zinc-50 border border-zinc-200 px-2 text-[10px] font-bold tracking-widest text-zinc-500">
                           {cat.items.length}
                         </span>
                       </div>
-                      <p className="text-sm text-zinc-600 max-w-2xl pl-9">{cat.description}</p>
+                      <p className="text-sm md:text-base text-zinc-500 max-w-2xl pl-9">{cat.description}</p>
                     </div>
                   </div>
 
@@ -529,9 +541,10 @@ export function Dashboard() {
 
         </div>
       </div>
-      
+
+
       {/* Footer */}
-      <div className="w-full bg-white mt-20 border-t border-neutral-200">
+      <div className="w-full bg-black mt-20 border-t border-white/10">
         <Footer />
       </div>
     </div>
