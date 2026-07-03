@@ -1,9 +1,11 @@
 import React, { createContext, useContext, useLayoutEffect } from "react";
 
-type Theme = "light";
+type Theme = "light" | "dark" | "system";
 
 type ThemeProviderProps = {
   children: React.ReactNode;
+  defaultTheme?: Theme;
+  storageKey?: string;
 };
 
 type ThemeProviderState = {
