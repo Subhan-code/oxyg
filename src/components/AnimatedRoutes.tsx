@@ -23,34 +23,36 @@ import { FooterAndTestimonials } from './FooterAndTestimonials';
 // Separate Home Page Component
 function Home({ triggerToast }: { triggerToast: (msg: string) => void }) {
   return (
-    <div className="relative z-10 bg-white shadow-[0_20px_60px_rgba(0,0,0,0.1)] rounded-b-[40px] md:rounded-b-[48px]">
-      <main>
-        <Hero />
-        <section className="py-16 bg-[#fafafa] flex flex-col items-center justify-center border-b border-neutral-100 relative z-10 w-full overflow-hidden">
-          <RecordingToggle />
-        </section>
-        <Features />
-        <InteractiveShowcase />
-        <TimelineSection />
-        <BespokeSection />
-        <section className="py-20 md:py-32 w-full relative z-10 border-t border-neutral-100 flex flex-col items-center">
-          <div className="max-w-3xl mx-auto text-center px-4 mb-10 md:mb-16">
-            <span className="text-[10px] md:text-[11px] font-bold tracking-[0.15em] uppercase text-neutral-400">Interactive Elements</span>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-[#141414] leading-tight mt-3">
-              Ink Reveal Canvas
-            </h2>
-            <p className="text-sm md:text-base text-neutral-500 font-medium leading-relaxed mt-4">
-              Move your mouse across the canvas to carve away the ink overlay. A fluid math-based brush wobble expands organically to reveal the landscape hidden underneath.
-            </p>
-          </div>
-          <div className="w-full relative h-[450px] md:h-[650px] bg-[#fafafa] border-y border-neutral-100 overflow-hidden shadow-inner">
-            <InkRevealDemo />
-          </div>
-        </section>
-        <IOSFAQ />
-      </main>
+    <>
+      <div className="relative z-10 bg-white shadow-[0_20px_60px_rgba(0,0,0,0.1)] rounded-b-[40px] md:rounded-b-[48px]">
+        <main>
+          <Hero />
+          <section className="py-16 bg-[#fafafa] flex flex-col items-center justify-center border-b border-neutral-100 relative z-10 w-full overflow-hidden">
+            <RecordingToggle />
+          </section>
+          <Features />
+          <InteractiveShowcase />
+          <TimelineSection />
+          <BespokeSection />
+          <section className="py-20 md:py-32 w-full relative z-10 border-t border-neutral-100 flex flex-col items-center">
+            <div className="max-w-3xl mx-auto text-center px-4 mb-10 md:mb-16">
+              <span className="text-[10px] md:text-[11px] font-bold tracking-[0.15em] uppercase text-neutral-400">Interactive Elements</span>
+              <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-[#141414] leading-tight mt-3">
+                Ink Reveal Canvas
+              </h2>
+              <p className="text-sm md:text-base text-neutral-500 font-medium leading-relaxed mt-4">
+                Move your mouse across the canvas to carve away the ink overlay. A fluid math-based brush wobble expands organically to reveal the landscape hidden underneath.
+              </p>
+            </div>
+            <div className="w-full relative h-[450px] md:h-[650px] bg-[#fafafa] border-y border-neutral-100 overflow-hidden shadow-inner">
+              <InkRevealDemo />
+            </div>
+          </section>
+          <IOSFAQ />
+        </main>
+      </div>
       <FooterAndTestimonials triggerToast={triggerToast} />
-    </div>
+    </>
   );
 }
 
@@ -78,12 +80,7 @@ export default function AnimatedRoutes() {
         )}
 
         <Routes location={location} key={location.pathname}>
-          <Route path="/" element={
-            <>
-              <Home triggerToast={triggerToast} />
-              <Footer />
-            </>
-          } />
+          <Route path="/" element={<Home triggerToast={triggerToast} />} />
           <Route path="/pricing" element={
             <>
               <div className="relative z-10 bg-white shadow-[0_20px_60px_rgba(0,0,0,0.5)] rounded-b-[40px] md:rounded-b-[48px] overflow-hidden border-b border-neutral-200">

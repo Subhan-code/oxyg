@@ -1569,7 +1569,7 @@ export default function ComponentPage() {
             animate={{ width: "auto", opacity: 1 }}
             exit={{ width: 0, opacity: 0 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="shrink-0 h-full border-r border-border overflow-hidden md:relative absolute z-50 bg-background shadow-xl md:shadow-none"
+            className="shrink-0 h-full overflow-hidden md:relative absolute z-50 bg-background shadow-xl md:shadow-none"
           >
             <Sidebar001 defaultWidth={280} minWidth={200} maxWidth={400} className="border-none w-[280px] md:w-auto md:min-w-[200px]" data-lenis-prevent>
               <Sidebar001Header>
