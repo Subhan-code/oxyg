@@ -95,14 +95,32 @@ function SectionHead({ lines }: { lines: string[] }) {
   );
 }
 
+const FEATURE_TO_SLUG_MAP: Record<string, string> = {
+  "Spaced Chat UI": "spaced-chat-input",
+  "Gooey Search Panel": "gooey-search",
+  "Adaptive Caret Input": "adaptive-caret",
+  "Worm Progress Loader": "setup-steps",
+  "Interactive Canvas Art": "pixel-canvas-demo",
+  "3D Perspective Grid": "staggered-3d-grid",
+};
+
 export function Features() {
   const [activeTab, setActiveTab] = useState(TABS[0]);
+
+  const handleCardClick = (title: string) => {
+    const slug = FEATURE_TO_SLUG_MAP[title] || title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+    window.location.hash = `/components/${slug}`;
+  };
 
   const renderMarqueeContent = () => {
     switch (activeTab) {
       case "Components":
         return [...COMPONENTS_DATA, ...COMPONENTS_DATA].map((item, i) => (
-          <div key={i} className="w-[260px] md:w-[360px] shrink-0 p-3 md:p-4 bg-zinc-950 hover:bg-white rounded-3xl border border-zinc-900 hover:border-zinc-200 transition-all duration-300 flex flex-col hover:scale-[1.025] shadow-lg hover:shadow-md group">
+          <div 
+            key={i} 
+            onClick={() => handleCardClick(item.title)}
+            className="w-[260px] md:w-[360px] shrink-0 p-3 md:p-4 bg-zinc-950 hover:bg-white rounded-3xl border border-zinc-900 hover:border-zinc-200 transition-all duration-300 flex flex-col hover:scale-[1.025] shadow-lg hover:shadow-md group cursor-pointer"
+          >
             <div className="w-full h-[150px] md:h-[210px] rounded-2xl overflow-hidden border border-zinc-900/50 bg-[#1c1c1e] relative group-hover:border-zinc-200/50 transition-colors duration-300">
               <video src={item.video} autoPlay muted loop playsInline className="w-full h-full object-cover" />
             </div>
@@ -113,7 +131,11 @@ export function Features() {
         ));
       case "Templates":
         return [...TEMPLATES_DATA, ...TEMPLATES_DATA].map((item, i) => (
-          <div key={i} className="w-[260px] md:w-[360px] shrink-0 p-3 md:p-4 bg-zinc-950 hover:bg-white rounded-3xl border border-zinc-900 hover:border-zinc-200 transition-all duration-300 flex flex-col hover:scale-[1.025] shadow-lg hover:shadow-md group">
+          <div 
+            key={i} 
+            onClick={() => handleCardClick(item.title)}
+            className="w-[260px] md:w-[360px] shrink-0 p-3 md:p-4 bg-zinc-950 hover:bg-white rounded-3xl border border-zinc-900 hover:border-zinc-200 transition-all duration-300 flex flex-col hover:scale-[1.025] shadow-lg hover:shadow-md group cursor-pointer"
+          >
             <div className="w-full h-[150px] md:h-[210px] rounded-2xl overflow-hidden border border-zinc-900/50 bg-[#1c1c1e] relative group-hover:border-zinc-200/50 transition-colors duration-300">
               <video src={item.video} autoPlay muted loop playsInline className="w-full h-full object-cover" />
             </div>

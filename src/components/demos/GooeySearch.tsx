@@ -179,7 +179,7 @@ const getResultItemVariants = (index: number, isUnsupported: boolean) => ({
 const getResultItemTransition = (index: number) => ({
   duration: 0.75,
   delay: index * 0.12,
-  type: "spring",
+  type: "spring" as const,
   bounce: 0.35,
   exit: { duration: index * 0.1 },
   filter: { ease: "easeInOut" },

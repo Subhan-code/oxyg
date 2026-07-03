@@ -101,6 +101,7 @@ export function Header({ dark = false }: { dark?: boolean }) {
           {/* Desktop Nav */}
           <nav className="hidden sm:flex items-center h-full">
             <div className="flex items-center gap-6">
+              <a href="#/components" className="text-[15px] font-[600] transition-colors hover:opacity-80">Components</a>
               <a href="#/installation" className="text-[15px] font-[600] transition-colors hover:opacity-80">Installation</a>
               <a href="#/pricing" className="text-[15px] font-[600] transition-colors hover:opacity-80">Pricing</a>
               <a href="#contact" className="text-[15px] font-[600] transition-colors hover:opacity-80">Contact</a>
@@ -175,6 +176,7 @@ export function Header({ dark = false }: { dark?: boolean }) {
               {/* Menu items list */}
               <div className="flex flex-col gap-3.5 text-left px-2">
                 {[
+                  { href: "#/components", label: "Components" },
                   { href: "#/installation", label: "Installation" },
                   { href: "#/pricing", label: "Pricing" },
                   { href: "#contact", label: "Contact" },

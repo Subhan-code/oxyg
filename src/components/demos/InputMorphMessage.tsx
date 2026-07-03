@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 
 const transitionDebug = {
-  type: 'easeOut',
+  type: 'easeOut' as any,
   duration: 0.2,
 };
 

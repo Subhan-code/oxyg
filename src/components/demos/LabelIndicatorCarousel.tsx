@@ -5,7 +5,7 @@ const transition = {
   type: "spring",
   stiffness: 260,
   damping: 28,
-};
+} as const;
 
 const ITEMS = ["Dean", "Lil B", "Lazer", "Simz", "Bladee"];
 

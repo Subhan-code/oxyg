@@ -97,7 +97,7 @@ const SPRING_OPTIONS = {
   type: 'spring',
   stiffness: 300,
   damping: 30,
-};
+} as const;
 
 export default function Subtle3DCarousel() {
   const x = useMotionValue(0);

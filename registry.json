@@ -1,0 +1,43 @@
+{
+  "name": "oxygen-ui",
+  "version": "1.0.0",
+  "description": "High-fidelity React 19 / Tailwind v4 component library registry",
+  "components": {
+    "signature": {
+      "title": "Signature",
+      "dependencies": ["motion", "opentype.js"],
+      "files": ["src/components/demos/SignatureDemo.tsx", "src/components/oxygen-ui/Signature.tsx"],
+      "tailwind": {}
+    },
+    "spaced-chat-input": {
+      "title": "Spaced Chat Input",
+      "dependencies": ["motion", "@base-ui/react"],
+      "files": ["src/components/demos/SpacedChat.tsx"],
+      "tailwind": {}
+    },
+    "progressive-blur": {
+      "title": "Progressive Blur",
+      "dependencies": ["motion"],
+      "files": ["src/components/demos/ProgressiveBlur.tsx"],
+      "tailwind": {}
+    },
+    "setup-steps": {
+      "title": "Setup Steps",
+      "dependencies": ["motion"],
+      "files": ["src/components/demos/WormLoaderDemo.tsx"],
+      "tailwind": {}
+    },
+    "tilt-card": {
+      "title": "Tilt Card",
+      "dependencies": ["motion"],
+      "files": ["src/components/demos/TiltCard.tsx"],
+      "tailwind": {}
+    },
+    "calligraph": {
+      "title": "Calligraph",
+      "dependencies": ["motion", "calligraph"],
+      "files": ["src/components/demos/Calligraph.tsx"],
+      "tailwind": {}
+    }
+  }
+}

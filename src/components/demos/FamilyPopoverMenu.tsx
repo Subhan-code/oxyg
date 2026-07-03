@@ -78,7 +78,7 @@ export default function FamilyPopoverMenu() {
   const isScreenSizeSm = useMediaQuery('(max-width: 640px)');
 
   const duration = 0.25;
-  const transition = { duration, ease: [0.32, 0.72, 0, 1] };
+  const transition = { duration, ease: [0.32, 0.72, 0, 1] as any };
 
   const menuVariants = {
     open: {

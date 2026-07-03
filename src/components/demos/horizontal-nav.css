@@ -1,0 +1,119 @@
+@layer prototype {
+  .mask-nav ul {
+    --size: 4;
+    display: flex;
+    gap: .25rem;
+    list-style-type: none;
+    padding: 2rem calc(var(--size) * 1ch);
+    margin: 0;
+    max-width: 100%;
+    overflow: auto;
+    scrollbar-color: #0000 #0000;
+    scrollbar-width: none;
+    transform: translateZ(0);
+
+    /* Original standard */
+    mask-image: linear-gradient(90deg, #fff, #0000), linear-gradient(90deg, #fff 0 100%), linear-gradient(90deg, #0000, #fff);
+    mask-size: calc(var(--size) * 1ch) 100%, 100% 100%, calc(var(--size) * 1ch) 100%;
+    mask-repeat: no-repeat;
+    mask-composite: exclude;
+    
+    /* Safari/Chrome prefix logic */
+    -webkit-mask-image: linear-gradient(90deg, #fff, #0000), linear-gradient(90deg, #fff 0 100%), linear-gradient(90deg, #0000, #fff);
+    -webkit-mask-size: calc(var(--size) * 1ch) 100%, 100% 100%, calc(var(--size) * 1ch) 100%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-composite: xor;
+
+    animation-timing-function: linear;
+    animation-timeline: scroll(self inline);
+    animation-range: 0 calc(var(--size) * 1ch), calc(100% - (var(--size) * 1ch)) 100%;
+    
+    mask-position: 0 0, 0 0, 100% 0;
+    -webkit-mask-position: 0 0, 0 0, 100% 0;
+    
+    mask-size: 0 100%, 100% 100%, calc(var(--size) * 1ch) 100%;
+    -webkit-mask-size: 0 100%, 100% 100%, calc(var(--size) * 1ch) 100%;
+    
+    animation-name: size-up, size-down;
+    animation-fill-mode: both;
+
+    position: relative;
+    clip-path: inset(0);
+  }
+
+  .mask-nav ul::-webkit-scrollbar {
+    display: none;
+  }
+
+  @keyframes size-up {
+    to {
+      mask-size: calc(var(--size) * 1ch) 100%, 100% 100%, calc(var(--size) * 1ch) 100%;
+      -webkit-mask-size: calc(var(--size) * 1ch) 100%, 100% 100%, calc(var(--size) * 1ch) 100%;
+    }
+  }
+
+  @keyframes size-down {
+    to {
+      mask-size: calc(var(--size) * 1ch) 100%, 100% 100%, 0 100%;
+      -webkit-mask-size: calc(var(--size) * 1ch) 100%, 100% 100%, 0 100%;
+    }
+  }
+
+  .mask-nav ul a {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+    padding: 0 0.25rem;
+    position: relative;
+    z-index: 10;
+  }
+
+  .mask-nav ul a span {
+    transition: background 0.12s ease-out;
+    border-radius: 100px;
+    padding: 0.25rem 0.75rem;
+    pointer-events: none;
+    display: inline-block;
+  }
+
+  .mask-nav ul a:is(:hover, :focus-visible) {
+    outline: none;
+  }
+
+  .mask-nav ul a:is(:hover, :focus-visible):not([data-active=true]) span {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .resize {
+    padding: 1rem;
+    resize: horizontal;
+    overflow: hidden;
+    width: 326px;
+    max-width: 100%;
+    min-width: 250px;
+    margin: 0 auto;
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .mask-nav a[data-active=true] span {
+    anchor-name: --active;
+  }
+
+  .mask-nav ul::after {
+    content: '';
+    background: #fff;
+    pointer-events: none;
+    mix-blend-mode: difference;
+    position: absolute;
+    z-index: 10;
+    top: anchor(top);
+    bottom: anchor(bottom);
+    left: anchor(left);
+    right: anchor(right);
+    position-anchor: --active;
+    transition: all 0.26s ease-out;
+    border-radius: 100px;
+  }
+}

@@ -1,0 +1,23 @@
+# Oxygen UI — LLM Directory & Index
+
+Oxygen UI is a premium, high-fidelity developer component library and landing showcase built using React 19, Vite, Tailwind CSS v4, Framer Motion, and GSAP.
+
+## Component Directory
+Every component in the repository maps to its dynamic route `#/components/:name` and raw source tabs inside `src/component-sources.ts`.
+
+### Core Schemas
+- **Signature (`signature`)**: Renders handwriting strokes dynamically using Opentype.js font path nodes and Framer Motion layout draws.
+- **Spaced Chat Input (`spaced-chat-input`)**: A Spring-based conversation block featuring responsive overlays and chat bubbles.
+- **Progressive Blur (`progressive-blur`)**: Edges of scrollable containers layered with variable opacity backdrops.
+- **Setup Steps (`setup-steps`)**: Progress trackers drawing smooth svg loops.
+
+## Installation Sequence
+Agents should run local configurations dynamically using:
+`npx oxygen-ui add <component-slug>`
+
+## Dependencies
+Central packages are declared in `package.json`:
+- React 19
+- Framer Motion / motion/react (Spring animations)
+- Lenis (Smooth scrolling)
+- GSAP / gsap-react (Morph curves)

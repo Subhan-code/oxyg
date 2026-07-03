@@ -171,7 +171,73 @@ export const PLAYGROUND_CATEGORIES: Record<string, "components" | "templates" | 
   "Circular Text Effect": "resources"
 };
 
-const PLAYGROUNDS: Record<string, ComponentPlayground> = {
+export const PLAYGROUND_TO_SLUG_MAP: Record<string, string> = {
+  "Spaced Chat Input": "spaced-chat-input",
+  "Family Wallet": "skiper-21",
+  "Scrubber": "scrubber",
+  "SignIn Drawer": "signin-drawer",
+  "Gooey Menu": "gooey-menu",
+  "Draggable Curved Menu": "draggable-curved-menu",
+  "Family Popover Menu": "family-popover-menu",
+  "Gooey Button": "gooey-button",
+  "Magnetic Button": "magnetic-button",
+  "Adaptive Caret": "adaptive-caret",
+  "Custom Cursor": "custom-cursor",
+  "Underlay Action Sheet": "underlay-action-sheet",
+  "AnimationsDev Hero": "scene",
+  "Willem Loading Animation": "willem-loader",
+  "Fixed Underlay Navigation": "underlay-nav",
+  "Three.js Warp Gallery": "three-js-warp-gallery",
+  "WebGL Magazine": "webgl-magazine",
+  "WebGL Page Transitions": "webgl-page-transitions",
+  "Custom Bunny HLS Player": "bunny-player",
+  "13 Minutes to the Moon": "minutes-to-moon",
+  "Flow Scroll": "flow-scroll",
+  "Scroll Effect": "scroll-effect",
+  "Sticky Card Stack": "skiper-34",
+  "Glowing Scroll Indicator": "glowing-scroll-indicator",
+  "Pixelated Carousel": "pixelated-carousel",
+  "Motion Blur": "motion-blur",
+  "Progressive Blur": "progressive-blur",
+  "Input Morph Message": "input-morph-message",
+  "Label Indicator Carousel": "label-indicator-carousel",
+  "Swipeable Stack Cards": "swipeable-stack-cards",
+  "Subtle 3D Carousel": "subtle-3d-carousel",
+  "Run Stats Stacks": "run-stats-stacks",
+  "Timeline Indicator": "timeline-indicator",
+  "Cylindrical Photo Carousel": "three-d-photo-carousel-3",
+  "Flat 3D Photo Carousel": "three-d-photo-carousel",
+  "Scroll Reveal CSS": "scroll-reveal-css",
+  "Distorted Glass": "distorted-glass",
+  "Fractal Glass Panels": "fractal-glass-panels",
+  "Magnetic Tabs": "magnetic-tabs",
+  "Mask Animation": "mask-animation",
+  "Scroll Animation": "scroll-animation",
+  "Apple Spotlight": "apple-spotlight",
+  "ThreeD Photo Carousel": "three-d-photo-carousel",
+  "ThreeD Photo Carousel3": "three-d-photo-carousel-3",
+  "ThreeD Letters Menu Hover": "three-d-letters-menu-hover",
+  "ThreeD Text Animation": "three-d-text-animation",
+  "Elastic Grid Scroll": "elastic-grid-scroll",
+  "ThreeD Infinite Parallax Carousel": "three-d-infinite-parallax-carousel",
+  "Pixel Canvas Demo": "pixel-canvas-demo",
+  "Staggered 3D Grid": "staggered-3d-grid",
+  "On Scroll Layout Formations": "on-scroll-layout-formations",
+  "On Scroll Letter Animations": "on-scroll-letter-animations",
+  "Sticky Grid Scroll": "sticky-grid-scroll",
+  "Gradient Slider": "gradient-slider",
+  "Circular Text Effect": "circular-text-effect",
+  "Input Clear Dissolve": "input-clear-dissolve",
+  "Shimmer Text": "shimmer-text",
+  "Plus Menu Morph": "plus-menu-morph",
+  "Accordion Expand": "accordion-expand",
+  "Skeleton Loader": "skeleton-loader",
+  "Error State Shake": "error-state-shake",
+  "Calligraph Text": "calligraph",
+  "SlotText Roll": "slot-text"
+};
+
+export const PLAYGROUNDS: Record<string, ComponentPlayground> = {
   "13 Minutes to the Moon": {
     name: "13 Minutes to the Moon",
     description: "Lab #064: An interactive SVG mask animation with staggered GSAP morphing and text reveals mapping the moon landing trajectory.",
@@ -1078,8 +1144,8 @@ export function InteractiveShowcase() {
               <button
                 key={key}
                 onClick={() => {
-                  setActivePlayground(key);
-                  setCopied(false);
+                  const slug = PLAYGROUND_TO_SLUG_MAP[key] || key.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+                  window.location.hash = `/components/${slug}`;
                 }}
                 className={`px-3 py-2.5 rounded-xl text-[12px] font-semibold text-center transition-[background-color,border-color,transform,color] active:scale-[0.96] border cursor-pointer leading-tight ${
                   activePlayground === key
@@ -1103,8 +1169,8 @@ export function InteractiveShowcase() {
                 <button
                   key={key}
                   onClick={() => {
-                    setActivePlayground(key);
-                    setCopied(false);
+                    const slug = PLAYGROUND_TO_SLUG_MAP[key] || key.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+                    window.location.hash = `/components/${slug}`;
                   }}
                   className={`w-full px-5 py-4 rounded-2xl text-[15px] font-[600] text-left transition-[background-color,border-color,transform,color] active:scale-[0.96] border flex items-center justify-between gap-2 cursor-pointer shrink-0 ${
                     activePlayground === key

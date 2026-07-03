@@ -185,6 +185,18 @@ interface ScreenItem {
   badge: "Updated" | "New";
   likes: number;
 }
+const DASHBOARD_TO_SLUG_MAP: Record<string, string> = {
+  "animationsdev-hero": "scene",
+  "spaced-chat": "spaced-chat-input",
+  "family-wallet": "skiper-21",
+  "glowing-indicator": "glowing-scroll-indicator",
+  "sticky-card-stack": "skiper-34",
+  "flat-3d-photo-carousel": "three-d-photo-carousel",
+  "cylindrical-photo-carousel": "three-d-photo-carousel-3",
+  "scroll-layout-formations": "on-scroll-layout-formations",
+  "3d-letters-menu": "three-d-letters-menu-hover"
+};
+
 const DASHBOARD_ITEMS: ScreenItem[] = [
   {
     id: "airbnb",
@@ -969,7 +981,65 @@ export function Dashboard() {
   const [bookmarks, setBookmarks] = useState<string[]>([]);
   const [showOnlyBookmarks, setShowOnlyBookmarks] = useState(false);
   const [showToast, setShowToast] = useState<string | null>(null);
-  const [selectedScreen, setSelectedScreen] = useState<ScreenItem | null>(null);
+  const [selectedScreen, setSelectedScreenRaw] = useState<ScreenItem | null>(null);
+  
+  const setSelectedScreen = (item: ScreenItem | null) => {
+    if (item) {
+      const isInteractive = [
+        "animationsdev-hero",
+        "adaptive-caret",
+        "custom-cursor",
+        "work-together",
+        "stay-in-loop",
+        "foldable-map",
+        "magnetic-button",
+        "mask-animation",
+        "scroll-animation",
+        "spaced-chat",
+        "family-wallet",
+        "scrubber",
+        "signin-drawer",
+        "flow-scroll",
+        "glowing-indicator",
+        "scroll-effect",
+        "pixelated-carousel",
+        "sticky-card-stack",
+        "apple-spotlight",
+        "underlay-action-sheet",
+        "motion-blur",
+        "progressive-blur",
+        "input-morph-message",
+        "label-indicator-carousel",
+        "swipeable-stack-cards",
+        "subtle-3d-carousel",
+        "gooey-menu",
+        "draggable-curved-menu",
+        "run-stats-stacks",
+        "timeline-indicator",
+        "cylindrical-photo-carousel",
+        "flat-3d-photo-carousel",
+        "family-popover-menu",
+        "scroll-reveal-css",
+        "gooey-button",
+        "distorted-glass",
+        "fractal-glass-panels",
+        "magnetic-tabs",
+        "staggered-3d-grid",
+        "scroll-layout-formations",
+        "gradient-slider",
+        "3d-letters-menu",
+        "gradient-shimmer"
+      ].includes(item.id);
+
+      if (isInteractive) {
+        const slug = DASHBOARD_TO_SLUG_MAP[item.id] || item.id;
+        window.location.hash = `/components/${slug}`;
+        return;
+      }
+    }
+    setSelectedScreenRaw(item);
+  };
+  
   const [isSpotlightOpen, setIsSpotlightOpen] = useState(false);
 
   const triggerToast = (msg: string) => {
@@ -1355,7 +1425,14 @@ export function Dashboard() {
               return (
                 <div 
                   key={item.id}
-                  onClick={() => setSelectedScreen(item)}
+                  onClick={() => {
+                    if (isInteractive) {
+                      const slug = DASHBOARD_TO_SLUG_MAP[item.id] || item.id;
+                      window.location.hash = `/components/${slug}`;
+                    } else {
+                      setSelectedScreen(item);
+                    }
+                  }}
                   className="group bg-[#151517] border border-white/[0.04] hover:border-white/[0.1] rounded-2xl p-6 hover:shadow-[0_30px_75px_rgba(0,0,0,0.6)] transition-all cursor-pointer relative flex flex-col h-[480px] justify-between overflow-hidden"
                 >
                   
