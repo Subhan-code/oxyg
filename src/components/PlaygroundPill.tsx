@@ -99,8 +99,6 @@ export function PlaygroundPill({
 
   const ACTIONS = [
     { id: 'reload', label: 'Reload rendering', icon: RotateCw, onClick: onRestart || (() => window.location.reload()) },
-    { id: 'copy', label: 'Copy source code', icon: (onCopy ? copiedCode : copied) ? Check : Copy, onClick: handleCopy },
-    { id: 'docs', label: 'Documentation', icon: BookOpen, onClick: () => { } },
     { id: 'expand', label: 'Expand to full screen', icon: Maximize, onClick: () => setIsExpanded?.(!isExpanded) },
   ];
 
@@ -123,6 +121,10 @@ export function PlaygroundPill({
   }, [activeTab]);
 
   const handleTabClick = (id: string) => {
+    if (id === 'home') {
+      window.location.hash = '/';
+      return;
+    }
     setPreviousTab(activeTab);
     if (id === activeTab) {
       setActiveTab(null); // Toggle off

@@ -1636,15 +1636,15 @@ export default function ComponentPage() {
           <div className="absolute top-0 left-0 right-0 h-20 bg-background/95 border-b border-border/10 z-40 pointer-events-none" />
 
           {/* Sidebar Toggle Header */}
-          <div className="absolute top-0 left-0 right-0 h-16 flex items-center z-[150] px-6 pointer-events-none">
-            <div className="flex items-center gap-3 w-full pointer-events-auto pt-6">
+          <div className="absolute top-0 left-0 right-0 h-20 flex items-center z-[150] px-6 pointer-events-none">
+            <div className="flex items-center gap-3 w-full pointer-events-auto">
               <div>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <button
                       ref={toggleBtnRef}
                       onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                      className="inline-flex shrink-0 items-center justify-center gap-2 text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 size-8 rounded-full"
+                      className="inline-flex shrink-0 items-center justify-center gap-2 text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 border border-border/60 hover:bg-accent dark:hover:bg-accent/50 hover:text-accent-foreground bg-background/60 backdrop-blur size-8 rounded-full"
                       aria-label="Toggle sidebar"
                     >
                       <SidebarToggleIcon isOpen={isSidebarOpen} className="size-5 pointer-events-none" />
@@ -1952,9 +1952,9 @@ export default function ComponentPage() {
               </motion.div>
 
               {/* Spacer for bottom */}
-              <div className="h-20 md:hidden" />
             </div>
           </div>
+          <LiquidMetalBackToTop containerRef={scrollableContainerRef} className="absolute bottom-8 right-8 z-[9999]" />
         </div>
 
         {/* Draggable Splitter (Desktop Only) — hidden when info is fullscreen */}
@@ -2088,8 +2088,7 @@ export default function ComponentPage() {
         </div>
       </div>
 
-      {/* Floating WebGL Scroll progress Back to Top button */}
-      <LiquidMetalBackToTop containerRef={scrollableContainerRef} />
+
 
     </motion.div>
   );
