@@ -146,10 +146,10 @@ export function BespokeSection() {
   return (
     <section
       ref={sectionRef}
-      className="py-12 md:py-16 px-6 max-w-7xl mx-auto w-full transition-colors text-left relative overflow-hidden bg-white dark:bg-zinc-950 text-zinc-950 dark:text-[#f9f4eb]"
+      className="py-12 md:py-16 px-6 max-w-7xl mx-auto w-full transition-colors text-left relative overflow-hidden bg-white text-zinc-950"
     >
       {/* ── Inner Hero & Rotating Wheel ────────────────────────────────────── */}
-      <section className="pt-44 sm:pt-60 pb-0 px-6 max-w-5xl mx-auto text-zinc-950 dark:text-[#f9f4eb] relative">
+      <section className="pt-44 sm:pt-60 pb-0 px-6 max-w-5xl mx-auto text-zinc-950 relative">
         
         {/* Rotating wheel of cards — masked so only top arc shows */}
         <div
@@ -172,7 +172,7 @@ export function BespokeSection() {
               >
                 <img
                   alt="stamp card"
-                  className="w-[84px] sm:w-[106px] object-contain drop-shadow-xl select-none pointer-events-none dark:invert"
+                  className="w-[84px] sm:w-[106px] object-contain drop-shadow-xl select-none pointer-events-none"
                   src={WHEEL_IMGS[i % WHEEL_IMGS.length]}
                   loading="lazy"
                 />
@@ -190,7 +190,7 @@ export function BespokeSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="flex justify-center items-center -space-x-1 mb-8 text-zinc-950 dark:text-[#f9f4eb] scale-125"
+            className="flex justify-center items-center -space-x-1 mb-8 text-zinc-950 scale-125"
           >
             <PixelDiamond className="w-8 h-8 -mr-2" />
             <PixelDiamond className="w-8 h-8 -mt-6" />
@@ -225,10 +225,10 @@ export function BespokeSection() {
           variants={fadeInReveal}
           className="text-center max-w-xl mx-auto"
         >
-          <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white mb-2 text-balance">
+          <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-zinc-900 mb-2 text-balance">
             Membership Plans
           </h3>
-          <p className="text-sm text-zinc-500 dark:text-zinc-400 text-pretty">
+          <p className="text-sm text-zinc-500 text-pretty">
             Become part of a highly skilled creative community. Flexible plans to elevate your production speed.
           </p>
         </motion.div>
@@ -255,8 +255,8 @@ export function BespokeSection() {
               }}
               className={`rounded-[2.5rem] p-8 flex flex-col justify-between relative overflow-hidden border ${
                 plan.highlight
-                  ? "bg-zinc-900/5 dark:bg-blue-950/10 border-blue-300 dark:border-blue-900/50"
-                  : "bg-zinc-50 dark:bg-zinc-900/30 border-zinc-200 dark:border-zinc-800"
+                  ? "bg-zinc-900/5 border-blue-300"
+                  : "bg-zinc-50 border-zinc-200"
               }`}
             >
               {/* Best value badge */}
@@ -273,28 +273,28 @@ export function BespokeSection() {
                 </div>
 
                 {/* Plan name */}
-                <h4 className="text-2xl font-bold text-zinc-900 dark:text-white mb-1">
+                <h4 className="text-2xl font-bold text-zinc-900 mb-1">
                   {plan.name}
                 </h4>
 
                 {/* Price */}
                 <div className="flex items-baseline gap-1.5 mt-4 mb-6">
-                  <span className="text-4xl font-bold text-zinc-900 dark:text-white tabular-nums">
+                  <span className="text-4xl font-bold text-zinc-900 tabular-nums">
                     {plan.price}
                   </span>
                   {plan.priceUnit && (
-                    <span className="text-sm text-zinc-500 dark:text-zinc-400">
+                    <span className="text-sm text-zinc-500">
                       {plan.priceUnit}
                     </span>
                   )}
                 </div>
 
                 {/* Feature list */}
-                <ul className="space-y-3.5 border-t border-zinc-200 dark:border-zinc-800 pt-6">
+                <ul className="space-y-3.5 border-t border-zinc-200 pt-6">
                   {plan.features.map((feat, fIdx) => (
-                    <li key={fIdx} className="flex items-center gap-3 text-sm text-zinc-650 dark:text-zinc-300">
+                    <li key={fIdx} className="flex items-center gap-3 text-sm text-zinc-600">
                       <CheckIcon />
-                      <span className={plan.highlight && feat.includes("source") ? "font-semibold text-zinc-850 dark:text-white" : ""}>
+                      <span className={plan.highlight && feat.includes("source") ? "font-semibold text-zinc-900" : ""}>
                         {feat}
                       </span>
                     </li>
@@ -309,7 +309,7 @@ export function BespokeSection() {
                   className={`w-full h-12 rounded-xl font-semibold flex items-center justify-center text-sm transition-[background-color,transform] duration-200 active:scale-[0.96] ${
                     plan.highlight
                       ? "bg-blue-500 text-white hover:bg-blue-600 shadow-sm shadow-blue-500/10"
-                      : "bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200"
+                      : "bg-zinc-900 text-white hover:bg-zinc-800"
                   }`}
                 >
                   {plan.cta}
