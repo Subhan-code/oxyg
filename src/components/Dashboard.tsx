@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import { Search, Bookmark, Globe, Bell, Sparkles, ArrowUpRight } from "lucide-react";
@@ -32,6 +32,11 @@ export function Dashboard() {
   const [showOnlyBookmarks, setShowOnlyBookmarks] = useState(false);
   const [bookmarks, setBookmarks] = useState<string[]>([]);
   const [showToast, setShowToast] = useState<string | null>(null);
+
+  // Scroll to top on mount
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, []);
 
   const triggerToast = (msg: string) => {
     setShowToast(msg);
@@ -91,82 +96,16 @@ export function Dashboard() {
   // Total components count
   const totalCount = filteredCategories.reduce((acc, cat) => acc + cat.items.length, 0);
 
-  // Custom visual representation for components that don't have video
+  // Custom visual representation for components
   const renderCardPlaceholder = (name: string) => {
-    if (name === "signature") {
-      return (
-        <div className="flex items-center justify-center size-full bg-zinc-950 select-none">
-          <div className="flex items-center gap-1.5 text-xs text-zinc-650 font-medium">
-            <span className="size-1.5 rounded-full bg-zinc-700 animate-pulse"></span>
-            <span>Mini Preview</span>
-          </div>
-        </div>
-      );
-    }
-    if (name === "progressive-blur") {
-      return (
-        <div className="relative w-full h-full bg-zinc-950 overflow-hidden flex flex-col items-center justify-center select-none font-mono text-[9px] text-zinc-700">
-          <div className="space-y-1 text-center">
-            <div>BLUR TOP</div>
-            <div>↓↓↓</div>
-            <div>BLUR BOTTOM</div>
-          </div>
-          <div className="absolute top-0 inset-x-0 h-8 bg-zinc-950/85 backdrop-blur-[2px]" />
-          <div className="absolute bottom-0 inset-x-0 h-8 bg-zinc-950/85 backdrop-blur-[2px]" />
-        </div>
-      );
-    }
-    if (name === "animated-beam") {
-      return (
-        <div className="relative w-full h-full bg-zinc-950 flex items-center justify-center gap-14 overflow-hidden select-none">
-          <div className="size-8 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center z-10">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-3.5 text-zinc-400"><path d="M12 19h8"></path><path d="m4 17 6-6-6-6"></path></svg>
-          </div>
-          <div className="absolute w-16 h-[1.5px] bg-zinc-800" />
-          <div className="absolute w-8 h-[1.5px] bg-sky-500/50 -translate-x-6 animate-pulse" />
-          <div className="size-8 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center z-10">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-3.5 text-zinc-400"><path d="m16 18 6-6-6-6"></path><path d="m8 6-6 6 6 6"></path></svg>
-          </div>
-        </div>
-      );
-    }
-    if (name === "calligraph") {
-      return (
-        <div className="flex flex-col items-center justify-center size-full bg-zinc-950 font-sans select-none leading-none">
-          <span className="text-3xl font-extrabold text-white tracking-tighter">22,008</span>
-          <span className="text-[9px] uppercase tracking-widest text-zinc-650 font-mono mt-1">calligraph ticks</span>
-        </div>
-      );
-    }
-    if (name === "scroll-image-text-reveal") {
-      return (
-        <div className="flex items-center justify-center size-full bg-zinc-950 px-6 text-center text-xs font-medium text-zinc-400 leading-relaxed select-none">
-          <div className="flex items-center gap-1.5 border border-zinc-850 bg-zinc-900/50 rounded-full px-3 py-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-3 text-sky-400"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path><path d="M20 2v4"></path><path d="M22 4h-4"></path><circle cx="4" cy="20" r="2"></circle></svg>
-            <span>Inline media reveals on scroll</span>
-          </div>
-        </div>
-      );
-    }
-    if (name === "scroll-velocity-marquee") {
-      return (
-        <div className="w-full h-full bg-zinc-950 flex flex-col justify-center gap-3 overflow-hidden border border-zinc-900 select-none">
-          <div className="flex whitespace-nowrap font-mono text-[9px] uppercase tracking-widest text-zinc-500 animate-pulse">
-            <span className="mr-8">LIGHTNING SPEED • HIGH MOTION • DESIGN SYSTEM •</span>
-          </div>
-          <div className="flex whitespace-nowrap font-mono text-[9px] uppercase tracking-widest text-zinc-650 animate-pulse">
-            <span className="mr-8">OXYGEN UI • EXTREME SPRING • HARD SHIP •</span>
-          </div>
-        </div>
-      );
-    }
-
     return (
-      <div className="flex items-center justify-center size-full bg-zinc-950 select-none border border-zinc-900">
-        <div className="flex flex-col items-center gap-2">
-          <Sparkles className="w-5 h-5 text-zinc-700 animate-pulse" />
-          <span className="text-[10px] font-mono text-zinc-650 uppercase tracking-widest">Interactive primitives</span>
+      <div className="w-full h-full relative bg-[#0a0a0c] flex items-center justify-center flex-col gap-3 group">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.02)_0%,transparent_100%)] pointer-events-none" />
+        <div className="w-10 h-10 rounded-[10px] bg-white/[0.03] border border-white/[0.05] flex items-center justify-center group-hover:bg-white/[0.06] transition-colors relative z-10 shadow-sm">
+          <Sparkles className="w-4 h-4 text-zinc-500 group-hover:text-zinc-300 transition-colors" />
         </div>
+        <span className="text-[10px] font-mono text-zinc-600 group-hover:text-zinc-400 transition-colors uppercase tracking-widest relative z-10">{name.replace(/-/g, ' ')}</span>
+        <div className="absolute inset-0 ring-1 ring-inset ring-white/[0.03] rounded-[12px] md:rounded-[20px] pointer-events-none" />
       </div>
     );
   };
@@ -309,11 +248,11 @@ export function Dashboard() {
               </div>
 
               {/* Title */}
-              <h1 className="text-4xl md:text-[64px] lg:text-[72px] whitespace-nowrap text-center font-black tracking-tighter leading-none text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.25)]">
-                For builders with high standards.
+              <h1 className="text-4xl md:text-[64px] lg:text-[72px] whitespace-nowrap text-center font-black tracking-tighter leading-none text-white">
+                Component Library
               </h1>
               <span className="block font-medium md:text-lg sm:text-base text-sm text-center mt-4 text-zinc-400 max-w-xl text-balance">
-                Explore premium {activeTab === "Apps" ? "Mobile App components" : "Website Primtives"} engineered with high performance spring physics.
+                High-performance primitives built for modern web experiences.
               </span>
             </div>
 
@@ -407,18 +346,7 @@ export function Dashboard() {
                               
                               {/* Scale preview container on hover */}
                               <div className="absolute inset-0 size-full overflow-hidden rounded-[18px] transition-transform duration-700 ease-[cubic-bezier(0.2,1,0.2,1)] group-hover/link:scale-[1.025]">
-                                {item.video ? (
-                                  <video 
-                                    src={item.video} 
-                                    loop 
-                                    muted 
-                                    playsInline 
-                                    autoPlay 
-                                    className="absolute inset-0 size-full object-cover" 
-                                  />
-                                ) : (
-                                  renderCardPlaceholder(item.name)
-                                )}
+                                {renderCardPlaceholder(item.name)}
                               </div>
 
                               {/* Save Bookmark button */}
