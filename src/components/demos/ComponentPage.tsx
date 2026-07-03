@@ -524,6 +524,7 @@ export default function ComponentPage() {
     return files[0].key;
   });
   const [isCodeExpanded, setIsCodeExpanded] = useState<boolean>(false);
+  const [isUsageExpanded, setIsUsageExpanded] = useState<boolean>(false);
   const [codeSearchQuery, setCodeSearchQuery] = useState<string>('');
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -568,6 +569,7 @@ export default function ComponentPage() {
     ];
     setActiveCodeTab(files[0].key);
     setIsCodeExpanded(false);
+    setIsUsageExpanded(false);
     setCodeSearchQuery('');
     setComponentSettings(getInitialSettingsForComponent(name));
   }, [name]);
@@ -605,6 +607,27 @@ export default function ComponentPage() {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isSidebarOpen]);
+
+  // Mobile Swipe Gestures
+  useEffect(() => {
+    let touchStartX = 0;
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartX = e.changedTouches[0].screenX;
+    };
+    const handleTouchEnd = (e: TouchEvent) => {
+      const touchEndX = e.changedTouches[0].screenX;
+      // Swipe right from the left edge (within 40px) opens sidebar
+      if (touchEndX - touchStartX > 80 && touchStartX < 40 && !isSidebarOpen) {
+        setIsSidebarOpen(true);
+      }
+    };
+    window.addEventListener('touchstart', handleTouchStart);
+    window.addEventListener('touchend', handleTouchEnd);
+    return () => {
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchend', handleTouchEnd);
     };
   }, [isSidebarOpen]);
 
@@ -1569,6 +1592,14 @@ export default function ComponentPage() {
             animate={{ width: "auto", opacity: 1 }}
             exit={{ width: 0, opacity: 0 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            drag={window.innerWidth < 768 ? "x" : false}
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0}
+            onDragEnd={(e, { offset, velocity }) => {
+              if (window.innerWidth < 768 && (offset.x < -50 || velocity.x < -20)) {
+                setIsSidebarOpen(false);
+              }
+            }}
             className="shrink-0 h-full overflow-hidden md:relative absolute z-50 bg-background shadow-xl md:shadow-none"
           >
             <Sidebar001 defaultWidth={280} minWidth={200} maxWidth={400} className="border-none w-[280px] md:w-auto md:min-w-[200px]" data-lenis-prevent>
@@ -1853,11 +1884,11 @@ export default function ComponentPage() {
 
                     {/* Code Container */}
                     <div 
-                      className={`relative overflow-x-auto transition-all duration-300 ${
-                        isCodeExpanded ? "max-h-[1000px]" : "max-h-[420px]"
+                      className={`relative overflow-hidden transition-all duration-500 ${
+                        isCodeExpanded ? "max-h-[5000px]" : "max-h-[320px]"
                       }`}
                     >
-                      <div className="p-4 font-mono text-[12.5px] leading-[1.7] select-text">
+                      <div className="p-4 font-mono text-[12.5px] leading-[1.7] select-text overflow-x-auto no-scrollbar pb-16">
                         {highlightedLines.map((lineHtml, i) => {
                           const lineNum = i + 1;
                           const isMatch = codeSearchQuery && lineHtml.toLowerCase().includes(codeSearchQuery.toLowerCase());
@@ -1884,21 +1915,24 @@ export default function ComponentPage() {
                       </div>
 
                       {/* Height Fade Overlay */}
+                      {!isCodeExpanded && (
+                        <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-transparent pointer-events-none" />
+                      )}
                     </div>
 
                     {/* Show More / Show Less Toggle Bar */}
-                    <div className="border-t border-zinc-800/80 bg-zinc-900/40 p-2 flex justify-center">
+                    <div className="border-t border-zinc-800/80 bg-zinc-900/40 p-3 flex justify-center relative z-10 shadow-[0_-10px_20px_rgba(0,0,0,0.1)]">
                       <button
                         onClick={() => setIsCodeExpanded(!isCodeExpanded)}
-                        className="flex items-center gap-1.5 text-xs text-zinc-400 hover:text-zinc-100 font-medium py-1 px-3 rounded-lg hover:bg-zinc-800 transition-colors"
+                        className="flex items-center gap-2 text-[13px] text-zinc-300 hover:text-white font-medium py-1.5 px-4 rounded-full border border-zinc-700/50 hover:border-zinc-500 bg-zinc-800/50 hover:bg-zinc-700 transition-all shadow-sm group backdrop-blur-sm cursor-pointer"
                       >
                         {isCodeExpanded ? (
                           <>
-                            <ChevronUp className="size-3.5" /> Show Less
+                            <ChevronUp className="size-3.5 group-hover:-translate-y-0.5 transition-transform" /> Show Less
                           </>
                         ) : (
                           <>
-                            <ChevronDown className="size-3.5" /> Show More ({highlightedLines.length} lines)
+                            <ChevronDown className="size-3.5 group-hover:translate-y-0.5 transition-transform" /> Expand code ({highlightedLines.length} lines)
                           </>
                         )}
                       </button>
@@ -1919,24 +1953,59 @@ export default function ComponentPage() {
                     <div className="flex items-center gap-2 opacity-60">
                       <span className="text-sm font-medium">page.tsx</span>
                     </div>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <button
-                          onClick={copyCode}
-                          className="size-7 flex items-center justify-center rounded-md hover:bg-foreground/5 text-muted-foreground hover:text-foreground transition-colors -mr-1"
-                        >
-                          {codeCopied ? <span className="text-xs font-medium text-green-500">Copied</span> : <Copy className="size-3.5" />}
-                        </button>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>Copy code</p>
-                      </TooltipContent>
-                    </Tooltip>
+                <div className="rounded-xl border border-border/60 overflow-hidden flex flex-col bg-zinc-950 text-zinc-100 shadow-xl">
+                    <div className="flex items-center justify-between px-4 h-12 border-b border-zinc-800/80 bg-zinc-900/60 backdrop-blur-md">
+                      <div className="flex items-center gap-2 opacity-60 text-zinc-300">
+                        <Code className="size-3.5" />
+                        <span className="text-sm font-medium">page.tsx</span>
+                      </div>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <button
+                            onClick={copyCode}
+                            className="size-8 flex items-center justify-center rounded-lg hover:bg-zinc-800 text-zinc-400 hover:text-zinc-100 transition-colors cursor-pointer -mr-1"
+                          >
+                            {codeCopied ? <span className="text-[10px] font-medium text-green-500">Copied</span> : <Copy className="size-3.5" />}
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Copy code</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </div>
+                    <div 
+                      className={`relative overflow-hidden transition-all duration-500 ${
+                        isUsageExpanded ? "max-h-[3000px]" : "max-h-[220px]"
+                      }`}
+                    >
+                      <div className="p-4 overflow-x-auto no-scrollbar pb-16">
+                        <pre className="text-[13px] leading-[1.7] font-mono whitespace-pre-wrap"><code dangerouslySetInnerHTML={{ __html: codeExample.replace(/([A-Z][a-zA-Z0-9_]+)\b/g, '<span class="text-amber-200">$1</span>').replace(/from/g, '<span class="text-rose-400">from</span>').replace(/import/g, '<span class="text-rose-400">import</span>').replace(/export/g, '<span class="text-rose-400">export</span>').replace(/default/g, '<span class="text-rose-400">default</span>').replace(/function/g, '<span class="text-rose-400">function</span>').replace(/return/g, '<span class="text-rose-400">return</span>').replace(/"([^"]*)"/g, '<span class="text-blue-300">"$1"</span>') }} /></pre>
+                      </div>
+                      
+                      {/* Height Fade Overlay */}
+                      {!isUsageExpanded && (
+                        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-transparent pointer-events-none" />
+                      )}
+                    </div>
+                    
+                    {/* Show More / Show Less Toggle Bar */}
+                    <div className="border-t border-zinc-800/80 bg-zinc-900/40 p-3 flex justify-center relative z-10 shadow-[0_-10px_20px_rgba(0,0,0,0.1)]">
+                      <button
+                        onClick={() => setIsUsageExpanded(!isUsageExpanded)}
+                        className="flex items-center gap-2 text-[13px] text-zinc-300 hover:text-white font-medium py-1.5 px-4 rounded-full border border-zinc-700/50 hover:border-zinc-500 bg-zinc-800/50 hover:bg-zinc-700 transition-all shadow-sm group backdrop-blur-sm cursor-pointer"
+                      >
+                        {isUsageExpanded ? (
+                          <>
+                            <ChevronUp className="size-3.5 group-hover:-translate-y-0.5 transition-transform" /> Show Less
+                          </>
+                        ) : (
+                          <>
+                            <ChevronDown className="size-3.5 group-hover:translate-y-0.5 transition-transform" /> Expand code
+                          </>
+                        )}
+                      </button>
+                    </div>
                   </div>
-                  <div className="p-4 bg-background overflow-x-auto">
-                    <pre className="text-[13px] leading-[1.6] text-foreground font-mono whitespace-pre-wrap"><code dangerouslySetInnerHTML={{ __html: codeExample.replace(/([A-Z][a-zA-Z0-9_]+)\b/g, '<span class="text-amber-200">$1</span>').replace(/from/g, '<span class="text-rose-400">from</span>').replace(/import/g, '<span class="text-rose-400">import</span>').replace(/export/g, '<span class="text-rose-400">export</span>').replace(/default/g, '<span class="text-rose-400">default</span>').replace(/function/g, '<span class="text-rose-400">function</span>').replace(/return/g, '<span class="text-rose-400">return</span>').replace(/"([^"]*)"/g, '<span class="text-blue-300">"$1"</span>') }} /></pre>
-                  </div>
-                </div>
               </motion.div>
 
               <motion.div

@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { Search, Bookmark, Globe, Bell, Sparkles, ArrowUpRight } from "lucide-react";
 import logoUrl from "../assets/oxygen-ui-logo.png";
 import { categories } from "../data";
+import { Footer } from "./Footer";
 
 // Badges list for the Intro section
 const TECH_BADGES = [
@@ -107,6 +108,19 @@ export function Dashboard() {
 
   // Total components count
   const totalCount = filteredCategories.reduce((acc, cat) => acc + cat.items.length, 0);
+
+  const allExpanded = filteredCategories.every(cat => expandedCategories[cat.slug]);
+  const toggleAllCategories = () => {
+    if (allExpanded) {
+      setExpandedCategories({});
+    } else {
+      const newExpanded: Record<string, boolean> = {};
+      filteredCategories.forEach(cat => {
+        newExpanded[cat.slug] = true;
+      });
+      setExpandedCategories(newExpanded);
+    }
+  };
 
   // Custom visual representation for components
   const renderCardPlaceholder = (name: string) => {
@@ -269,8 +283,9 @@ export function Dashboard() {
             </div>
 
             {/* Sub Filter Row */}
-            <div className="flex flex-col sm:flex-row items-center gap-4 max-w-3xl mx-auto w-full">
-              {/* Mobile Search input */}
+            <div className="flex flex-col gap-4 w-full">
+              <div className="flex flex-col sm:flex-row items-center gap-4 max-w-3xl mx-auto w-full">
+                {/* Mobile Search input */}
               <div className="relative w-full md:hidden">
                 <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4.5 text-zinc-500 pointer-events-none" />
                 <input 
@@ -318,13 +333,73 @@ export function Dashboard() {
                 </div>
 
               </div>
+
+              {/* Category Pills and Expand Toggle */}
+              <div className="flex items-center gap-3 w-full max-w-5xl mx-auto px-4 mt-2 justify-between">
+                
+                {/* Expand / Collapse All */}
+                <button
+                  onClick={toggleAllCategories}
+                  className="shrink-0 flex items-center gap-2 px-3 py-2 h-10 rounded-xl bg-zinc-100 border border-zinc-200 text-xs font-semibold text-zinc-600 hover:text-black hover:bg-zinc-200 transition-colors cursor-pointer"
+                >
+                  {allExpanded ? (
+                    <>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="rotate-0 transition-transform"><path d="m18 15-6-6-6 6"/></svg>
+                      Collapse All
+                    </>
+                  ) : (
+                    <>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="rotate-0 transition-transform"><path d="m6 9 6 6 6-6"/></svg>
+                      Expand All
+                    </>
+                  )}
+                </button>
+
+                {/* Horizontal Scrollable Category Families */}
+                <div className="relative flex flex-1 items-center h-10 p-1 rounded-xl bg-zinc-100 border border-zinc-200 select-none overflow-hidden group">
+                  {/* Left fade out */}
+                  <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-zinc-100 to-transparent pointer-events-none z-10 hidden sm:block opacity-0 group-hover:opacity-100 transition-opacity" />
+                  
+                  <div className="flex items-center gap-1 overflow-x-auto px-1 w-full no-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                    <style>{`
+                      .no-scrollbar::-webkit-scrollbar {
+                        display: none;
+                      }
+                    `}</style>
+                    {filteredCategories.map((cat) => (
+                      <button
+                        key={cat.slug}
+                        type="button"
+                        onClick={() => {
+                          const el = document.getElementById(cat.slug);
+                          if (el) {
+                            setExpandedCategories(prev => ({ ...prev, [cat.slug]: true }));
+                            setTimeout(() => {
+                              // adjust for fixed header (approx 120px)
+                              const y = el.getBoundingClientRect().top + window.scrollY - 120;
+                              window.scrollTo({ top: y, behavior: 'smooth' });
+                            }, 50);
+                          }
+                        }}
+                        className="relative px-3 py-1.5 text-[11px] md:text-xs font-medium rounded-lg transition-all duration-150 cursor-pointer text-zinc-600 hover:text-black hover:bg-zinc-200/60 whitespace-nowrap"
+                      >
+                        {cat.title}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Right fade out */}
+                  <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-zinc-100 to-transparent pointer-events-none z-10 hidden sm:block opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+              </div>
+
             </div>
           </div>
 
           {/* Grid Category Listing Sections */}
-          <div className="flex flex-col gap-20 mt-4 w-full">
+          <div className="flex flex-col gap-10 mt-4 w-full">
             {filteredCategories.map((cat) => {
-              const isExpanded = expandedCategories[cat.slug] !== false;
+              const isExpanded = expandedCategories[cat.slug] === true;
               return (
                 <section key={cat.slug} id={cat.slug} className="flex flex-col w-full border-t border-zinc-200 pt-10">
                   
@@ -452,6 +527,11 @@ export function Dashboard() {
           </div>
 
         </div>
+      </div>
+      
+      {/* Footer */}
+      <div className="w-full bg-white mt-20 border-t border-neutral-200">
+        <Footer />
       </div>
     </div>
   );
