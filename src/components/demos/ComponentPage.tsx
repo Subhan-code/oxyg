@@ -1948,11 +1948,6 @@ export default function ComponentPage() {
                 transition={{ delay: 0.5 }}
               >
                 <h2 className="text-2xl font-medium tracking-tight mb-4">Usage</h2>
-                <div className="rounded-xl border border-border/60 overflow-hidden">
-                  <div className="flex items-center justify-between px-4 h-11 border-b border-border/60 bg-transparent">
-                    <div className="flex items-center gap-2 opacity-60">
-                      <span className="text-sm font-medium">page.tsx</span>
-                    </div>
                 <div className="rounded-xl border border-border/60 overflow-hidden flex flex-col bg-zinc-950 text-zinc-100 shadow-xl">
                     <div className="flex items-center justify-between px-4 h-12 border-b border-zinc-800/80 bg-zinc-900/60 backdrop-blur-md">
                       <div className="flex items-center gap-2 opacity-60 text-zinc-300">

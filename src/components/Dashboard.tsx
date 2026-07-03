@@ -395,6 +395,7 @@ export function Dashboard() {
 
             </div>
           </div>
+        </div>
 
           {/* Grid Category Listing Sections */}
           <div className="flex flex-col gap-10 mt-4 w-full">
