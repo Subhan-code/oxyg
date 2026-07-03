@@ -54,10 +54,10 @@ export function Login() {
   };
 
   return (
-    <div className="h-screen w-full flex bg-[#121212] text-white overflow-hidden font-sans select-none relative z-50">
+    <div className="h-screen w-full flex bg-white text-black overflow-hidden font-sans select-none relative z-50">
       
       {/* 1. Left Side: Clean Dark Login Form (Main Part) */}
-      <div className="w-full lg:w-[45%] flex flex-col justify-center items-center p-8 bg-[#121212] h-full shrink-0">
+      <div className="w-full lg:w-[45%] flex flex-col justify-center items-center p-8 bg-white h-full shrink-0">
         
         {/* Form Container */}
         <div className="max-w-[340px] w-full flex flex-col justify-center gap-6 py-4 text-center">
@@ -68,7 +68,7 @@ export function Login() {
           </a>
 
           {/* Centered Title */}
-          <h1 className="text-3xl font-[700] text-white tracking-tight leading-none mb-1 select-none text-balance">
+          <h1 className="text-3xl font-[700] text-black tracking-tight leading-none mb-1 select-none text-balance">
             Welcome back
           </h1>
 
@@ -78,7 +78,7 @@ export function Login() {
             <button 
               onClick={() => handleProviderLogin("google")}
               disabled={isSubmitting}
-              className="flex h-11 w-full items-center justify-center gap-2.5 rounded-full border border-neutral-800 bg-transparent hover:bg-white/[0.04] text-[14px] font-semibold text-white transition-[background-color,transform] active:scale-[0.96] cursor-pointer disabled:opacity-50"
+              className="flex h-11 w-full items-center justify-center gap-2.5 rounded-full border border-neutral-200 bg-transparent hover:bg-black/[0.04] text-[14px] font-semibold text-black transition-[background-color,transform] active:scale-[0.96] cursor-pointer disabled:opacity-50"
             >
               {isSubmitting && submitType === "google" ? (
                 <span className="w-4 h-4 rounded-full border-2 border-white/20 border-t-white animate-spin" />
@@ -102,7 +102,7 @@ export function Login() {
                   exit={{ opacity: 0, y: -5 }}
                   transition={{ duration: 0.15 }}
                   onClick={() => setShowOtherOptions(true)}
-                  className="flex h-11 w-full items-center justify-center rounded-full border border-neutral-800 bg-transparent hover:bg-white/[0.04] text-[14px] font-semibold text-white transition-[background-color,transform] active:scale-[0.96] cursor-pointer"
+                  className="flex h-11 w-full items-center justify-center rounded-full border border-neutral-200 bg-transparent hover:bg-black/[0.04] text-[14px] font-semibold text-black transition-[background-color,transform] active:scale-[0.96] cursor-pointer"
                 >
                   <span>See other options</span>
                 </motion.button>
@@ -119,7 +119,7 @@ export function Login() {
                   <button 
                     onClick={() => handleProviderLogin("facebook")}
                     disabled={isSubmitting}
-                    className="flex h-11 w-full items-center justify-center rounded-full border border-neutral-800 bg-transparent hover:bg-white/[0.04] text-white transition-[background-color,transform] active:scale-[0.96] cursor-pointer disabled:opacity-50"
+                    className="flex h-11 w-full items-center justify-center rounded-full border border-neutral-200 bg-transparent hover:bg-black/[0.04] text-black transition-[background-color,transform] active:scale-[0.96] cursor-pointer disabled:opacity-50"
                   >
                     {isSubmitting && submitType === "facebook" ? (
                       <span className="w-4 h-4 rounded-full border-2 border-white/20 border-t-white animate-spin" />
@@ -135,12 +135,12 @@ export function Login() {
                   <button 
                     onClick={() => handleProviderLogin("x")}
                     disabled={isSubmitting}
-                    className="flex h-11 w-full items-center justify-center rounded-full border border-neutral-800 bg-transparent hover:bg-white/[0.04] text-white transition-[background-color,transform] active:scale-[0.96] cursor-pointer disabled:opacity-50"
+                    className="flex h-11 w-full items-center justify-center rounded-full border border-neutral-200 bg-transparent hover:bg-black/[0.04] text-black transition-[background-color,transform] active:scale-[0.96] cursor-pointer disabled:opacity-50"
                   >
                     {isSubmitting && submitType === "x" ? (
                       <span className="w-4 h-4 rounded-full border-2 border-white/20 border-t-white animate-spin" />
                     ) : (
-                      <svg className="w-4 h-4 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <svg className="w-4 h-4 fill-black" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                       </svg>
                     )}
@@ -153,9 +153,9 @@ export function Login() {
           {/* Divider */}
           <div className="relative flex items-center justify-center h-4 my-1">
             <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t border-neutral-800/80"></span>
+              <span className="w-full border-t border-neutral-200"></span>
             </div>
-            <span className="relative z-10 px-4 text-xs font-semibold text-gray-500 bg-[#121212] select-none">or</span>
+            <span className="relative z-10 px-4 text-xs font-semibold text-gray-500 bg-white select-none">or</span>
           </div>
 
           {/* Input form */}
@@ -167,13 +167,13 @@ export function Login() {
               placeholder="Enter email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="h-12 w-full px-5 rounded-2xl border border-neutral-800 bg-transparent focus:bg-[#161616]/30 focus:border-white focus:ring-1 focus:ring-white outline-none transition-[border-color,background-color] text-[15px] text-white placeholder-gray-600 text-left disabled:opacity-50"
+              className="h-12 w-full px-5 rounded-2xl border border-neutral-200 bg-transparent focus:bg-neutral-50 focus:border-black focus:ring-1 focus:ring-black outline-none transition-[border-color,background-color] text-[15px] text-black placeholder-gray-400 text-left disabled:opacity-50"
             />
 
             <button
               type="submit"
               disabled={isSubmitting || !email}
-              className="flex h-12 w-full items-center justify-center rounded-full bg-white text-black text-[15px] font-bold transition-[background-color,transform] hover:bg-neutral-100 active:scale-[0.96] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer mt-1"
+              className="flex h-12 w-full items-center justify-center rounded-full bg-black text-white text-[15px] font-bold transition-[background-color,transform] hover:bg-neutral-800 active:scale-[0.96] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer mt-1"
             >
               {isSubmitting && submitType === "email" ? (
                 <span className="w-4 h-4 rounded-full border-2 border-neutral-950/20 border-t-neutral-950 animate-spin" />
@@ -186,9 +186,9 @@ export function Login() {
           {/* Footer Text */}
           <p className="text-[11px] text-gray-500 text-center leading-normal font-medium mt-1 select-none text-pretty">
             By continuing, you agree to Mobbin’s{" "}
-            <a href="#/" className="text-gray-400 hover:text-white transition-colors underline decoration-white/20">Terms of Service</a>
+            <a href="#/" className="text-gray-600 hover:text-black transition-colors underline decoration-black/20">Terms of Service</a>
             {" "}and{" "}
-            <a href="#/" className="text-gray-400 hover:text-white transition-colors underline decoration-white/20">Privacy Policy</a>.
+            <a href="#/" className="text-gray-600 hover:text-black transition-colors underline decoration-black/20">Privacy Policy</a>.
           </p>
 
         </div>
@@ -196,13 +196,13 @@ export function Login() {
       </div>
 
       {/* 2. Right Side: Signature Mobbin scrolling columns (Demo Part) */}
-      <div className="hidden lg:flex w-[55%] relative overflow-hidden bg-neutral-950/80 border-l border-white/5 h-full">
+      <div className="hidden lg:flex w-[55%] relative overflow-hidden bg-neutral-50 border-l border-black/5 h-full">
         {/* Radial Dark overlay */}
-        <div className="absolute inset-0 bg-radial-[circle_at_center] from-transparent via-[#121212]/40 to-[#121212] z-20 pointer-events-none" />
+        <div className="absolute inset-0 bg-radial-[circle_at_center] from-transparent via-white/40 to-white z-20 pointer-events-none" />
         
         {/* Absolute vertical gradients to fade top and bottom */}
-        <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-[#121212] to-transparent z-20 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-[#121212] to-transparent z-20 pointer-events-none" />
+        <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-white to-transparent z-20 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-white to-transparent z-20 pointer-events-none" />
 
         {/* 3 scrolling columns of app screenshots */}
         <div className="grid grid-cols-3 gap-6 px-8 py-12 w-full h-full justify-center opacity-70">
