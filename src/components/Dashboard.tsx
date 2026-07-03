@@ -99,9 +99,9 @@ export function Dashboard() {
   // Custom visual representation for components
   const renderCardPlaceholder = (name: string) => {
     return (
-      <div className="w-full h-full relative bg-[#0a0a0c] flex items-center justify-center flex-col gap-3 group">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.02)_0%,transparent_100%)] pointer-events-none" />
-        <div className="w-10 h-10 rounded-[10px] bg-white/[0.03] border border-white/[0.05] flex items-center justify-center group-hover:bg-white/[0.06] transition-colors relative z-10 shadow-sm">
+      <div className="w-full h-full relative bg-neutral-100 flex items-center justify-center flex-col gap-3 group">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.02)_0%,transparent_100%)] pointer-events-none" />
+        <div className="w-10 h-10 rounded-[10px] bg-black/[0.03] border border-black/[0.05] flex items-center justify-center group-hover:bg-black/[0.06] transition-colors relative z-10 shadow-sm">
           <Sparkles className="w-4 h-4 text-zinc-500 group-hover:text-zinc-300 transition-colors" />
         </div>
         <span className="text-[10px] font-mono text-zinc-600 group-hover:text-zinc-400 transition-colors uppercase tracking-widest relative z-10">{name.replace(/-/g, ' ')}</span>
@@ -111,7 +111,7 @@ export function Dashboard() {
   };
 
   return (
-    <div className="bg-[#000000] text-white min-h-[100dvh] pb-32 font-sans select-none flex flex-col">
+    <div className="bg-white text-black min-h-[100dvh] pb-32 font-sans select-none flex flex-col">
       
       {/* Dynamic Action Toast */}
       <AnimatePresence>
@@ -129,7 +129,7 @@ export function Dashboard() {
       </AnimatePresence>
 
       {/* 1. Header Navigation Bar (Restored starting local navbar) */}
-      <header className="sticky top-0 z-40 bg-[#000000]/95 backdrop-blur-md border-b border-white/[0.04] px-6 h-16 flex justify-center w-full">
+      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-200 px-6 h-16 flex justify-center w-full">
         <div className="max-w-[1400px] w-full flex items-center justify-between">
           
           {/* Left Logo branding & Navigation Tabs */}
@@ -145,7 +145,7 @@ export function Dashboard() {
                   setActiveTab("Apps");
                   triggerToast("Browsing Mobile Apps");
                 }}
-                className={`transition-[color,transform] active:scale-[0.96] cursor-pointer ${activeTab === "Apps" ? "text-white" : "text-gray-500 hover:text-white"}`}
+                className={`transition-[color,transform] active:scale-[0.96] cursor-pointer ${activeTab === "Apps" ? "text-black" : "text-gray-500 hover:text-black"}`}
               >
                 Apps
               </button>
@@ -154,7 +154,7 @@ export function Dashboard() {
                   setActiveTab("Sites");
                   triggerToast("Browsing Websites");
                 }}
-                className={`transition-[color,transform] active:scale-[0.96] cursor-pointer ${activeTab === "Sites" ? "text-white" : "text-gray-500 hover:text-white"}`}
+                className={`transition-[color,transform] active:scale-[0.96] cursor-pointer ${activeTab === "Sites" ? "text-black" : "text-gray-500 hover:text-black"}`}
               >
                 Sites
               </button>
@@ -169,7 +169,7 @@ export function Dashboard() {
               placeholder="Search..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full h-10 pl-11 pr-4 rounded-full bg-[#0d0d0f] text-sm placeholder-gray-500 text-white focus:outline-none focus:ring-1 focus:ring-white/20 transition-all border border-white/[0.02]"
+              className="w-full h-10 pl-11 pr-4 rounded-full bg-neutral-100 text-sm placeholder-gray-500 text-black focus:outline-none focus:ring-1 focus:ring-black/20 transition-all border border-neutral-200"
             />
           </div>
 
@@ -185,7 +185,7 @@ export function Dashboard() {
                 }}
                 whileHover={{ scale: 1.15 }}
                 className={`transition-colors p-1 cursor-pointer ${
-                  showOnlyBookmarks ? "text-red-500" : "text-gray-400 hover:text-white"
+                  showOnlyBookmarks ? "text-red-500" : "text-gray-400 hover:text-black"
                 }`}
               >
                 <motion.div whileHover={{ y: -2 }} transition={{ type: "spring", stiffness: 400, damping: 10 }}>
@@ -204,7 +204,7 @@ export function Dashboard() {
             {/* Get Pro link */}
             <Link 
               to="/pricing"
-              className="bg-white text-black font-extrabold text-xs px-4 py-2 rounded-full hover:bg-neutral-100 transition-colors select-none"
+              className="bg-black text-white font-extrabold text-xs px-4 py-2 rounded-full hover:bg-neutral-800 transition-colors select-none"
             >
               Get Pro
             </Link>
@@ -214,7 +214,7 @@ export function Dashboard() {
               <motion.button 
                 onClick={handleLogout}
                 whileHover={{ scale: 1.1, rotate: 5 }}
-                className="w-8 h-8 rounded-full bg-neutral-800 border border-neutral-700 flex items-center justify-center text-[11px] font-black text-gray-300 hover:border-white/20 active:scale-95 transition-all cursor-pointer"
+                className="w-8 h-8 rounded-full bg-neutral-100 border border-neutral-200 flex items-center justify-center text-[11px] font-black text-gray-700 hover:border-black/20 active:scale-95 transition-all cursor-pointer"
               >
                 S
               </motion.button>
@@ -237,21 +237,21 @@ export function Dashboard() {
             <div className="relative z-10 flex flex-col items-center justify-center pt-4">
               
               {/* Badges */}
-              <div className="mb-6 flex items-center gap-3 bg-zinc-900/50 border border-zinc-800/80 px-4 py-2 rounded-full shadow-lg">
+              <div className="mb-6 flex items-center gap-3 bg-zinc-100 border border-zinc-200 px-4 py-2 rounded-full shadow-sm">
                 <div className="flex items-center -space-x-1.5">
-                  <div className="h-5.5 w-5.5 rounded-full bg-[#1e1e24] border border-zinc-750 flex items-center justify-center text-[10px] font-bold text-sky-400">R</div>
-                  <div className="h-5.5 w-5.5 rounded-full bg-[#1e1e24] border border-zinc-750 flex items-center justify-center text-[10px] font-bold text-blue-500">TS</div>
-                  <div className="h-5.5 w-5.5 rounded-full bg-[#1e1e24] border border-zinc-750 flex items-center justify-center text-[10px] font-bold text-teal-400">TW</div>
-                  <div className="h-5.5 w-5.5 rounded-full bg-[#1e1e24] border border-zinc-750 flex items-center justify-center text-[10px] font-bold text-pink-500">M</div>
+                  <div className="h-5.5 w-5.5 rounded-full bg-white border border-zinc-200 flex items-center justify-center text-[10px] font-bold text-sky-400">R</div>
+                  <div className="h-5.5 w-5.5 rounded-full bg-white border border-zinc-200 flex items-center justify-center text-[10px] font-bold text-blue-500">TS</div>
+                  <div className="h-5.5 w-5.5 rounded-full bg-white border border-zinc-200 flex items-center justify-center text-[10px] font-bold text-teal-400">TW</div>
+                  <div className="h-5.5 w-5.5 rounded-full bg-white border border-zinc-200 flex items-center justify-center text-[10px] font-bold text-pink-500">M</div>
                 </div>
-                <span className="text-[12px] font-semibold text-zinc-400">React · TS · Tailwind · Motion · shadcn</span>
+                <span className="text-[12px] font-semibold text-zinc-600">React · TS · Tailwind · Motion · shadcn</span>
               </div>
 
               {/* Title */}
-              <h1 className="text-4xl md:text-[64px] lg:text-[72px] whitespace-nowrap text-center font-black tracking-tighter leading-none text-white">
+              <h1 className="text-4xl md:text-[64px] lg:text-[72px] whitespace-nowrap text-center font-black tracking-tighter leading-none text-black">
                 Component Library
               </h1>
-              <span className="block font-medium md:text-lg sm:text-base text-sm text-center mt-4 text-zinc-400 max-w-xl text-balance">
+              <span className="block font-medium md:text-lg sm:text-base text-sm text-center mt-4 text-zinc-600 max-w-xl text-balance">
                 High-performance primitives built for modern web experiences.
               </span>
             </div>
@@ -266,7 +266,7 @@ export function Dashboard() {
                   placeholder="Search component primitives..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full h-11 pl-11 pr-4 rounded-xl bg-zinc-900 border border-zinc-800 text-sm text-white placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-zinc-700 transition-[box-shadow,background-color]"
+                  className="w-full h-11 pl-11 pr-4 rounded-xl bg-white border border-zinc-200 text-sm text-black placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-zinc-300 transition-[box-shadow,background-color]"
                 />
               </div>
 
@@ -274,14 +274,14 @@ export function Dashboard() {
               <div className="flex w-full items-center justify-center gap-3 shrink-0 flex-wrap">
                 
                 {/* Premium category pills */}
-                <div className="relative flex items-center h-10 p-1 rounded-xl bg-zinc-900/80 border border-zinc-800 shrink-0 select-none">
+                <div className="relative flex items-center h-10 p-1 rounded-xl bg-zinc-100 border border-zinc-200 shrink-0 select-none">
                   {(["All", "Free", "Pro"] as const).map((filter) => (
                     <button
                       key={filter}
                       type="button"
                       onClick={() => setPremiumFilter(filter)}
                       className={`relative px-4 h-full text-xs font-semibold rounded-lg transition-all duration-150 cursor-pointer ${
-                        premiumFilter === filter ? "bg-zinc-800 text-white shadow-sm" : "text-zinc-400 hover:text-white"
+                        premiumFilter === filter ? "bg-white text-black shadow-sm" : "text-zinc-600 hover:text-black"
                       }`}
                     >
                       {filter}
@@ -290,14 +290,14 @@ export function Dashboard() {
                 </div>
 
                 {/* Sort selection pills */}
-                <div className="relative flex items-center h-10 p-1 rounded-xl bg-zinc-900/80 border border-zinc-800 shrink-0 select-none">
+                <div className="relative flex items-center h-10 p-1 rounded-xl bg-zinc-100 border border-zinc-200 shrink-0 select-none">
                   {(["Default", "Newest"] as const).map((opt) => (
                     <button
                       key={opt}
                       type="button"
                       onClick={() => setSortOption(opt)}
                       className={`relative px-4 h-full text-xs font-semibold rounded-lg transition-all duration-150 cursor-pointer ${
-                        sortOption === opt ? "bg-zinc-800 text-white shadow-sm" : "text-zinc-400 hover:text-white"
+                        sortOption === opt ? "bg-white text-black shadow-sm" : "text-zinc-600 hover:text-black"
                       }`}
                     >
                       {opt}
@@ -312,18 +312,18 @@ export function Dashboard() {
           {/* Grid Category Listing Sections */}
           <div className="flex flex-col gap-20 mt-4 w-full">
             {filteredCategories.map((cat) => (
-              <section key={cat.slug} id={cat.slug} className="flex flex-col gap-8 w-full border-t border-zinc-900/80 pt-10">
+              <section key={cat.slug} id={cat.slug} className="flex flex-col gap-8 w-full border-t border-zinc-200 pt-10">
                 
                 {/* Section Header */}
                 <div className="flex items-start justify-between gap-3 text-left">
                   <div className="flex flex-col gap-1.5">
                     <div className="inline-flex items-center gap-3">
-                      <h2 className="text-xl md:text-2xl font-extrabold tracking-tight text-white">{cat.title}</h2>
-                      <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-zinc-900 border border-zinc-850 px-2 text-[10px] font-black text-zinc-400">
+                      <h2 className="text-xl md:text-2xl font-extrabold tracking-tight text-black">{cat.title}</h2>
+                      <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-zinc-100 border border-zinc-200 px-2 text-[10px] font-black text-zinc-600">
                         {cat.items.length}
                       </span>
                     </div>
-                    <p className="text-sm text-zinc-400 max-w-2xl">{cat.description}</p>
+                    <p className="text-sm text-zinc-600 max-w-2xl">{cat.description}</p>
                   </div>
                 </div>
 
@@ -337,12 +337,12 @@ export function Dashboard() {
                         to={`/components/${item.name}`}
                         className="group/link block h-full select-none"
                       >
-                        <div className="group relative flex flex-col rounded-[24px] p-2 bg-[#0b0b0d] border border-white/[0.03] hover:border-zinc-800 hover:bg-[#121215] transition-all duration-300 cursor-pointer h-[260px] justify-between shadow-lg">
+                        <div className="group relative flex flex-col rounded-[24px] p-2 bg-white border border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 transition-all duration-300 cursor-pointer h-[260px] justify-between shadow-sm">
                           
                           <div className="relative w-full h-[200px] shrink-0 overflow-hidden rounded-[18px]">
                             
                             {/* Inner shifted card container on hover */}
-                            <div className="absolute top-0 left-0 w-full overflow-hidden bg-zinc-950 rounded-[18px] transition-all duration-500 ease-out h-full group-hover/link:h-[calc(100%-2.25rem)] shadow-inner border border-zinc-900/40">
+                            <div className="absolute top-0 left-0 w-full overflow-hidden bg-zinc-100 rounded-[18px] transition-all duration-500 ease-out h-full group-hover/link:h-[calc(100%-2.25rem)] shadow-inner border border-zinc-200">
                               
                               {/* Scale preview container on hover */}
                               <div className="absolute inset-0 size-full overflow-hidden rounded-[18px] transition-transform duration-700 ease-[cubic-bezier(0.2,1,0.2,1)] group-hover/link:scale-[1.025]">
@@ -395,10 +395,10 @@ export function Dashboard() {
 
                           {/* Title and details row */}
                           <div className="flex items-center justify-between px-2 pb-1.5 transition-all duration-300">
-                            <span className="text-sm font-bold tracking-tight text-zinc-300 group-hover/link:text-white transition-colors truncate">
+                            <span className="text-sm font-bold tracking-tight text-zinc-700 group-hover/link:text-black transition-colors truncate">
                               {item.title}
                             </span>
-                            <ArrowUpRight className="w-3.5 h-3.5 text-zinc-600 opacity-0 group-hover/link:opacity-100 transition-opacity" />
+                            <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400 opacity-0 group-hover/link:opacity-100 transition-opacity" />
                           </div>
                         </div>
                       </Link>
@@ -410,9 +410,9 @@ export function Dashboard() {
 
             {totalCount === 0 && (
               <div className="flex flex-col items-center justify-center text-center py-32 max-w-sm mx-auto w-full">
-                <Sparkles className="w-12 h-12 text-zinc-700 mb-4 animate-pulse" />
-                <h3 className="text-lg font-bold text-white mb-2">No components found</h3>
-                <p className="text-sm text-zinc-550 leading-relaxed">
+                <Sparkles className="w-12 h-12 text-zinc-300 mb-4 animate-pulse" />
+                <h3 className="text-lg font-bold text-black mb-2">No components found</h3>
+                <p className="text-sm text-zinc-500 leading-relaxed">
                   No layouts match the selected search filters or bookmark list.
                 </p>
               </div>
