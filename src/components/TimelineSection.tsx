@@ -103,13 +103,13 @@ export function TimelineSection() {
   };
 
   return (
-    <section className="w-full bg-white text-[#141414] py-8 md:py-12 flex flex-col items-center relative z-10 px-6 sm:px-12">
+    <section className="w-full bg-white dark:bg-[#141414] text-[#141414] dark:text-white py-8 md:py-12 flex flex-col items-center relative z-10 px-6 sm:px-12">
       
       <div className="max-w-5xl mx-auto flex flex-col items-center w-full relative z-10 font-sans">
         
         {/* Section Header */}
         <div className="text-center mb-6">
-          <h2 className="text-2xl md:text-4xl font-extrabold tracking-tight text-[#141414] font-sans">
+          <h2 className="text-2xl md:text-4xl font-extrabold tracking-tight text-[#141414] dark:text-white font-sans">
             Why Choose Oxygen UI
           </h2>
         </div>
@@ -157,8 +157,8 @@ export function TimelineSection() {
                   onClick={() => !isActive && setSelected(i)}
                   className={`absolute w-full h-[180px] md:h-[220px] rounded-2xl border ${
                     isActive 
-                      ? "border-neutral-300 shadow-[0_12px_36px_rgba(0,0,0,0.05)] cursor-grab active:cursor-grabbing" 
-                      : "border-neutral-200 shadow-[0_4px_16px_rgba(0,0,0,0.01)] cursor-pointer"
+                      ? "border-neutral-300 dark:border-neutral-700 shadow-[0_12px_36px_rgba(0,0,0,0.05)] cursor-grab active:cursor-grabbing" 
+                      : "border-neutral-200 dark:border-neutral-800 shadow-[0_4px_16px_rgba(0,0,0,0.01)] cursor-pointer"
                   } ${item.bg} ${item.textColor} overflow-hidden flex flex-row items-stretch select-none origin-bottom transition-[border-color,background-color] duration-300`}
                 >
                   
@@ -206,7 +206,7 @@ export function TimelineSection() {
           </div>
 
           {/* Horizontally Centered Timeline Ticks Row (Ticks are VERTICAL lines aligned in horizontal row) */}
-          <div className="flex flex-row items-center justify-center gap-6 py-6 select-none w-full border-t border-neutral-100 mt-2 font-sans relative min-h-[64px]">
+          <div className="flex flex-row items-center justify-center gap-6 py-6 select-none w-full border-t border-neutral-100 dark:border-neutral-800 mt-2 font-sans relative min-h-[64px]">
             {TIMELINE_DATA.map((item, i) => {
               const isSelected = selected === i;
               const isHovered = hoveredIndex === i;
@@ -225,8 +225,8 @@ export function TimelineSection() {
                   <motion.div
                     className={`w-1 h-6 rounded-full transition-colors duration-300 ${
                       isSelected
-                        ? "bg-neutral-900"
-                        : "bg-neutral-300 group-hover:bg-neutral-400"
+                        ? "bg-neutral-900 dark:bg-neutral-100"
+                        : "bg-neutral-300 dark:bg-neutral-700 group-hover:bg-neutral-400 dark:group-hover:bg-neutral-500"
                     }`}
                     animate={{
                       scale: calculateScale(i),
@@ -240,7 +240,7 @@ export function TimelineSection() {
                     {(isHovered || isSelected) && (
                       <motion.span
                         className={`absolute top-8 text-[9px] font-black tracking-wider whitespace-nowrap ${
-                          isSelected ? "text-neutral-900" : "text-neutral-400"
+                          isSelected ? "text-neutral-900 dark:text-neutral-100" : "text-neutral-400 dark:text-neutral-500"
                         }`}
                         initial={{ opacity: 0, y: -4, filter: "blur(2px)" }}
                         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}

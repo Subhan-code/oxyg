@@ -7,17 +7,17 @@ import heroBgImg from "../8c87a926bae86d6d0c32f86b87bfa574.jpg";
 import { ThreeDTextScrollSection } from "./ThreeDTextScrollSection";
 
 const LOGO_TEMPLATES = [
-  { name: "Airbnb", className: "font-extrabold text-xl tracking-tighter text-neutral-800" },
-  { name: "Plaid", className: "font-bold text-xl text-neutral-800" },
-  { name: "NIKE", className: "font-black text-xl italic tracking-tighter text-neutral-800" },
-  { name: "Spotify", className: "font-bold text-xl tracking-tight text-neutral-800" },
-  { name: "Uber", className: "font-extrabold text-xl tracking-tight text-neutral-800" },
-  { name: "Stripe", className: "font-extrabold text-xl text-neutral-800" },
-  { name: "Linear", className: "font-semibold text-xl tracking-wide text-neutral-800" },
-  { name: "Figma", className: "font-bold text-xl tracking-normal text-neutral-800" },
-  { name: "Slack", className: "font-extrabold text-xl tracking-tight text-neutral-800" },
-  { name: "Apple", className: "font-medium text-xl tracking-tighter text-neutral-800" },
-  { name: "Google", className: "font-bold text-xl text-neutral-800" },
+  { name: "Airbnb", className: "font-extrabold text-xl tracking-tighter text-neutral-800 dark:text-neutral-200" },
+  { name: "Plaid", className: "font-bold text-xl text-neutral-800 dark:text-neutral-200" },
+  { name: "NIKE", className: "font-black text-xl italic tracking-tighter text-neutral-800 dark:text-neutral-200" },
+  { name: "Spotify", className: "font-bold text-xl tracking-tight text-neutral-800 dark:text-neutral-200" },
+  { name: "Uber", className: "font-extrabold text-xl tracking-tight text-neutral-800 dark:text-neutral-200" },
+  { name: "Stripe", className: "font-extrabold text-xl text-neutral-800 dark:text-neutral-200" },
+  { name: "Linear", className: "font-semibold text-xl tracking-wide text-neutral-800 dark:text-neutral-200" },
+  { name: "Figma", className: "font-bold text-xl tracking-normal text-neutral-800 dark:text-neutral-200" },
+  { name: "Slack", className: "font-extrabold text-xl tracking-tight text-neutral-800 dark:text-neutral-200" },
+  { name: "Apple", className: "font-medium text-xl tracking-tighter text-neutral-800 dark:text-neutral-200" },
+  { name: "Google", className: "font-bold text-xl text-neutral-800 dark:text-neutral-200" },
 ];
 
 function LogoSlot({ index, interval }: { index: number; interval: number }) {

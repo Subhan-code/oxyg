@@ -23,24 +23,24 @@ import { FooterAndTestimonials } from './FooterAndTestimonials';
 // Separate Home Page Component
 function Home({ triggerToast }: { triggerToast: (msg: string) => void }) {
   return (
-    <div className="relative z-10 bg-white shadow-[0_20px_60px_rgba(0,0,0,0.1)] rounded-b-[40px] md:rounded-b-[48px] mb-0 md:mb-[400px] md-reveal-layer">
+    <div className="relative z-10 bg-white dark:bg-[#141414] shadow-[0_20px_60px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.5)] rounded-b-[40px] md:rounded-b-[48px] mb-0 md:mb-[400px] md-reveal-layer">
       <main>
         <Hero />
         <Features />
         <InteractiveShowcase />
         <TimelineSection />
         <BespokeSection />
-        <section className="py-20 md:py-32 w-full relative z-10 border-t border-neutral-100 flex flex-col items-center">
+        <section className="py-20 md:py-32 w-full relative z-10 border-t border-neutral-100 dark:border-neutral-800 flex flex-col items-center">
           <div className="max-w-3xl mx-auto text-center px-4 mb-10 md:mb-16">
             <span className="text-[10px] md:text-[11px] font-bold tracking-[0.15em] uppercase text-neutral-400">Interactive Elements</span>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-[#141414] leading-tight mt-3">
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-[#141414] dark:text-white leading-tight mt-3">
               Ink Reveal Canvas
             </h2>
-            <p className="text-sm md:text-base text-neutral-500 font-medium leading-relaxed mt-4">
+            <p className="text-sm md:text-base text-neutral-500 dark:text-neutral-400 font-medium leading-relaxed mt-4">
               Move your mouse across the canvas to carve away the ink overlay. A fluid math-based brush wobble expands organically to reveal the landscape hidden underneath.
             </p>
           </div>
-          <div className="w-full relative h-[450px] md:h-[650px] bg-[#fafafa] border-y border-neutral-100 overflow-hidden shadow-inner">
+          <div className="w-full relative h-[450px] md:h-[650px] bg-[#fafafa] dark:bg-[#18181b] border-y border-neutral-100 dark:border-neutral-800 overflow-hidden shadow-inner">
             <InkRevealDemo />
           </div>
         </section>

@@ -77,7 +77,7 @@ export const SquiCircleFilterStatic = () => (
 /* Compact section heading used in multiple places */
 function SectionHead({ lines }: { lines: string[] }) {
   return (
-    <h2 className="text-[1.75rem] md:text-6xl font-bold tracking-[-0.04em] text-neutral-900 text-center leading-[1.1] flex flex-col items-center text-balance">
+    <h2 className="text-[1.75rem] md:text-6xl font-bold tracking-[-0.04em] text-neutral-900 dark:text-neutral-100 text-center leading-[1.1] flex flex-col items-center text-balance">
       {lines.map((line, i) => (
         <span key={i} className="overflow-hidden block mt-0.5">
           <motion.span
@@ -150,26 +150,26 @@ export function Features() {
   };
 
   return (
-    <div className="bg-white flex flex-col items-center overflow-x-hidden w-full">
+    <div className="bg-white dark:bg-[#141414] flex flex-col items-center overflow-x-hidden w-full">
 
       {/* ── Design Patterns ── */}
       <div className="pt-0 pb-10 md:pt-2 md:pb-32 w-full overflow-hidden flex flex-col items-center">
         <SectionHead lines={["Find exactly what", "you need."]} />
 
         {/* Tab pills — flex-1 on mobile so all fit equally, fixed size on desktop */}
-        <div className="mt-5 md:mt-10 flex items-center bg-neutral-100/80 p-1 rounded-full mx-4 shadow-inner border border-neutral-200/50 w-[calc(100%-2rem)] md:w-auto">
+        <div className="mt-5 md:mt-10 flex items-center bg-neutral-100/80 dark:bg-neutral-800/80 p-1 rounded-full mx-4 shadow-inner border border-neutral-200/50 dark:border-neutral-700/50 w-[calc(100%-2rem)] md:w-auto">
           {TABS.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`relative flex-1 md:flex-none px-2 md:px-4 py-2 text-[11px] md:text-[15px] font-semibold rounded-full transition-[color,transform] active:scale-[0.96] text-center leading-tight ${
-                activeTab === tab ? "text-neutral-900" : "text-neutral-500 hover:text-neutral-800"
+                activeTab === tab ? "text-neutral-900 dark:text-neutral-100" : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200"
               }`}
             >
               {activeTab === tab && (
                 <motion.div
                   layoutId="activeTab"
-                  className="absolute inset-0 bg-white rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.06)] border border-neutral-200/50"
+                  className="absolute inset-0 bg-white dark:bg-zinc-900 rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.06)] border border-neutral-200/50 dark:border-neutral-700/50"
                   transition={{ type: "spring", bounce: 0.2, duration: 0.55 }}
                 />
               )}
@@ -220,14 +220,14 @@ export function Features() {
             ].map(({ src, title, desc }) => (
               <div key={title} className="flex flex-col gap-3 md:gap-6 group">
                 <div
-                  className="bg-[#f0f0f0] rounded-[1.5rem] md:rounded-[2rem] h-[200px] md:h-[340px] flex items-center justify-center transition-colors group-hover:bg-[#e8e8e8]"
+                  className="bg-[#f0f0f0] dark:bg-[#18181b] rounded-[1.5rem] md:rounded-[2rem] h-[200px] md:h-[340px] flex items-center justify-center transition-colors group-hover:bg-[#e8e8e8] dark:group-hover:bg-[#202024]"
                   style={{ filter: "url(#SkiperSquiCircleFilterLayout)", transform: "translateZ(0)" }}
                 >
                   <video src={src} autoPlay muted loop playsInline className="w-[80%] h-auto object-cover shadow-xl rounded-xl group-hover:scale-105 transition-transform duration-500 outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10" />
                 </div>
                 <div className="text-center px-3">
-                  <h3 className="text-base md:text-xl font-bold tracking-tight text-neutral-900 mb-1">{title}</h3>
-                  <p className="text-neutral-500 font-medium text-[13px] md:text-base leading-relaxed text-pretty">{desc}</p>
+                  <h3 className="text-base md:text-xl font-bold tracking-tight text-neutral-900 dark:text-white mb-1">{title}</h3>
+                  <p className="text-neutral-500 dark:text-neutral-400 font-medium text-[13px] md:text-base leading-relaxed text-pretty">{desc}</p>
                 </div>
               </div>
             ))}
