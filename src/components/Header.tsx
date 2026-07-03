@@ -83,7 +83,7 @@ export function Header({ dark = false }: { dark?: boolean }) {
         }}
         transition={{ type: "spring", stiffness: 300, damping: 28 }}
         className={`${
-          dark || isMenuOpen ? "bg-[#1d1f27]/95 border border-white/5 text-white" : "bg-[#ededed]/90 text-[#141414]"
+          isMenuOpen ? "bg-white border border-neutral-200 text-[#141414]" : "bg-[#ededed]/90 text-[#141414]"
         } backdrop-blur-[24px] flex flex-col px-6 w-full max-w-[584px] pointer-events-auto shadow-[0_8px_32px_rgba(0,0,0,0.12)] overflow-hidden`}
       >
         {/* Top bar (always visible, height 60px) */}
@@ -118,7 +118,7 @@ export function Header({ dark = false }: { dark?: boolean }) {
                 >
                   <a 
                     href="#/signup"
-                    className={`${dark ? "bg-white text-neutral-900" : "bg-[#141414] text-white"} hover:opacity-90 transition-[opacity,transform] active:scale-[0.96] h-[44px] px-4 rounded-full text-[15px] font-[600] flex items-center justify-center whitespace-nowrap`}
+                    className="bg-[#141414] text-white hover:opacity-90 transition-[opacity,transform] active:scale-[0.96] h-[44px] px-4 rounded-full text-[15px] font-[600] flex items-center justify-center whitespace-nowrap"
                   >
                     Join for free
                   </a>

@@ -70,13 +70,11 @@ export default function AnimatedRoutes() {
   const isTouchDevice = typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
 
   return (
-    <ReactLenis root={!isViewportLocked && !isComponentPage && !isTouchDevice} options={{ duration: 0.9, lerp: 0.15 }}>
-      <div className={`font-sans antialiased selection:bg-neutral-900 selection:text-white relative z-0 min-h-screen transition-colors duration-300 bg-[#141414] overflow-x-clip ${
-        currentPath === '/pricing' || currentPath === '/installation' || isViewportLocked || isComponentPage || isComponentsList ? 'text-white' : 'text-[#141414]'
-      }`}>
+    <ReactLenis root={true} options={{ duration: 1.2, lerp: 0.1 }}>
+      <div className="font-sans antialiased selection:bg-neutral-900 selection:text-white relative z-0 min-h-screen transition-colors duration-300 bg-white text-[#141414] overflow-x-clip">
         {/* Global Header (hidden on component playground page and components list page) */}
         {!isViewportLocked && !isComponentPage && !isComponentsList && (
-          <Header dark={currentPath === '/pricing' || currentPath === '/installation'} />
+          <Header dark={false} />
         )}
 
         <Routes location={location} key={location.pathname}>
@@ -88,7 +86,7 @@ export default function AnimatedRoutes() {
           } />
           <Route path="/pricing" element={
             <>
-              <div className="relative z-10 bg-[#141414] shadow-[0_20px_60px_rgba(0,0,0,0.5)] rounded-b-[40px] md:rounded-b-[48px] overflow-hidden border-b border-neutral-800">
+              <div className="relative z-10 bg-white shadow-[0_20px_60px_rgba(0,0,0,0.5)] rounded-b-[40px] md:rounded-b-[48px] overflow-hidden border-b border-neutral-200">
                 <Pricing />
               </div>
               <Footer />
@@ -96,7 +94,7 @@ export default function AnimatedRoutes() {
           } />
           <Route path="/installation" element={
             <>
-              <div className="relative z-10 bg-[#0a0a0c] shadow-[0_20px_60px_rgba(0,0,0,0.5)] rounded-b-[40px] md:rounded-b-[48px] overflow-hidden border-b border-neutral-900">
+              <div className="relative z-10 bg-white shadow-[0_20px_60px_rgba(0,0,0,0.5)] rounded-b-[40px] md:rounded-b-[48px] overflow-hidden border-b border-neutral-200">
                 <Installation />
               </div>
               <Footer />
