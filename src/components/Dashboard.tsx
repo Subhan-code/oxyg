@@ -309,8 +309,8 @@ export function Dashboard() {
               </div>
 
               {/* Title */}
-              <h1 className="text-4xl md:text-6xl max-w-2xl text-center font-bold tracking-tight leading-none text-white">
-                For builders with high standards
+              <h1 className="text-4xl md:text-[64px] lg:text-[72px] whitespace-nowrap text-center font-black tracking-tighter leading-none text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.25)]">
+                For builders with high standards.
               </h1>
               <span className="block font-medium md:text-lg sm:text-base text-sm text-center mt-4 text-zinc-400 max-w-xl text-balance">
                 Explore premium {activeTab === "Apps" ? "Mobile App components" : "Website Primtives"} engineered with high performance spring physics.

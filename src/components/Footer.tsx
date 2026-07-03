@@ -3,7 +3,7 @@ import logoUrl from "../assets/oxygen-ui-logo.png";
 
 export function Footer() {
   return (
-    <footer className="relative md:fixed md:bottom-0 md:left-0 w-full h-auto md:h-[400px] z-0 bg-[#141414] flex flex-col justify-end pb-8 pt-10 md:pt-20 md:pb-12 px-5 md:px-12 text-[#f5f5f5] font-sans">
+    <footer className="relative w-full h-auto z-0 bg-[#141414] flex flex-col justify-end pb-8 pt-10 md:pt-20 md:pb-12 px-5 md:px-12 text-[#f5f5f5] font-sans">
       <div className="max-w-[1240px] w-full mx-auto flex flex-col md:flex-row justify-between items-start gap-6 md:gap-12 z-10">
         <div className="flex flex-col gap-2 md:gap-4 md:max-w-[320px]">
            <div className="flex items-center gap-2 md:gap-3">
