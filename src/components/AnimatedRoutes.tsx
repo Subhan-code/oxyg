@@ -66,14 +66,16 @@ export default function AnimatedRoutes() {
 
   const isComponentPage = currentPath.startsWith('/components/');
   const isViewportLocked = currentPath === '/login' || currentPath === '/dashboard';
+  const isComponentsList = currentPath === '/components';
+  const isTouchDevice = typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
 
   return (
-    <ReactLenis root={!isViewportLocked && !isComponentPage} options={{ duration: 0.9, lerp: 0.15 }}>
+    <ReactLenis root={!isViewportLocked && !isComponentPage && !isTouchDevice} options={{ duration: 0.9, lerp: 0.15 }}>
       <div className={`font-sans antialiased selection:bg-neutral-900 selection:text-white relative z-0 min-h-screen transition-colors duration-300 bg-[#141414] overflow-x-clip ${
-        currentPath === '/pricing' || currentPath === '/installation' || isViewportLocked || isComponentPage ? 'text-white' : 'text-[#141414]'
+        currentPath === '/pricing' || currentPath === '/installation' || isViewportLocked || isComponentPage || isComponentsList ? 'text-white' : 'text-[#141414]'
       }`}>
-        {/* Global Header (hidden on component playground page) */}
-        {!isViewportLocked && !isComponentPage && (
+        {/* Global Header (hidden on component playground page and components list page) */}
+        {!isViewportLocked && !isComponentPage && !isComponentsList && (
           <Header dark={currentPath === '/pricing' || currentPath === '/installation'} />
         )}
 
