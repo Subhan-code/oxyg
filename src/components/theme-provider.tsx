@@ -1,65 +1,50 @@
-import React, { createContext, useContext, useEffect, useState } from "react"
+import React, { createContext, useContext, useLayoutEffect } from "react";
 
-type Theme = "dark" | "light"
+type Theme = "light";
 
 type ThemeProviderProps = {
-  children: React.ReactNode
-  defaultTheme?: Theme
-  storageKey?: string
-}
+  children: React.ReactNode;
+};
 
 type ThemeProviderState = {
-  theme: Theme
-  setTheme: (theme: Theme) => void
-  toggleTheme: () => void
-}
+  theme: Theme;
+  setTheme: (_theme: Theme) => void;
+  toggleTheme: () => void;
+};
 
-const initialState: ThemeProviderState = {
+const ThemeProviderContext = createContext<ThemeProviderState>({
   theme: "light",
-  setTheme: () => null,
-  toggleTheme: () => null,
-}
+  setTheme: () => {},
+  toggleTheme: () => {},
+});
 
-const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
+export function ThemeProvider({ children }: ThemeProviderProps) {
+  useLayoutEffect(() => {
+    const root = document.documentElement;
 
-export function ThemeProvider({
-  children,
-  defaultTheme = "light",
-  storageKey = "vite-ui-theme",
-  ...props
-}: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>("light")
+    // hard-force light mode
+    root.classList.remove("dark");
+    root.classList.add("light");
+    root.style.colorScheme = "light";
 
-  useEffect(() => {
-    const root = window.document.documentElement
-
-    root.classList.remove("light", "dark")
-    root.classList.add(theme)
-    root.style.colorScheme = theme
-  }, [theme])
-
-  const toggleTheme = () => {
-    // Disabled toggle theme since website is strictly light theme now
-  }
-
-  const value = {
-    theme: "light" as Theme,
-    setTheme: () => null,
-    toggleTheme,
-  }
+    // wipe any stale saved theme values from older builds
+    try {
+      localStorage.removeItem("vite-ui-theme");
+      localStorage.removeItem("theme");
+    } catch {}
+  }, []);
 
   return (
-    <ThemeProviderContext.Provider {...props} value={value}>
+    <ThemeProviderContext.Provider
+      value={{
+        theme: "light",
+        setTheme: () => {},
+        toggleTheme: () => {},
+      }}
+    >
       {children}
     </ThemeProviderContext.Provider>
-  )
+  );
 }
 
-export const useTheme = () => {
-  const context = useContext(ThemeProviderContext)
-
-  if (context === undefined)
-    throw new Error("useTheme must be used within a ThemeProvider")
-
-  return context
-}
+export const useTheme = () => useContext(ThemeProviderContext);
