@@ -1644,7 +1644,7 @@ export default function ComponentPage() {
                     <button
                       ref={toggleBtnRef}
                       onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                      className="inline-flex shrink-0 items-center justify-center gap-2 text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 border border-border/60 hover:bg-accent dark:hover:bg-accent/50 hover:text-accent-foreground bg-background/60 backdrop-blur size-8 rounded-full"
+                      className="inline-flex shrink-0 items-center justify-center gap-2 text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 bg-white dark:bg-black text-black dark:text-white shadow-sm size-8 rounded-full z-[9999]"
                       aria-label="Toggle sidebar"
                     >
                       <SidebarToggleIcon isOpen={isSidebarOpen} className="size-5 pointer-events-none" />
