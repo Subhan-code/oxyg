@@ -111,8 +111,8 @@ export function Dashboard() {
             <div>↓↓↓</div>
             <div>BLUR BOTTOM</div>
           </div>
-          <div className="absolute top-0 inset-x-0 h-8 bg-gradient-to-b from-zinc-950 via-zinc-950/60 to-transparent backdrop-blur-[2px]" />
-          <div className="absolute bottom-0 inset-x-0 h-8 bg-gradient-to-t from-zinc-950 via-zinc-950/60 to-transparent backdrop-blur-[2px]" />
+          <div className="absolute top-0 inset-x-0 h-8 bg-zinc-950/85 backdrop-blur-[2px]" />
+          <div className="absolute bottom-0 inset-x-0 h-8 bg-zinc-950/85 backdrop-blur-[2px]" />
         </div>
       );
     }
@@ -123,7 +123,7 @@ export function Dashboard() {
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-3.5 text-zinc-400"><path d="M12 19h8"></path><path d="m4 17 6-6-6-6"></path></svg>
           </div>
           <div className="absolute w-16 h-[1.5px] bg-zinc-800" />
-          <div className="absolute w-8 h-[1.5px] bg-gradient-to-r from-sky-500 to-transparent -translate-x-6 animate-pulse" />
+          <div className="absolute w-8 h-[1.5px] bg-sky-500/50 -translate-x-6 animate-pulse" />
           <div className="size-8 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center z-10">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-3.5 text-zinc-400"><path d="m16 18 6-6-6-6"></path><path d="m8 6-6 6 6 6"></path></svg>
           </div>
@@ -222,15 +222,15 @@ export function Dashboard() {
             </div>
           </div>
 
-          {/* Search bar inside header */}
-          <div className="flex-1 max-w-[440px] mx-6 relative hidden md:block">
+          {/* Search bar inside header (decreased width, expands on hover/focus) */}
+          <div className="mx-6 relative hidden md:block transition-all duration-300 w-44 hover:w-64 focus-within:w-64">
             <Search className="w-4 h-4 text-gray-500 absolute left-4 top-1/2 -translate-y-1/2" />
             <input 
               type="text"
-              placeholder={`Search component primitives...`}
+              placeholder="Search..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full h-10 pl-11 pr-11 rounded-full bg-[#0d0d0f] text-sm placeholder-gray-500 text-white focus:outline-none focus:ring-1 focus:ring-white/20 transition-[box-shadow,background-color] border border-white/[0.02]"
+              className="w-full h-10 pl-11 pr-4 rounded-full bg-[#0d0d0f] text-sm placeholder-gray-500 text-white focus:outline-none focus:ring-1 focus:ring-white/20 transition-all border border-white/[0.02]"
             />
           </div>
 
@@ -260,40 +260,7 @@ export function Dashboard() {
               </div>
             </div>
 
-            {/* Globe button */}
-            <div className="relative group/tooltip flex items-center justify-center">
-              <motion.button 
-                whileHover={{ scale: 1.15 }}
-                className="text-gray-400 hover:text-white transition-colors p-1 cursor-pointer"
-              >
-                <motion.div whileHover={{ rotate: 45 }} transition={{ type: "spring", stiffness: 200, damping: 10 }}>
-                  <Globe className="w-4.5 h-4.5" />
-                </motion.div>
-              </motion.button>
-              <div className="absolute top-10 opacity-0 scale-95 pointer-events-none group-hover/tooltip:opacity-100 group-hover/tooltip:scale-100 transition-all duration-150 bg-neutral-900 border border-white/10 text-white text-[10.5px] font-bold px-2.5 py-1.5 rounded-lg whitespace-nowrap shadow-xl z-50">
-                Explore Languages
-              </div>
-            </div>
 
-            {/* Bell button */}
-            <div className="relative group/tooltip flex items-center justify-center">
-              <motion.button 
-                whileHover={{ scale: 1.15 }}
-                className="text-gray-400 hover:text-white transition-colors p-1 cursor-pointer"
-              >
-                <motion.div 
-                  whileHover={{ 
-                    rotate: [0, -15, 15, -10, 10, 0] 
-                  }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <Bell className="w-4.5 h-4.5" />
-                </motion.div>
-              </motion.button>
-              <div className="absolute top-10 opacity-0 scale-95 pointer-events-none group-hover/tooltip:opacity-100 group-hover/tooltip:scale-100 transition-all duration-150 bg-neutral-900 border border-white/10 text-white text-[10.5px] font-bold px-2.5 py-1.5 rounded-lg whitespace-nowrap shadow-xl z-50">
-                Notifications
-              </div>
-            </div>
 
             {/* Get Pro link */}
             <Link 
@@ -342,7 +309,7 @@ export function Dashboard() {
               </div>
 
               {/* Title */}
-              <h1 className="text-4xl md:text-6xl max-w-2xl text-center font-bold tracking-tight leading-none bg-gradient-to-b from-white to-zinc-400 bg-clip-text text-transparent">
+              <h1 className="text-4xl md:text-6xl max-w-2xl text-center font-bold tracking-tight leading-none text-white">
                 For builders with high standards
               </h1>
               <span className="block font-medium md:text-lg sm:text-base text-sm text-center mt-4 text-zinc-400 max-w-xl text-balance">
